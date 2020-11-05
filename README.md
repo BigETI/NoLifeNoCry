@@ -17,6 +17,8 @@ This repository is a template for the upcoming programming tasks for BA3 Game Pr
 
 # How to use
 
+First of all make sure that all of the mentioned tools have been instealled on your machine.
+
 Create a fork from https://github.com/BigETI/BA3GameProgrammingTemplate
 
 Before you use Conan, make sure that the remote https://api.bintray.com/conan/bincrafters/public-conan is added to your Conan installation.
@@ -26,6 +28,8 @@ You can do it with
 ```
 conan remote add bintray-bincrafters-public-conan https://api.bintray.com/conan/bincrafters/public-conan
 ```
+
+This is used to get the Conan recipe for SFML.
 
 Clone your forked repository with
 
