@@ -6,8 +6,8 @@
 
 #include "Asset.hpp"
 
-/// @brief BA3 Game Programming namespace
-namespace BA3GameProgrammingTemplate
+/// @brief No Life, No Cry engine namespace
+namespace NoLifeNoCry::Engine
 {
 	/// @brief Assets class
 	class Assets
@@ -26,7 +26,7 @@ namespace BA3GameProgrammingTemplate
 		/// @brief Load asset
 		/// @param assetPath Path to asset
 		/// @return Asset pointer if successful, otherwise "nullptr"
-		std::shared_ptr<BA3GameProgrammingTemplate::Asset> LoadAsset(const std::string& assetPath);
+		std::shared_ptr<NoLifeNoCry::Engine::Asset> LoadAsset(const std::string& assetPath);
 
 		/// @brief Remove asset from cache
 		/// @param assetPath Asset path
@@ -42,9 +42,9 @@ namespace BA3GameProgrammingTemplate
 	private:
 
 		/// @brief No asset
-		static const std::shared_ptr<BA3GameProgrammingTemplate::Asset> noAsset;
+		static const std::shared_ptr<NoLifeNoCry::Engine::Asset> noAsset;
 
 		/// @brief Asset cache
-		std::unordered_map<std::string, std::shared_ptr<BA3GameProgrammingTemplate::Asset>> assetCache;
+		std::unordered_map<std::string, std::shared_ptr<NoLifeNoCry::Engine::Asset>> assetCache;
 	};
 }

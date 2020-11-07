@@ -1,10 +1,10 @@
 #pragma once
 
-/// @brief BA3 Game Programming template namespace
-namespace BA3GameProgrammingTemplate
+/// @brief No Life, No Cry engine namespace
+namespace NoLifeNoCry::Engine
 {
 	/// @brief Game exit code enumerator
-	enum class EGameExitCode
+	enum class EExitCode
 	{
 		/// @brief Game exited successfully
 		Success,

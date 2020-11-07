@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.11)
-project(BA3GameProgrammingTemplate LANGUAGES C CXX VERSION 0.0.1)
+project(NoLifeNoCry LANGUAGES C CXX VERSION 0.0.1)
 
 SET(j "0" CACHE STRING "Use parallelism?")
 
 # Standard libraries
 if(MSVC)
-	set(CMAKE_CXX_STANDARD 17)
+	set(CMAKE_CXX_STANDARD 20)
 	set(CMAKE_CXX_STANDARD_REQUIRED ON)
 elseif(UNIX)
 	# Linux GCC/Clang
@@ -28,7 +28,7 @@ elseif(UNIX)
 	endif()
 
 	set(CMAKE_C_FLAGS "-pthread")
-	set(CMAKE_CXX_FLAGS "-fno-sized-deallocation -std=gnu++17 -Wno-register -pthread -static-libstdc++")
+	set(CMAKE_CXX_FLAGS "-fno-sized-deallocation -std=gnu++20 -Wno-register -pthread -static-libstdc++")
 	
 	# If not cross-building, assume we're using a x86_64 compiler
 	if(CROSS_BUILD)
@@ -130,13 +130,13 @@ endif()
 enable_warnings(game)
 
 # Shared include files
-add_subdirectory(shared/include include-shared)
+add_subdirectory(shared/include include-shared-game)
 get_property(SHARED_INCLUDE_FILES TARGET game PROPERTY SOURCES)
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/shared/include PREFIX shared/include FILES ${SHARED_INCLUDE_FILES})
 set_property(TARGET game PROPERTY SOURCES "")
 
 # Shared source files
-add_subdirectory(shared/src src-shared)
+add_subdirectory(shared/src src-shared-game)
 get_property(SHARED_SOURCE_FILES TARGET game PROPERTY SOURCES)
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/shared/src PREFIX shared/src FILES ${SHARED_SOURCE_FILES})
 set_property(TARGET game PROPERTY SOURCES "")
@@ -159,6 +159,7 @@ set_property(TARGET game PROPERTY SOURCES "${SHARED_INCLUDE_FILES};${SHARED_SOUR
 # Target include directories
 target_include_directories(game PUBLIC shared/include)
 target_include_directories(game PUBLIC game/include)
+target_include_directories(game PUBLIC dependencies/cista/include)
 
 # Set compile definitions
 target_compile_definitions(game PUBLIC
@@ -168,6 +169,7 @@ target_compile_definitions(game PUBLIC
 
 # Target libraries for linking
 target_link_libraries(game
+	CONAN_PKG::glm
 	CONAN_PKG::rapidxml
 	CONAN_PKG::sfml
 )
@@ -182,7 +184,7 @@ foreach(CMAKE_CONFIGURATION_TYPE ${CMAKE_CONFIGURATION_TYPES})
 endforeach()
 
 # Output name
-set_property(TARGET game PROPERTY OUTPUT_NAME MyExampleGame)
+set_property(TARGET game PROPERTY OUTPUT_NAME NoLifeNoCry)
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT game)
 
 unset(PROJECT)
@@ -192,3 +194,94 @@ unset(PROJECT)
 # Game project (end) #
 #                    #
 ######################
+
+##########################
+#                        #
+# Editor project (begin) #
+#                        #
+##########################
+
+set(PROJECT editor)
+
+add_executable(editor "")
+
+# Compiler options
+if(MSVC)
+	target_compile_options(editor PRIVATE "/bigobj")
+	if(NOT j STREQUAL "0")
+		target_compile_options(editor PRIVATE "/MP${j}")
+	endif()
+else()
+	if(NOT j STREQUAL "0")
+		target_compile_options(editor PRIVATE "-j ${j}")
+	endif()
+endif()
+
+# Enable warnings
+enable_warnings(editor)
+
+# Shared include files
+add_subdirectory(shared/include include-shared-editor)
+get_property(SHARED_INCLUDE_FILES TARGET editor PROPERTY SOURCES)
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/shared/include PREFIX shared/include FILES ${SHARED_INCLUDE_FILES})
+set_property(TARGET editor PROPERTY SOURCES "")
+
+# Shared source files
+add_subdirectory(shared/src src-shared-editor)
+get_property(SHARED_SOURCE_FILES TARGET editor PROPERTY SOURCES)
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/shared/src PREFIX shared/src FILES ${SHARED_SOURCE_FILES})
+set_property(TARGET editor PROPERTY SOURCES "")
+
+# Editor include files
+add_subdirectory(editor/include include-editor)
+get_property(EDITOR_INCLUDE_FILES TARGET editor PROPERTY SOURCES)
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/editor/include PREFIX editor/include FILES ${EDITOR_INCLUDE_FILES})
+set_property(TARGET editor PROPERTY SOURCES "")
+
+# Editor source files
+add_subdirectory(editor/src src-editor)
+get_property(EDITOR_SOURCE_FILES TARGET editor PROPERTY SOURCES)
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/editor/src PREFIX editor/src FILES ${EDITOR_SOURCE_FILES})
+set_property(TARGET editor PROPERTY SOURCES "")
+
+# Target all files
+set_property(TARGET editor PROPERTY SOURCES "${SHARED_INCLUDE_FILES};${SHARED_SOURCE_FILES};${EDITOR_INCLUDE_FILES};${EDITOR_SOURCE_FILES}")
+
+# Target include directories
+target_include_directories(editor PUBLIC shared/include)
+target_include_directories(editor PUBLIC editor/include)
+target_include_directories(editor PUBLIC dependencies/cista/include)
+
+# Set compile definitions
+target_compile_definitions(editor PUBLIC
+	WIN32_LEAN_AND_MEAN
+	NOGDI
+)
+
+# Target libraries for linking
+target_link_libraries(editor
+	CONAN_PKG::glm
+	CONAN_PKG::rapidxml
+	CONAN_PKG::sfml
+)
+
+# Copy files from "./editor/resources" to binary output directories
+foreach(CMAKE_CONFIGURATION_TYPE ${CMAKE_CONFIGURATION_TYPES})
+	add_custom_command(
+		TARGET editor POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_directory
+			${CMAKE_CURRENT_SOURCE_DIR}/editor/resources/
+			${PROJECT_BINARY_DIR}/${CMAKE_CONFIGURATION_TYPE})
+endforeach()
+
+# Output name
+set_property(TARGET editor PROPERTY OUTPUT_NAME NoLifeNoCryEditor)
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT editor)
+
+unset(PROJECT)
+
+########################
+#                      #
+# Editor project (end) #
+#                      #
+########################

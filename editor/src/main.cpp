@@ -2,10 +2,10 @@
 #include <iostream>
 #include <string>
 
-#include "GameWindow.hpp"
+#include "EditorWindow.hpp"
 
 /// @brief Configuration path
-static const std::filesystem::path configurationPath("./config.xml");
+static const std::filesystem::path configurationPath("./editorconfig.xml");
 
 /// @brief Main entry point
 /// @param argc Command line argument count
@@ -16,8 +16,8 @@ int main(int argc, char* argv[])
 	NoLifeNoCry::Engine::EExitCode ret(NoLifeNoCry::Engine::EExitCode::UnknownError);
 	try
 	{
-		NoLifeNoCry::Game::GameWindow game_window(static_cast<std::size_t>(800), static_cast<std::size_t>(600), "No Life, No Cry", NoLifeNoCry::Engine::EWindowStyle::Default);
-		ret = game_window.Start();
+		NoLifeNoCry::Editor::EditorWindow editor_window(static_cast<std::size_t>(800), static_cast<std::size_t>(600), "No Life, No Cry - Editor", NoLifeNoCry::Engine::EWindowStyle::Default);
+		ret = editor_window.Start();
 	}
 	catch (const std::exception& e)
 	{
@@ -37,16 +37,16 @@ int main(int argc, char* argv[])
 	switch (ret)
 	{
 	case NoLifeNoCry::Engine::EExitCode::Success:
-		std::cout << "Game has been terminated successfully!" << std::endl;
+		std::cout << "Editor has been terminated successfully!" << std::endl;
 		break;
 	case NoLifeNoCry::Engine::EExitCode::FailedCreatingWindow:
 		std::cerr << "Failed to create window!" << std::endl;
 		break;
 	case NoLifeNoCry::Engine::EExitCode::UnhandledException:
-		std::cerr << "Game has been terminated with an unhandled exception!" << std::endl;
+		std::cerr << "Editor has been terminated with an unhandled exception!" << std::endl;
 		break;
 	case NoLifeNoCry::Engine::EExitCode::UnknownError:
-		std::cerr << "Game has been terminated with an unknown error!" << std::endl;
+		std::cerr << "Editor has been terminated with an unknown error!" << std::endl;
 		break;
 	}
 	return static_cast<int>(ret);

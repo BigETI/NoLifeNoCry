@@ -1,3 +1,6 @@
 [submodule "dependencies/cmake-conan"]
 	path = dependencies/cmake-conan
 	url = https://github.com/conan-io/cmake-conan.git
+[submodule "dependencies/cista"]
+	path = dependencies/cista
+	url = https://github.com/felixguendling/cista.git

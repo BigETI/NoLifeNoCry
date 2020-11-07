@@ -15,8 +15,17 @@ function(add_conan_lib pkg_name conan_pkg)
 	set_target_properties(${pkg_name} PROPERTIES IMPORTED_GLOBAL TRUE)
 endfunction()
 
+# Cista++ Git submodule from https://github.com/felixguendling/cista
+add_subdirectory(cista)
+
+# GLM from conan-center
+add_conan_lib(CONAN_PKG::glm glm/0.9.9.8)
+
+# GoogleTest from conan-center
+add_conan_lib(CONAN_PKG::gtest gtest/1.10.0)
+
 # RapidXml from conan-center
 add_conan_lib(CONAN_PKG::rapidxml rapidxml/1.13)
 
-# SFML from bintray/bincrafters
+# SFML from bincrafters in bintray
 add_conan_lib(CONAN_PKG::sfml sfml/2.5.1@bincrafters/stable)

@@ -5,13 +5,13 @@
 #include "Assets.hpp"
 
 /// @brief Default constructor
-BA3GameProgrammingTemplate::Assets::Assets()
+NoLifeNoCry::Engine::Assets::Assets()
 {
 	// ...
 }
 
 /// @brief Destructor
-BA3GameProgrammingTemplate::Assets::~Assets()
+NoLifeNoCry::Engine::Assets::~Assets()
 {
 	// ...
 }
@@ -19,10 +19,10 @@ BA3GameProgrammingTemplate::Assets::~Assets()
 /// @brief Load asset
 /// @param assetPath Path to asset
 /// @return Asset pointer if successful, otherwise "nullptr"
-std::shared_ptr<BA3GameProgrammingTemplate::Asset> BA3GameProgrammingTemplate::Assets::LoadAsset(const std::string& assetPath)
+std::shared_ptr<NoLifeNoCry::Engine::Asset> NoLifeNoCry::Engine::Assets::LoadAsset(const std::string& assetPath)
 {
-	std::shared_ptr<BA3GameProgrammingTemplate::Asset> ret(noAsset);
-	std::unordered_map<std::string, std::shared_ptr<BA3GameProgrammingTemplate::Asset>>::const_iterator iterator(assetCache.find(assetPath));
+	std::shared_ptr<NoLifeNoCry::Engine::Asset> ret(noAsset);
+	std::unordered_map<std::string, std::shared_ptr<NoLifeNoCry::Engine::Asset>>::const_iterator iterator(assetCache.find(assetPath));
 	if (iterator == assetCache.end())
 	{
 		// TODO: Load asset from file
@@ -41,7 +41,7 @@ std::shared_ptr<BA3GameProgrammingTemplate::Asset> BA3GameProgrammingTemplate::A
 					std::string class_name(class_xml_attribute->value());
 					std::string asset_file_type_version(version_xml_attribute->value());
 					std::unordered_map<std::string, std::string> meta_data;
-					std::unordered_map<std::string, BA3GameProgrammingTemplate::Asset::PropertyVariant> properties;
+					std::unordered_map<std::string, NoLifeNoCry::Engine::Asset::PropertyVariant> properties;
 					if (asset_file_type_version == "1.0")
 					{
 						rapidxml::xml_node<>* entry_xml_node(nullptr);
@@ -95,7 +95,7 @@ std::shared_ptr<BA3GameProgrammingTemplate::Asset> BA3GameProgrammingTemplate::A
 								entry_xml_node = entry_xml_node->parent() ? entry_xml_node->next_sibling() : nullptr;
 							}
 						}
-						ret = std::make_shared<BA3GameProgrammingTemplate::Asset>(std::move(class_name), std::move(asset_file_type_version), std::move(meta_data), std::move(properties));
+						ret = std::make_shared<NoLifeNoCry::Engine::Asset>(std::move(class_name), std::move(asset_file_type_version), std::move(meta_data), std::move(properties));
 						assetCache.insert_or_assign(assetPath, ret);
 					}
 					else
@@ -116,16 +116,16 @@ std::shared_ptr<BA3GameProgrammingTemplate::Asset> BA3GameProgrammingTemplate::A
 /// @brief Remove asset from cache
 /// @param assetPath Asset path
 /// @return "true" if successful, otherwise "false"
-bool BA3GameProgrammingTemplate::Assets::RemoveAssetFromCache(const std::string& assetPath)
+bool NoLifeNoCry::Engine::Assets::RemoveAssetFromCache(const std::string& assetPath)
 {
 	return static_cast<bool>(assetCache.erase(assetPath));
 }
 
 /// @brief Clear asset cache
-void BA3GameProgrammingTemplate::Assets::ClearAssetCache()
+void NoLifeNoCry::Engine::Assets::ClearAssetCache()
 {
 	assetCache.clear();
 }
 
 /// @brief No asset
-const std::shared_ptr<BA3GameProgrammingTemplate::Asset> BA3GameProgrammingTemplate::Assets::noAsset;
+const std::shared_ptr<NoLifeNoCry::Engine::Asset> NoLifeNoCry::Engine::Assets::noAsset;

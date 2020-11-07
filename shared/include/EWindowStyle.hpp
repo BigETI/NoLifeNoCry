@@ -1,12 +1,12 @@
 #pragma once
 
-#include <SFML/Window.hpp>
+#include <SFML/Window/WindowStyle.hpp>
 
-/// @brief BA3 Game Programming template namespace
-namespace BA3GameProgrammingTemplate
+/// @brief No Life, No Cry engine namespace
+namespace NoLifeNoCry::Engine
 {
 	/// @brief Game window style enumerator
-	enum class EGameWindowStyle
+	enum class EWindowStyle
 	{
 		/// @brief No window style
 		None = sf::Style::None,

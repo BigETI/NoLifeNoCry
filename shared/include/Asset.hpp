@@ -4,8 +4,8 @@
 #include <unordered_map>
 #include <variant>
 
-/// @brief BA3 Game Programming Template
-namespace BA3GameProgrammingTemplate
+/// @brief No Life, No Cry engine namespace
+namespace NoLifeNoCry::Engine
 {
 	/// @brief Asset class
 	class Asset
@@ -31,25 +31,25 @@ namespace BA3GameProgrammingTemplate
 
 		/// @brief Get class name
 		/// @return Class name
-		const std::string& GetClassName() const;
+		const std::string& GetClassName() const noexcept;
 
 		/// @brief Get file type version
 		/// @return File type version
-		const std::string& GetFileTypeVersion() const;
+		const std::string& GetFileTypeVersion() const noexcept;
 
 		/// @brief Get all meta data
 		/// @return All meta data
-		const std::unordered_map<std::string, std::string>& GetAllMetaData() const;
+		const std::unordered_map<std::string, std::string>& GetAllMetaData() const noexcept;
 
 		/// @brief Does meta data exist
 		/// @param name Meta data name
 		/// @return "true" if property exists, otherwise "false"
-		bool DoesMetaDataExist(const std::string& name) const;
+		bool DoesMetaDataExist(const std::string& name) const noexcept;
 
 		/// @brief Get meta data
 		/// @param name Meta data name
 		/// @return Property value if successful, otherwise the specified default value
-		const std::string& GetMetaData(const std::string& name) const;
+		const std::string& GetMetaData(const std::string& name) const noexcept;
 
 		/// @brief Set meta data
 		/// @param name Meta data name
@@ -63,12 +63,12 @@ namespace BA3GameProgrammingTemplate
 
 		/// @brief Get properties
 		/// @return Properties
-		const std::unordered_map<std::string, PropertyVariant>& GetAllProperties() const;
+		const std::unordered_map<std::string, PropertyVariant>& GetAllProperties() const noexcept;
 
 		/// @brief Does property exist
 		/// @param name Property name
 		/// @return "true" if property exists, otherwise "false"
-		bool DoesPropertyExist(const std::string& name) const;
+		bool DoesPropertyExist(const std::string& name) const noexcept;
 
 		/// @brief Get property
 		/// @tparam T Property type
@@ -76,7 +76,7 @@ namespace BA3GameProgrammingTemplate
 		/// @param defaultValue Default property value
 		/// @return Property value if successful, otherwise the specified default value
 		template <typename T>
-		const T& GetProperty(const std::string& name, const T& defaultValue = default) const
+		const T& GetProperty(const std::string& name, const T& defaultValue = default) const noexcept
 		{
 			const T& ret(defaultValue);
 			std::unordered_map<std::string, PropertyVariant>::const_iterator iterator(properties.find(name));
