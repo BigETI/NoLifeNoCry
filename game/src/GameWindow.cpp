@@ -1,6 +1,9 @@
 #include <iostream>
-
-#include "GameWindow.hpp"
+#include <rttr/registration.h>
+#include <Asset.hpp>
+#include <GameWindow.hpp>
+#include <Story.hpp>
+#include <StoryData.hpp>
 
 /// @brief Constructor
 /// @param windowWidth Window width
@@ -93,6 +96,8 @@ NoLifeNoCry::Game::GameWindow::GameWindow(std::size_t windowWidth, std::size_t w
 	{
 		std::cout << "Sensor changed: Type " << static_cast<int>(sensor.type) << " at (" << sensor.x << ", " << sensor.y << ", " << sensor.z << ")" << std::endl;
 	};
+
+	SaveGame::LoadAll("./saves/", saveGames);
 }
 
 /// @brief Destructor

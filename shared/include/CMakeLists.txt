@@ -1,6 +1,6 @@
 target_sources(${PROJECT} PRIVATE
 	"${CMAKE_CURRENT_SOURCE_DIR}/Asset.hpp"
-	"${CMAKE_CURRENT_SOURCE_DIR}/Assets.hpp"
+	"${CMAKE_CURRENT_SOURCE_DIR}/AssetMetaData.hpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/AudioClip.hpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/AudioPlayer.hpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Color.hpp"
@@ -14,6 +14,7 @@ target_sources(${PROJECT} PRIVATE
 	"${CMAKE_CURRENT_SOURCE_DIR}/ESensorType.hpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/EWindowStyle.hpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Event.hpp"
+	"${CMAKE_CURRENT_SOURCE_DIR}/ISerialiser.hpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Image.hpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/JoystickButtonData.hpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/JoystickConnectionData.hpp"
@@ -28,5 +29,7 @@ target_sources(${PROJECT} PRIVATE
 	"${CMAKE_CURRENT_SOURCE_DIR}/Texture.hpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Time.hpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/TouchData.hpp"
+	"${CMAKE_CURRENT_SOURCE_DIR}/Utilities.hpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Window.hpp"
+	"${CMAKE_CURRENT_SOURCE_DIR}/XMLSerialiser.hpp"
 )

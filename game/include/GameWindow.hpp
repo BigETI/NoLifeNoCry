@@ -1,12 +1,12 @@
 #pragma once
 
 #include <filesystem>
+#include <memory>
 #include <string>
-#include <unordered_map>
-
-#include "Assets.hpp"
-#include "EExitCode.hpp"
-#include "Window.hpp"
+#include <vector>
+#include <EExitCode.hpp>
+#include <SaveGame.hpp>
+#include <Window.hpp>
 
 /// @brief No Life, No Cry game namespace
 namespace NoLifeNoCry::Game
@@ -38,7 +38,7 @@ namespace NoLifeNoCry::Game
 
 	private:
 
-		/// @brief Game assets
-		NoLifeNoCry::Engine::Assets assets;
+		/// @brief Save games
+		std::vector<std::shared_ptr<NoLifeNoCry::Game::SaveGame>> saveGames;
 	};
 }

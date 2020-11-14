@@ -1,4 +1,8 @@
 target_sources(${PROJECT} PRIVATE
+	"${CMAKE_CURRENT_SOURCE_DIR}/Chapter.cpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/GameWindow.cpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/main.cpp"
+	"${CMAKE_CURRENT_SOURCE_DIR}/Page.cpp"
+	"${CMAKE_CURRENT_SOURCE_DIR}/SaveGame.cpp"
+	"${CMAKE_CURRENT_SOURCE_DIR}/Story.cpp"
 )

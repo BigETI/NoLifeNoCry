@@ -1,9 +1,8 @@
 target_sources(${PROJECT} PRIVATE
-	"${CMAKE_CURRENT_SOURCE_DIR}/Asset.cpp"
-	"${CMAKE_CURRENT_SOURCE_DIR}/Assets.cpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/AudioClip.cpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/AudioPlayer.cpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Image.cpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Texture.cpp"
+	"${CMAKE_CURRENT_SOURCE_DIR}/Utilities.cpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Window.cpp"
 )

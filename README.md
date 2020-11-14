@@ -13,11 +13,11 @@ This repository is my programming task for BA3 Game Programmers at CGL in TH-Kö
 
 # Dependencies
 
-- Cista++
 - cmake-conan (CMake wrapper for the Conan C and C++ package manager)
 - GLM (OpenGL Mathematics)
 - GoogleTest (Google's C++ testing framework)
 - RapidXml (A fast XML library)
+- RTTR (Run Time Type Reflection)
 - SFML (Simple and Fast Multimedia Library)
 
 # Building

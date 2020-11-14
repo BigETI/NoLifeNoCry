@@ -159,7 +159,6 @@ set_property(TARGET game PROPERTY SOURCES "${SHARED_INCLUDE_FILES};${SHARED_SOUR
 # Target include directories
 target_include_directories(game PUBLIC shared/include)
 target_include_directories(game PUBLIC game/include)
-target_include_directories(game PUBLIC dependencies/cista/include)
 
 # Set compile definitions
 target_compile_definitions(game PUBLIC
@@ -171,6 +170,7 @@ target_compile_definitions(game PUBLIC
 target_link_libraries(game
 	CONAN_PKG::glm
 	CONAN_PKG::rapidxml
+	CONAN_PKG::rttr
 	CONAN_PKG::sfml
 )
 
@@ -250,7 +250,6 @@ set_property(TARGET editor PROPERTY SOURCES "${SHARED_INCLUDE_FILES};${SHARED_SO
 # Target include directories
 target_include_directories(editor PUBLIC shared/include)
 target_include_directories(editor PUBLIC editor/include)
-target_include_directories(editor PUBLIC dependencies/cista/include)
 
 # Set compile definitions
 target_compile_definitions(editor PUBLIC
@@ -262,6 +261,7 @@ target_compile_definitions(editor PUBLIC
 target_link_libraries(editor
 	CONAN_PKG::glm
 	CONAN_PKG::rapidxml
+	CONAN_PKG::rttr
 	CONAN_PKG::sfml
 )
 

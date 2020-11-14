@@ -16,7 +16,7 @@ function(add_conan_lib pkg_name conan_pkg)
 endfunction()
 
 # Cista++ Git submodule from https://github.com/felixguendling/cista
-add_subdirectory(cista)
+#add_subdirectory(cista)
 
 # GLM from conan-center
 add_conan_lib(CONAN_PKG::glm glm/0.9.9.8)
@@ -26,6 +26,9 @@ add_conan_lib(CONAN_PKG::gtest gtest/1.10.0)
 
 # RapidXml from conan-center
 add_conan_lib(CONAN_PKG::rapidxml rapidxml/1.13)
+
+# Run Time Type Reflection library from conan-center
+add_conan_lib(CONAN_PKG::rttr rttr/0.9.6)
 
 # SFML from bincrafters in bintray
 add_conan_lib(CONAN_PKG::sfml sfml/2.5.1@bincrafters/stable)
