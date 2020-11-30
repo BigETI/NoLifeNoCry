@@ -129,16 +129,28 @@ endif()
 # Enable warnings
 enable_warnings(game)
 
-# Shared include files
-add_subdirectory(shared/include include-shared-game)
-get_property(SHARED_INCLUDE_FILES TARGET game PROPERTY SOURCES)
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/shared/include PREFIX shared/include FILES ${SHARED_INCLUDE_FILES})
+# Engine include files
+add_subdirectory(engine/include include-engine-game)
+get_property(ENGINE_INCLUDE_FILES TARGET game PROPERTY SOURCES)
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/engine/include PREFIX engine/include FILES ${ENGINE_INCLUDE_FILES})
 set_property(TARGET game PROPERTY SOURCES "")
 
-# Shared source files
-add_subdirectory(shared/src src-shared-game)
-get_property(SHARED_SOURCE_FILES TARGET game PROPERTY SOURCES)
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/shared/src PREFIX shared/src FILES ${SHARED_SOURCE_FILES})
+# Engine source files
+add_subdirectory(engine/src src-engine-game)
+get_property(ENGINE_SOURCE_FILES TARGET game PROPERTY SOURCES)
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/engine/src PREFIX engine/src FILES ${ENGINE_SOURCE_FILES})
+set_property(TARGET game PROPERTY SOURCES "")
+
+# Shared game include files
+add_subdirectory(game-shared/include include-game-shared)
+get_property(GAME_SHARED_INCLUDE_FILES TARGET game PROPERTY SOURCES)
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/game-shared/include PREFIX game-shared/include FILES ${GAME_SHARED_INCLUDE_FILES})
+set_property(TARGET game PROPERTY SOURCES "")
+
+# Shared game source files
+add_subdirectory(game-shared/src src-game-shared)
+get_property(GAME_SHARED_SOURCE_FILES TARGET game PROPERTY SOURCES)
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/game-shared/src PREFIX game-shared/src FILES ${GAME_SHARED_SOURCE_FILES})
 set_property(TARGET game PROPERTY SOURCES "")
 
 # Game include files
@@ -154,10 +166,11 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/game/src PREFIX game/src FILES ${G
 set_property(TARGET game PROPERTY SOURCES "")
 
 # Target all files
-set_property(TARGET game PROPERTY SOURCES "${SHARED_INCLUDE_FILES};${SHARED_SOURCE_FILES};${GAME_INCLUDE_FILES};${GAME_SOURCE_FILES}")
+set_property(TARGET game PROPERTY SOURCES "${ENGINE_INCLUDE_FILES};${ENGINE_SOURCE_FILES};${GAME_SHARED_INCLUDE_FILES};${GAME_SHARED_SOURCE_FILES};${GAME_INCLUDE_FILES};${GAME_SOURCE_FILES}")
 
 # Target include directories
-target_include_directories(game PUBLIC shared/include)
+target_include_directories(game PUBLIC engine/include)
+target_include_directories(game PUBLIC game-shared/include)
 target_include_directories(game PUBLIC game/include)
 
 # Set compile definitions
@@ -174,8 +187,13 @@ target_link_libraries(game
 	CONAN_PKG::sfml
 )
 
-# Copy files from "./game/resources" to binary output directories
+# Copy files from "./engine/resources" and "./game/resources" to binary output directories
 foreach(CMAKE_CONFIGURATION_TYPE ${CMAKE_CONFIGURATION_TYPES})
+	add_custom_command(
+		TARGET game POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_directory
+			${CMAKE_CURRENT_SOURCE_DIR}/engine/resources/
+			${PROJECT_BINARY_DIR}/${CMAKE_CONFIGURATION_TYPE})
 	add_custom_command(
 		TARGET game POST_BUILD
 		COMMAND ${CMAKE_COMMAND} -E copy_directory
@@ -220,16 +238,28 @@ endif()
 # Enable warnings
 enable_warnings(editor)
 
-# Shared include files
-add_subdirectory(shared/include include-shared-editor)
-get_property(SHARED_INCLUDE_FILES TARGET editor PROPERTY SOURCES)
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/shared/include PREFIX shared/include FILES ${SHARED_INCLUDE_FILES})
+# Engine include files
+add_subdirectory(engine/include include-engine-editor)
+get_property(ENGINE_INCLUDE_FILES TARGET editor PROPERTY SOURCES)
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/engine/include PREFIX engine/include FILES ${ENGINE_INCLUDE_FILES})
 set_property(TARGET editor PROPERTY SOURCES "")
 
-# Shared source files
-add_subdirectory(shared/src src-shared-editor)
-get_property(SHARED_SOURCE_FILES TARGET editor PROPERTY SOURCES)
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/shared/src PREFIX shared/src FILES ${SHARED_SOURCE_FILES})
+# Engine source files
+add_subdirectory(engine/src src-engine-editor)
+get_property(ENGINE_SOURCE_FILES TARGET editor PROPERTY SOURCES)
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/engine/src PREFIX engine/src FILES ${ENGINE_SOURCE_FILES})
+set_property(TARGET editor PROPERTY SOURCES "")
+
+# Shared game include files
+add_subdirectory(game-shared/include include-game-shared-editor)
+get_property(GAME_SHARED_INCLUDE_FILES TARGET editor PROPERTY SOURCES)
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/game-shared/include PREFIX game-shared/include FILES ${GAME_SHARED_INCLUDE_FILES})
+set_property(TARGET editor PROPERTY SOURCES "")
+
+# Shared game source files
+add_subdirectory(game-shared/src src-game-shared-editor)
+get_property(GAME_SHARED_SOURCE_FILES TARGET editor PROPERTY SOURCES)
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/game-shared/src PREFIX game-shared/src FILES ${GAME_SHARED_SOURCE_FILES})
 set_property(TARGET editor PROPERTY SOURCES "")
 
 # Editor include files
@@ -245,10 +275,11 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/editor/src PREFIX editor/src FILES
 set_property(TARGET editor PROPERTY SOURCES "")
 
 # Target all files
-set_property(TARGET editor PROPERTY SOURCES "${SHARED_INCLUDE_FILES};${SHARED_SOURCE_FILES};${EDITOR_INCLUDE_FILES};${EDITOR_SOURCE_FILES}")
+set_property(TARGET editor PROPERTY SOURCES "${ENGINE_INCLUDE_FILES};${ENGINE_SOURCE_FILES};${GAME_SHARED_INCLUDE_FILES};${GAME_SHARED_SOURCE_FILES};${EDITOR_INCLUDE_FILES};${EDITOR_SOURCE_FILES}")
 
 # Target include directories
-target_include_directories(editor PUBLIC shared/include)
+target_include_directories(editor PUBLIC engine/include)
+target_include_directories(editor PUBLIC game-shared/include)
 target_include_directories(editor PUBLIC editor/include)
 
 # Set compile definitions
@@ -265,8 +296,13 @@ target_link_libraries(editor
 	CONAN_PKG::sfml
 )
 
-# Copy files from "./editor/resources" to binary output directories
+# Copy files from "./engine/resources" and "./editor/resources" to binary output directories
 foreach(CMAKE_CONFIGURATION_TYPE ${CMAKE_CONFIGURATION_TYPES})
+	add_custom_command(
+		TARGET editor POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_directory
+			${CMAKE_CURRENT_SOURCE_DIR}/engine/resources/
+			${PROJECT_BINARY_DIR}/${CMAKE_CONFIGURATION_TYPE})
 	add_custom_command(
 		TARGET editor POST_BUILD
 		COMMAND ${CMAKE_COMMAND} -E copy_directory

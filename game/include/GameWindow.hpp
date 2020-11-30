@@ -6,13 +6,13 @@
 #include <vector>
 #include <EExitCode.hpp>
 #include <SaveGame.hpp>
-#include <Window.hpp>
+#include <UI/Window.hpp>
 
 /// @brief No Life, No Cry game namespace
 namespace NoLifeNoCry::Game
 {
 	/// @brief Game window class
-	class GameWindow : public NoLifeNoCry::Engine::Window
+	class GameWindow : public NoLifeNoCry::Engine::UI::Window
 	{
 	public:
 
@@ -28,10 +28,6 @@ namespace NoLifeNoCry::Game
 
 		GameWindow(const GameWindow&) = delete;
 		GameWindow(GameWindow&&) = delete;
-
-		/// @brief Start game
-		/// @return Game exit code
-		NoLifeNoCry::Engine::EExitCode Start();
 
 		GameWindow& operator=(const GameWindow&) = delete;
 		GameWindow& operator=(GameWindow&&) = delete;

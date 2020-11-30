@@ -1,0 +1,11 @@
+target_sources(${PROJECT} PRIVATE
+	"${CMAKE_CURRENT_SOURCE_DIR}/Chapter.hpp"
+	"${CMAKE_CURRENT_SOURCE_DIR}/ChapterData.hpp"
+	"${CMAKE_CURRENT_SOURCE_DIR}/Page.hpp"
+	"${CMAKE_CURRENT_SOURCE_DIR}/PageData.hpp"
+	"${CMAKE_CURRENT_SOURCE_DIR}/Reflection.hpp"
+	"${CMAKE_CURRENT_SOURCE_DIR}/SaveGame.hpp"
+	"${CMAKE_CURRENT_SOURCE_DIR}/SaveGameData.hpp"
+	"${CMAKE_CURRENT_SOURCE_DIR}/Story.hpp"
+	"${CMAKE_CURRENT_SOURCE_DIR}/StoryData.hpp"
+)

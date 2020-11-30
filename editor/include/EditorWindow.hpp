@@ -1,11 +1,13 @@
 #pragma once
 
-#include "EExitCode.hpp"
-#include "Window.hpp"
+#include <EExitCode.hpp>
+#include <UI/Button.hpp>
+#include <UI/InputField.hpp>
+#include <UI/Window.hpp>
 
 namespace NoLifeNoCry::Editor
 {
-	class EditorWindow : public NoLifeNoCry::Engine::Window
+	class EditorWindow : public NoLifeNoCry::Engine::UI::Window
 	{
 	public:
 		/// @brief Constructor
@@ -21,11 +23,15 @@ namespace NoLifeNoCry::Editor
 		EditorWindow(const EditorWindow&) = delete;
 		EditorWindow(EditorWindow&&) = delete;
 
-		/// @brief Start editor
-		/// @return Exit code
-		NoLifeNoCry::Engine::EExitCode Start();
-
 		EditorWindow& operator=(const EditorWindow&) = delete;
 		EditorWindow& operator=(EditorWindow&&) = delete;
+
+	private:
+
+		std::shared_ptr<NoLifeNoCry::Engine::UI::Button> testButton;
+
+		std::shared_ptr<NoLifeNoCry::Engine::UI::InputField> testInputField;
+
+		double time;
 	};
 }

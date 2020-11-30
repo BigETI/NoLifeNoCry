@@ -1,8 +1,7 @@
 #include <filesystem>
 #include <iostream>
 #include <string>
-
-#include "EditorWindow.hpp"
+#include <EditorWindow.hpp>
 
 /// @brief Configuration path
 static const std::filesystem::path configurationPath("./editorconfig.xml");
