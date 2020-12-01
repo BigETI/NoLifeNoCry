@@ -2,8 +2,8 @@
 
 #include <memory>
 
-/// @brief No Life, No Cry engine serialiser namespace
-namespace NoLifeNoCry::Engine::Serialiser
+/// @brief Dirt Machine game engine serialiser namespace
+namespace DirtMachine::Serialiser
 {
 	/// @brief Serialiser class
 	/// @tparam TObject Object type

@@ -2,7 +2,7 @@
 
 #include <SFML/System/String.hpp>
 
-namespace NoLifeNoCry::Engine
+namespace DirtMachine
 {
 	using String = sf::String;
 }

@@ -8,27 +8,27 @@
 #include <Graphic/Font.hpp>
 #include <Graphic/Text.hpp>
 
-namespace NoLifeNoCry::Engine::UI
+namespace DirtMachine::UI
 {
-	class Label : public NoLifeNoCry::Engine::UI::Control
+	class Label : public DirtMachine::UI::Control
 	{
 	public:
 
-		Label(const NoLifeNoCry::Engine::String& textString, const NoLifeNoCry::Engine::Graphic::Font* textFont, unsigned int textCharacterSize, NoLifeNoCry::Engine::UI::ETextAlignment textAlignment, const glm::ivec2& position, float rotation, const glm::uvec2& size, NoLifeNoCry::Engine::UI::Control* parent = nullptr);
+		Label(const DirtMachine::String& textString, const DirtMachine::Graphic::Font* textFont, unsigned int textCharacterSize, DirtMachine::UI::ETextAlignment textAlignment, const glm::ivec2& position, float rotation, const glm::uvec2& size, DirtMachine::UI::Control* parent = nullptr);
 
 		virtual ~Label();
 
-		virtual void SetTextString(const NoLifeNoCry::Engine::String& textString);
+		virtual void SetTextString(const DirtMachine::String& textString);
 
-		virtual NoLifeNoCry::Engine::String GetTextString() const;
+		virtual DirtMachine::String GetTextString() const;
 
-		void SetTextAlignment(NoLifeNoCry::Engine::UI::ETextAlignment newTextAlignment);
+		void SetTextAlignment(DirtMachine::UI::ETextAlignment newTextAlignment);
 
-		virtual NoLifeNoCry::Engine::UI::ETextAlignment GetTextAlignment() const;
+		virtual DirtMachine::UI::ETextAlignment GetTextAlignment() const;
 
-		virtual void SetTextFont(const NoLifeNoCry::Engine::Graphic::Font& newTextFont);
+		virtual void SetTextFont(const DirtMachine::Graphic::Font& newTextFont);
 
-		virtual const NoLifeNoCry::Engine::Graphic::Font* GetTextFont() const;
+		virtual const DirtMachine::Graphic::Font* GetTextFont() const;
 
 		virtual void SetTextCharacterSize(unsigned int textCharacterSize);
 
@@ -52,16 +52,16 @@ namespace NoLifeNoCry::Engine::UI
 
 		virtual glm::vec2 FindTextCharacterPosition(std::size_t textCharacterIndex) const;
 
-		virtual NoLifeNoCry::Engine::Graphic::Rectangle<float> GetTextLocalBounds() const;
+		virtual DirtMachine::Graphic::Rectangle<float> GetTextLocalBounds() const;
 
-		virtual NoLifeNoCry::Engine::Graphic::Rectangle<float> GetTextGlobalBounds() const;
+		virtual DirtMachine::Graphic::Rectangle<float> GetTextGlobalBounds() const;
 
-		virtual void Draw(NoLifeNoCry::Engine::Graphic::RenderTarget& renderTarget) const override;
+		virtual void Draw(DirtMachine::Graphic::RenderTarget& renderTarget) const override;
 
 	private:
 
-		NoLifeNoCry::Engine::Graphic::Text text;
+		DirtMachine::Graphic::Text text;
 
-		NoLifeNoCry::Engine::UI::ETextAlignment textAlignment;
+		DirtMachine::UI::ETextAlignment textAlignment;
 	};
 }

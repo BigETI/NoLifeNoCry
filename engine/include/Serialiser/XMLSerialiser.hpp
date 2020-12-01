@@ -9,13 +9,13 @@
 #include <rttr/registration.h>
 #include <Serialiser/ISerialiser.hpp>
 
-/// @brief No Life, No Cry engine serialiser namespace
-namespace NoLifeNoCry::Engine::Serialiser
+/// @brief Dirt Machine game engine serialiser namespace
+namespace DirtMachine::Serialiser
 {
 	/// @brief XML serialiser class
 	/// @tparam TObject Object type
 	template <typename TObject>
-	class XMLSerialiser : public NoLifeNoCry::Engine::Serialiser::ISerialiser<TObject, rapidxml::xml_node<>*, std::shared_ptr<rapidxml::xml_document<>>>
+	class XMLSerialiser : public DirtMachine::Serialiser::ISerialiser<TObject, rapidxml::xml_node<>*, std::shared_ptr<rapidxml::xml_document<>>>
 	{
 	public:
 

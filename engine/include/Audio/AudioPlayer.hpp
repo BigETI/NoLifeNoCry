@@ -4,8 +4,8 @@
 #include <Audio/AudioClip.hpp>
 #include <Audio/EAudioPlayStatus.hpp>
 
-/// @brief No Life, No Cry engine audio namespace
-namespace NoLifeNoCry::Engine::Audio
+/// @brief Dirt Machine game engine audio namespace
+namespace DirtMachine::Audio
 {
 	/// @brief Audio player class
 	class AudioPlayer : sf::Sound
@@ -21,7 +21,7 @@ namespace NoLifeNoCry::Engine::Audio
 
         /// @brief Set audio clip
         /// @param audioClip Audio clip
-        void SetAudioClip(const NoLifeNoCry::Engine::Audio::AudioClip& audioClip);
+        void SetAudioClip(const DirtMachine::Audio::AudioClip& audioClip);
         
         /// @brief Set loop
         /// @param loop Loop
@@ -29,11 +29,11 @@ namespace NoLifeNoCry::Engine::Audio
 
         /// @brief Set playing time offset
         /// @param timeOffset Time offset
-        void SetPlayingTimeOffset(NoLifeNoCry::Engine::Time timeOffset);
+        void SetPlayingTimeOffset(DirtMachine::Time timeOffset);
         
         /// @brief Get audio clip
         /// @return Audio clip
-        const NoLifeNoCry::Engine::Audio::AudioClip* GetAudioClip() const;
+        const DirtMachine::Audio::AudioClip* GetAudioClip() const;
         
         /// @brief Get loop
         /// @return Loop
@@ -41,11 +41,11 @@ namespace NoLifeNoCry::Engine::Audio
         
         /// @brief Get playing time offset
         /// @return Playing time offset
-        NoLifeNoCry::Engine::Time GetPlayingTimeOffset() const;
+        DirtMachine::Time GetPlayingTimeOffset() const;
 
         /// @brief Get audio play status
         /// @return Audio play status
-        NoLifeNoCry::Engine::Audio::EAudioPlayStatus GetAudioPlayStatus() const;
+        DirtMachine::Audio::EAudioPlayStatus GetAudioPlayStatus() const;
         
         /// @brief Reset audio clip
         void ResetAudioClip();

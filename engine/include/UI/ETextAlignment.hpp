@@ -1,6 +1,6 @@
 #pragma once
 
-namespace NoLifeNoCry::Engine::UI
+namespace DirtMachine::UI
 {
 	enum class ETextAlignment
 	{

@@ -8,8 +8,8 @@
 #include <Graphic/Colour.hpp>
 #include <Graphic/Rectangle.hpp>
 
-/// @brief No Life, No Cry engine graphic namespace
-namespace NoLifeNoCry::Engine::Graphic
+/// @brief Dirt Machine game engine graphic namespace
+namespace DirtMachine::Graphic
 {
 	/// @brief Image class
 	class Image : public sf::Image
@@ -25,7 +25,7 @@ namespace NoLifeNoCry::Engine::Graphic
         /// @param width Image width
         /// @param height Image height
         /// @param colour Image colour
-        void Create(unsigned int width, unsigned int height, const NoLifeNoCry::Engine::Graphic::Colour& colour = NoLifeNoCry::Engine::Graphic::Colour(0, 0, 0));
+        void Create(unsigned int width, unsigned int height, const DirtMachine::Graphic::Colour& colour = DirtMachine::Graphic::Colour(0, 0, 0));
 
         /// @brief Create image
         /// @param width Imafe width
@@ -60,7 +60,7 @@ namespace NoLifeNoCry::Engine::Graphic
         /// @brief Create image mask from colour
         /// @param colour Colour
         /// @param alpha Alpha
-        void CreateMaskFromColor(const NoLifeNoCry::Engine::Graphic::Colour& colour, std::uint8_t alpha = 0);
+        void CreateMaskFromColor(const DirtMachine::Graphic::Colour& colour, std::uint8_t alpha = 0);
 
         /// @brief Copy image
         /// @param source Source image
@@ -68,19 +68,19 @@ namespace NoLifeNoCry::Engine::Graphic
         /// @param destY Destination Y
         /// @param sourceRect Source rectangle
         /// @param applyAlpha Apply alpha
-        void Copy(const NoLifeNoCry::Engine::Graphic::Image& source, unsigned int destX, unsigned int destY, const NoLifeNoCry::Engine::Graphic::Rectangle<int>& sourceRect = NoLifeNoCry::Engine::Graphic::Rectangle<int>(0, 0, 0, 0), bool applyAlpha = false);
+        void Copy(const DirtMachine::Graphic::Image& source, unsigned int destX, unsigned int destY, const DirtMachine::Graphic::Rectangle<int>& sourceRect = DirtMachine::Graphic::Rectangle<int>(0, 0, 0, 0), bool applyAlpha = false);
 
         /// @brief Set pixel colour
         /// @param x X
         /// @param y Y
         /// @param colour Colour
-        void SetPixel(unsigned int x, unsigned int y, const NoLifeNoCry::Engine::Graphic::Colour& colour);
+        void SetPixel(unsigned int x, unsigned int y, const DirtMachine::Graphic::Colour& colour);
 
         /// @brief Get pixel colour
         /// @param x X
         /// @param y Y
         /// @return Pixel colour
-        NoLifeNoCry::Engine::Graphic::Colour GetPixel(unsigned int x, unsigned int y) const;
+        DirtMachine::Graphic::Colour GetPixel(unsigned int x, unsigned int y) const;
         
         /// @brief Get pointer to pixel data
         /// @return Pointer to pixel data

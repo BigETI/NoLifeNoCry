@@ -9,24 +9,24 @@
 #include <UI/Label.hpp>
 #include <UI/Panel.hpp>
 
-namespace NoLifeNoCry::Engine::UI
+namespace DirtMachine::UI
 {
-	class Button : public NoLifeNoCry::Engine::UI::InteractableControl
+	class Button : public DirtMachine::UI::InteractableControl
 	{
 	public:
 
-		Button(glm::ivec2 position, float rotation, glm::uvec2 size, const std::string& labelTextString, const NoLifeNoCry::Engine::Graphic::Font* labelTextFont, unsigned int labelTextCharacterSize, NoLifeNoCry::Engine::UI::Control* parent);
+		Button(glm::ivec2 position, float rotation, glm::uvec2 size, const std::string& labelTextString, const DirtMachine::Graphic::Font* labelTextFont, unsigned int labelTextCharacterSize, DirtMachine::UI::Control* parent);
 
 		virtual ~Button();
 
-		virtual NoLifeNoCry::Engine::UI::Label& GetLabel();
+		virtual DirtMachine::UI::Label& GetLabel();
 
-		virtual const NoLifeNoCry::Engine::UI::Label& GetLabel() const;
+		virtual const DirtMachine::UI::Label& GetLabel() const;
 
 	private:
 
-		std::shared_ptr<NoLifeNoCry::Engine::UI::Panel> backgroundPanel;
+		std::shared_ptr<DirtMachine::UI::Panel> backgroundPanel;
 
-		std::shared_ptr<NoLifeNoCry::Engine::UI::Label> label;
+		std::shared_ptr<DirtMachine::UI::Label> label;
 	};
 }

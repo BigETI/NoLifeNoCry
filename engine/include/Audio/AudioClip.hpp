@@ -9,8 +9,8 @@
 #include <glm/vec3.hpp>
 #include <Time.hpp>
 
-/// @brief No Life, No Cry engine audio namespace
-namespace NoLifeNoCry::Engine::Audio
+/// @brief Dirt Machine game engine audio namespace
+namespace DirtMachine::Audio
 {
 	/// @brief Audio clip class
 	class AudioClip : public sf::SoundBuffer

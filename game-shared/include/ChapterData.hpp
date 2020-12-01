@@ -5,8 +5,8 @@
 #include <rttr/registration.h>
 #include <PageData.hpp>
 
-/// @brief No Life, No Cry game namespace
-namespace NoLifeNoCry::Game
+/// @brief No Life, No Cry namespace
+namespace NoLifeNoCry
 {
 	/// @brief Chapter data structure
 	struct ChapterData
@@ -18,6 +18,6 @@ namespace NoLifeNoCry::Game
 		std::string description;
 
 		/// @brief Pages
-		std::vector<NoLifeNoCry::Game::PageData> pages;
+		std::vector<NoLifeNoCry::PageData> pages;
 	};
 }

@@ -16,9 +16,9 @@
 /// @param chapterIndex Chapter index
 /// @param pageIndex Page index
 /// @param variables Variables
-NoLifeNoCry::Game::SaveGame::SaveGame(const std::filesystem::path& saveGameFilePath, const std::string& creationDateTime, const std::string lastSavedDateTime, const std::string& storyName, std::size_t chapterIndex, std::size_t pageIndex, const std::map<std::string, std::string>& variables) : saveGameFilePath(saveGameFilePath), saveGameData({ creationDateTime, lastSavedDateTime, storyName, chapterIndex, pageIndex, variables }), chapter(nullptr), page(nullptr)
+NoLifeNoCry::SaveGame::SaveGame(const std::filesystem::path& saveGameFilePath, const std::string& creationDateTime, const std::string lastSavedDateTime, const std::string& storyName, std::size_t chapterIndex, std::size_t pageIndex, const std::map<std::string, std::string>& variables) : saveGameFilePath(saveGameFilePath), saveGameData({ creationDateTime, lastSavedDateTime, storyName, chapterIndex, pageIndex, variables }), chapter(nullptr), page(nullptr)
 {
-	std::shared_ptr<NoLifeNoCry::Game::Story> loaded_story(Story::Load(storyName));
+	std::shared_ptr<NoLifeNoCry::Story> loaded_story(Story::Load(storyName));
 	if (!loaded_story)
 	{
 		std::stringstream message;
@@ -60,9 +60,9 @@ NoLifeNoCry::Game::SaveGame::SaveGame(const std::filesystem::path& saveGameFileP
 /// @brief Load save game
 /// @param saveGameFilePath Save game file path
 /// @return Save game if successful, otherwise "nullptr"
-std::shared_ptr<NoLifeNoCry::Game::SaveGame> NoLifeNoCry::Game::SaveGame::Load(const std::filesystem::path& saveGameFilePath)
+std::shared_ptr<NoLifeNoCry::SaveGame> NoLifeNoCry::SaveGame::Load(const std::filesystem::path& saveGameFilePath)
 {
-	std::shared_ptr<NoLifeNoCry::Game::SaveGame> ret(nullptr);
+	std::shared_ptr<NoLifeNoCry::SaveGame> ret(nullptr);
 	try
 	{
 		if (std::filesystem::is_block_file(saveGameFilePath) ||
@@ -73,10 +73,10 @@ std::shared_ptr<NoLifeNoCry::Game::SaveGame> NoLifeNoCry::Game::SaveGame::Load(c
 			rapidxml::file<> xml_file(save_game_path.c_str());
 			rapidxml::xml_document<> xml_document;
 			xml_document.parse<0>(xml_file.data());
-			std::shared_ptr<NoLifeNoCry::Game::SaveGameData> save_game_data(NoLifeNoCry::Engine::Serialiser::XMLSerialiser<NoLifeNoCry::Game::SaveGameData>().DeserialiseObject(&xml_document));
+			std::shared_ptr<NoLifeNoCry::SaveGameData> save_game_data(DirtMachine::Serialiser::XMLSerialiser<NoLifeNoCry::SaveGameData>().DeserialiseObject(&xml_document));
 			if (save_game_data)
 			{
-				ret = std::make_shared<NoLifeNoCry::Game::SaveGame>(saveGameFilePath, save_game_data->creationDateTime, save_game_data->lastSavedDateTime, save_game_data->storyName, save_game_data->chapterIndex, save_game_data->pageIndex, save_game_data->variables);
+				ret = std::make_shared<NoLifeNoCry::SaveGame>(saveGameFilePath, save_game_data->creationDateTime, save_game_data->lastSavedDateTime, save_game_data->storyName, save_game_data->chapterIndex, save_game_data->pageIndex, save_game_data->variables);
 			}
 		}
 	}
@@ -102,7 +102,7 @@ std::shared_ptr<NoLifeNoCry::Game::SaveGame> NoLifeNoCry::Game::SaveGame::Load(c
 /// @param saveGamesDirectoryPath Save games directory path
 /// @param result Result
 /// @return Save games
-std::vector<std::shared_ptr<NoLifeNoCry::Game::SaveGame>>& NoLifeNoCry::Game::SaveGame::LoadAll(const std::filesystem::path& saveGamesDirectoryPath, std::vector<std::shared_ptr<NoLifeNoCry::Game::SaveGame>>& result)
+std::vector<std::shared_ptr<NoLifeNoCry::SaveGame>>& NoLifeNoCry::SaveGame::LoadAll(const std::filesystem::path& saveGamesDirectoryPath, std::vector<std::shared_ptr<NoLifeNoCry::SaveGame>>& result)
 {
 	result.clear();
 	for (const std::filesystem::path& save_game_file_path : saveGamesDirectoryPath)
@@ -111,7 +111,7 @@ std::vector<std::shared_ptr<NoLifeNoCry::Game::SaveGame>>& NoLifeNoCry::Game::Sa
 			std::filesystem::is_character_file(save_game_file_path) ||
 			std::filesystem::is_regular_file(save_game_file_path))
 		{
-			std::shared_ptr<NoLifeNoCry::Game::SaveGame> save_game(Load(save_game_file_path));
+			std::shared_ptr<NoLifeNoCry::SaveGame> save_game(Load(save_game_file_path));
 			if (save_game)
 			{
 				result.push_back(save_game);
@@ -123,49 +123,49 @@ std::vector<std::shared_ptr<NoLifeNoCry::Game::SaveGame>>& NoLifeNoCry::Game::Sa
 
 /// @brief Get creation date and time
 /// @return Creation date and time
-const std::string& NoLifeNoCry::Game::SaveGame::GetCreationDateTime() const
+const std::string& NoLifeNoCry::SaveGame::GetCreationDateTime() const
 {
 	return saveGameData.creationDateTime;
 }
 
 /// @brief Get last saved date and time
 /// @return Last saved date and time
-const std::string& NoLifeNoCry::Game::SaveGame::GetLastSavedDateTime() const
+const std::string& NoLifeNoCry::SaveGame::GetLastSavedDateTime() const
 {
 	return saveGameData.lastSavedDateTime;
 }
 
 /// @brief Get story name to access story from assets
 /// @return Story name
-const std::string& NoLifeNoCry::Game::SaveGame::GetStoryName() const
+const std::string& NoLifeNoCry::SaveGame::GetStoryName() const
 {
 	return saveGameData.storyName;
 }
 
 /// @brief Get story
 /// @return Story
-const NoLifeNoCry::Game::Story& NoLifeNoCry::Game::SaveGame::GetStory() const
+const NoLifeNoCry::Story& NoLifeNoCry::SaveGame::GetStory() const
 {
 	return story;
 }
 
 /// @brief Get story chapter
 /// @return Story chapter
-const NoLifeNoCry::Game::Chapter& NoLifeNoCry::Game::SaveGame::GetChapter() const
+const NoLifeNoCry::Chapter& NoLifeNoCry::SaveGame::GetChapter() const
 {
 	return *chapter;
 }
 
 /// @brief Get page in story chapter
 /// @return Page in story chapter
-const NoLifeNoCry::Game::Page& NoLifeNoCry::Game::SaveGame::GetPage() const
+const NoLifeNoCry::Page& NoLifeNoCry::SaveGame::GetPage() const
 {
 	return *page;
 }
 
 /// @brief Save save game
 /// @return "true" if save game was successfully saved, otherwise "false"
-bool NoLifeNoCry::Game::SaveGame::Save()
+bool NoLifeNoCry::SaveGame::Save()
 {
 	return Save(saveGameFilePath);
 }
@@ -173,7 +173,7 @@ bool NoLifeNoCry::Game::SaveGame::Save()
 /// @brief Save save game
 /// @param path Save game file path
 /// @return "true" if save game was successfully saved, otherwise "false"
-bool NoLifeNoCry::Game::SaveGame::Save(const std::filesystem::path& path)
+bool NoLifeNoCry::SaveGame::Save(const std::filesystem::path& path)
 {
 	bool ret(false);
 	try
@@ -189,7 +189,7 @@ bool NoLifeNoCry::Game::SaveGame::Save(const std::filesystem::path& path)
 		}
 		if (does_directory_exist)
 		{
-			std::shared_ptr<rapidxml::xml_document<>> xml_document(NoLifeNoCry::Engine::Serialiser::XMLSerialiser<SaveGameData>().SerialiseObject(saveGameData));
+			std::shared_ptr<rapidxml::xml_document<>> xml_document(DirtMachine::Serialiser::XMLSerialiser<SaveGameData>().SerialiseObject(saveGameData));
 			if (xml_document)
 			{
 				std::ofstream output_file_stream(path);

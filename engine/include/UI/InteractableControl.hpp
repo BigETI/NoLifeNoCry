@@ -7,23 +7,23 @@
 #include <Input/Data/MouseWheelData.hpp>
 #include <UI/Control.hpp>
 
-namespace NoLifeNoCry::Engine::UI
+namespace DirtMachine::UI
 {
-	class InteractableControl : public NoLifeNoCry::Engine::UI::Control
+	class InteractableControl : public DirtMachine::UI::Control
 	{
 	public:
 
-		NoLifeNoCry::Engine::Event<> OnMouseEntered;
+		DirtMachine::Event<> OnMouseEntered;
 
-		NoLifeNoCry::Engine::Event<> OnMouseLeft;
+		DirtMachine::Event<> OnMouseLeft;
 
-		NoLifeNoCry::Engine::Event<> OnMouseHovered;
+		DirtMachine::Event<> OnMouseHovered;
 
-		NoLifeNoCry::Engine::Event<NoLifeNoCry::Engine::Input::Data::MouseButtonData> OnMouseButtonPressed;
+		DirtMachine::Event<DirtMachine::Input::Data::MouseButtonData> OnMouseButtonPressed;
 
-		NoLifeNoCry::Engine::Event<NoLifeNoCry::Engine::Input::Data::MouseButtonData> OnMouseButtonReleased;
+		DirtMachine::Event<DirtMachine::Input::Data::MouseButtonData> OnMouseButtonReleased;
 
-		InteractableControl(const glm::ivec2& position, float rotation, const glm::uvec2& size, bool isVisible, bool isEnabled, bool isSelectable, bool isDraggable, NoLifeNoCry::Engine::UI::Control* parent);
+		InteractableControl(const glm::ivec2& position, float rotation, const glm::uvec2& size, bool isVisible, bool isEnabled, bool isSelectable, bool isDraggable, DirtMachine::UI::Control* parent);
 
 		virtual ~InteractableControl();
 
@@ -37,13 +37,13 @@ namespace NoLifeNoCry::Engine::UI
 
 		virtual bool IsMouseOnControl() const;
 		
-		virtual bool ProcessMouseWheelScrolled(const NoLifeNoCry::Engine::Input::Data::MouseWheelData& mouseWheelData) override;
+		virtual bool ProcessMouseWheelScrolled(const DirtMachine::Input::Data::MouseWheelData& mouseWheelData) override;
 
-		virtual bool ProcessMouseButtonPressed(const NoLifeNoCry::Engine::Input::Data::MouseButtonData& mouseButtonData) override;
+		virtual bool ProcessMouseButtonPressed(const DirtMachine::Input::Data::MouseButtonData& mouseButtonData) override;
 
-		virtual bool ProcessMouseButtonReleased(const NoLifeNoCry::Engine::Input::Data::MouseButtonData& mouseButtonData) override;
+		virtual bool ProcessMouseButtonReleased(const DirtMachine::Input::Data::MouseButtonData& mouseButtonData) override;
 
-		virtual bool ProcessMouseMoved(const NoLifeNoCry::Engine::Input::Data::MouseMovementData& mouseMovementData) override;
+		virtual bool ProcessMouseMoved(const DirtMachine::Input::Data::MouseMovementData& mouseMovementData) override;
 
 	private:
 

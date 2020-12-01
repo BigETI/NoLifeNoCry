@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics/Font.hpp>
 
-namespace NoLifeNoCry::Engine::Graphic
+namespace DirtMachine::Graphic
 {
 	/*class Font : public sf::Font
 	{

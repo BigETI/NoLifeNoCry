@@ -12,39 +12,39 @@ static const std::filesystem::path configurationPath("./config.xml");
 /// @return Exit code
 int main(int argc, char* argv[])
 {
-	NoLifeNoCry::Engine::EExitCode ret(NoLifeNoCry::Engine::EExitCode::UnknownError);
+	DirtMachine::EExitCode ret(DirtMachine::EExitCode::UnknownError);
 	try
 	{
-		NoLifeNoCry::Game::GameWindow game_window(static_cast<std::size_t>(800), static_cast<std::size_t>(600), "No Life, No Cry", NoLifeNoCry::Engine::EWindowStyle::Default);
+		NoLifeNoCry::GameWindow game_window(static_cast<std::size_t>(800), static_cast<std::size_t>(600), "No Life, No Cry", DirtMachine::EWindowStyle::Default);
 		ret = game_window.Start();
 	}
 	catch (const std::exception& e)
 	{
-		ret = NoLifeNoCry::Engine::EExitCode::UnhandledException;
+		ret = DirtMachine::EExitCode::UnhandledException;
 		std::cerr << e.what() << std::endl;
 	}
 	catch (int e)
 	{
-		ret = NoLifeNoCry::Engine::EExitCode::UnhandledException;
+		ret = DirtMachine::EExitCode::UnhandledException;
 		std::cerr << "Error code: " << e << std::endl;
 	}
 	catch (...)
 	{
-		ret = NoLifeNoCry::Engine::EExitCode::UnhandledException;
+		ret = DirtMachine::EExitCode::UnhandledException;
 		std::cerr << "An unknown exception was thrown. :(" << std::endl;
 	}
 	switch (ret)
 	{
-	case NoLifeNoCry::Engine::EExitCode::Success:
+	case DirtMachine::EExitCode::Success:
 		std::cout << "Game has been terminated successfully!" << std::endl;
 		break;
-	case NoLifeNoCry::Engine::EExitCode::FailedCreatingWindow:
+	case DirtMachine::EExitCode::FailedCreatingWindow:
 		std::cerr << "Failed to create window!" << std::endl;
 		break;
-	case NoLifeNoCry::Engine::EExitCode::UnhandledException:
+	case DirtMachine::EExitCode::UnhandledException:
 		std::cerr << "Game has been terminated with an unhandled exception!" << std::endl;
 		break;
-	case NoLifeNoCry::Engine::EExitCode::UnknownError:
+	case DirtMachine::EExitCode::UnknownError:
 		std::cerr << "Game has been terminated with an unknown error!" << std::endl;
 		break;
 	}

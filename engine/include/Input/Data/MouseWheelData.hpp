@@ -3,13 +3,13 @@
 #include <glm/vec2.hpp>
 #include <Input/EMouseWheel.hpp>
 
-/// @brief No Life, No Cry engine input data namespace
-namespace NoLifeNoCry::Engine::Input::Data
+/// @brief Dirt Machine game engine input data namespace
+namespace DirtMachine::Input::Data
 {
 	struct MouseWheelData
 	{
 		/// @brief Which wheel (for mice with multiple ones)
-		NoLifeNoCry::Engine::Input::EMouseWheel wheel;
+		DirtMachine::Input::EMouseWheel wheel;
 
 		/// @brief Wheel offset (positive is up/left, negative is down/right). High-precision mice may use non-integral offsets.
 		float delta;

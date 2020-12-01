@@ -2,8 +2,8 @@
 
 #include <SFML/Window/Sensor.hpp>
 
-/// @brief No Life, No Cry engine input namespace
-namespace NoLifeNoCry::Engine::Input
+/// @brief Dirt Machine game engine input namespace
+namespace DirtMachine::Input
 {
 	enum class ESensorType
 	{

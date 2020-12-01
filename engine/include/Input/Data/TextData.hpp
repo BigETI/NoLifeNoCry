@@ -2,8 +2,8 @@
 
 #include <cstdint>
 
-/// @brief No Life, No Cry engine input data namespace
-namespace NoLifeNoCry::Engine::Input::Data
+/// @brief Dirt Machine game engine input data namespace
+namespace DirtMachine::Input::Data
 {
 	/// @brief Text data structure
 	struct TextData

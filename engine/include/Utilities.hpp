@@ -3,8 +3,8 @@
 #include <chrono>
 #include <string>
 
-/// @brief No Life, No Cry engine namespace
-namespace NoLifeNoCry::Engine
+/// @brief Dirt Machine game engine namespace
+namespace DirtMachine
 {
 	/// @brief Utilities class
 	class Utilities

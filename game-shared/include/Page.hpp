@@ -3,8 +3,8 @@
 #include <string>
 #include <PageData.hpp>
 
-/// @brief No Life, No Cry game namespace
-namespace NoLifeNoCry::Game
+/// @brief No Life, No Cry namespace
+namespace NoLifeNoCry
 {
 	/// @brief Page class
 	class Page
@@ -18,7 +18,7 @@ namespace NoLifeNoCry::Game
 		/// @brief Constructor
 		/// @param pageData 
 		/// @return 
-		Page(const NoLifeNoCry::Game::PageData& pageData);
+		Page(const NoLifeNoCry::PageData& pageData);
 
 		/// @brief Get scene name
 		/// @return Scene name

@@ -7,8 +7,8 @@
 #include "ECoordinateSpace.hpp"
 #include "Image.hpp"
 
-/// @brief No Life, No Cry engine graphic namespace
-namespace NoLifeNoCry::Engine::Graphic
+/// @brief Dirt Machine game engine graphic namespace
+namespace DirtMachine::Graphic
 {
 	/// @brief Texture class
 	class Texture : sf::Texture
@@ -27,7 +27,7 @@ namespace NoLifeNoCry::Engine::Graphic
         /// @brief Bind texture
         /// @param texture Texture
         /// @param coordinateSpace Coordinate space
-        static void Bind(const NoLifeNoCry::Engine::Graphic::Texture* texture, NoLifeNoCry::Engine::Graphic::ECoordinateSpace coordinateSpace = NoLifeNoCry::Engine::Graphic::ECoordinateSpace::Normalized);
+        static void Bind(const DirtMachine::Graphic::Texture* texture, DirtMachine::Graphic::ECoordinateSpace coordinateSpace = DirtMachine::Graphic::ECoordinateSpace::Normalized);
 
         /// @brief Get maximal texture size
         /// @return Maximal texture size
@@ -43,14 +43,14 @@ namespace NoLifeNoCry::Engine::Graphic
         /// @param path Texture path
         /// @param area Texture area
         /// @return "true" if texture was successfully loaded from the specified path, otherwise "false"
-        bool LoadFromFile(const std::string& path, const NoLifeNoCry::Engine::Graphic::Rectangle<int>& area = NoLifeNoCry::Engine::Graphic::Rectangle<int>());
+        bool LoadFromFile(const std::string& path, const DirtMachine::Graphic::Rectangle<int>& area = DirtMachine::Graphic::Rectangle<int>());
 
         /// @brief Load texture from memory
         /// @param memory Texture from memory
         /// @param area Texture area
         /// @return "true" if texture was successfully loaded from memory, otherwise "false"
         template <std::size_t Extent>
-        bool LoadFromMemory(const std::span<std::uint8_t, Extent> memory, const NoLifeNoCry::Engine::Graphic::Rectangle<int>& area = NoLifeNoCry::Engine::Rectangle<int>())
+        bool LoadFromMemory(const std::span<std::uint8_t, Extent> memory, const DirtMachine::Graphic::Rectangle<int>& area = DirtMachine::Rectangle<int>())
         {
             return loadFromMemory(memory.data(), memory.size(), area);
         }
@@ -59,7 +59,7 @@ namespace NoLifeNoCry::Engine::Graphic
         /// @param image Image
         /// @param area Texture area
         /// @return "true" if texture was successfully loaded from image, otherwise "false"
-        bool LoadFromImage(const NoLifeNoCry::Engine::Graphic::Image& image, const NoLifeNoCry::Engine::Graphic::Rectangle<int>& area = NoLifeNoCry::Engine::Graphic::Rectangle<int>());
+        bool LoadFromImage(const DirtMachine::Graphic::Image& image, const DirtMachine::Graphic::Rectangle<int>& area = DirtMachine::Graphic::Rectangle<int>());
 
         /// @brief Get texture size
         /// @return Texture size
@@ -79,23 +79,23 @@ namespace NoLifeNoCry::Engine::Graphic
 
         /// @brief Update with texture
         /// @param texture Texture
-        void Update(const NoLifeNoCry::Engine::Graphic::Texture& texture);
+        void Update(const DirtMachine::Graphic::Texture& texture);
 
         /// @brief Update with texture
         /// @param texture Texture
         /// @param x X
         /// @param y Y
-        void Update(const NoLifeNoCry::Engine::Graphic::Texture& texture, unsigned int x, unsigned int y);
+        void Update(const DirtMachine::Graphic::Texture& texture, unsigned int x, unsigned int y);
 
         /// @brief Update with image
         /// @param image Image
-        void Update(const NoLifeNoCry::Engine::Graphic::Image& image);
+        void Update(const DirtMachine::Graphic::Image& image);
 
         /// @brief Update with image
         /// @param image Image
         /// @param x X
         /// @param y Y
-        void Update(const NoLifeNoCry::Engine::Graphic::Image& image, unsigned int x, unsigned int y);
+        void Update(const DirtMachine::Graphic::Image& image, unsigned int x, unsigned int y);
 
         /// @brief Set texture to smooth
         /// @param isSmooth Set texture to smooth
@@ -136,6 +136,6 @@ namespace NoLifeNoCry::Engine::Graphic
         /// @brief Assign operator
         /// @param texture Texture
         /// @return Itself
-        NoLifeNoCry::Engine::Graphic::Texture& operator =(const NoLifeNoCry::Engine::Graphic::Texture& texture);
+        DirtMachine::Graphic::Texture& operator =(const DirtMachine::Graphic::Texture& texture);
 	};
 }

@@ -18,31 +18,31 @@
 #include <Graphic/Colour.hpp>
 #include <Graphic/RenderTarget.hpp>
 
-namespace NoLifeNoCry::Engine::UI
+namespace DirtMachine::UI
 {
 	class Control
 	{
 	public:
 
-		NoLifeNoCry::Engine::Event<> OnTransformationChanged;
+		DirtMachine::Event<> OnTransformationChanged;
 
-		NoLifeNoCry::Engine::Event<const NoLifeNoCry::Engine::Graphic::Colour&> OnPrimaryBackgroundColourChanged;
+		DirtMachine::Event<const DirtMachine::Graphic::Colour&> OnPrimaryBackgroundColourChanged;
 
-		NoLifeNoCry::Engine::Event<const NoLifeNoCry::Engine::Graphic::Colour&> OnSecondaryBackgroundColourChanged;
+		DirtMachine::Event<const DirtMachine::Graphic::Colour&> OnSecondaryBackgroundColourChanged;
 
-		NoLifeNoCry::Engine::Event<const NoLifeNoCry::Engine::Graphic::Colour&> OnHighlightBackgroundColourChanged;
+		DirtMachine::Event<const DirtMachine::Graphic::Colour&> OnHighlightBackgroundColourChanged;
 
-		NoLifeNoCry::Engine::Event<const NoLifeNoCry::Engine::Graphic::Colour&> OnPrimaryForegroundColourChanged;
+		DirtMachine::Event<const DirtMachine::Graphic::Colour&> OnPrimaryForegroundColourChanged;
 
-		NoLifeNoCry::Engine::Event<const NoLifeNoCry::Engine::Graphic::Colour&> OnSecondaryForegroundColourChanged;
+		DirtMachine::Event<const DirtMachine::Graphic::Colour&> OnSecondaryForegroundColourChanged;
 
-		NoLifeNoCry::Engine::Event<const NoLifeNoCry::Engine::Graphic::Colour&> OnHighlightForegroundColourChanged;
+		DirtMachine::Event<const DirtMachine::Graphic::Colour&> OnHighlightForegroundColourChanged;
 
-		NoLifeNoCry::Engine::Event<const NoLifeNoCry::Engine::Graphic::Colour&> OnPrimaryTextColourChanged;
+		DirtMachine::Event<const DirtMachine::Graphic::Colour&> OnPrimaryTextColourChanged;
 
-		NoLifeNoCry::Engine::Event<const NoLifeNoCry::Engine::Graphic::Colour&> OnSecondaryTextColourChanged;
+		DirtMachine::Event<const DirtMachine::Graphic::Colour&> OnSecondaryTextColourChanged;
 
-		NoLifeNoCry::Engine::Event<const NoLifeNoCry::Engine::Graphic::Colour&> OnHighlightTextColourChanged;
+		DirtMachine::Event<const DirtMachine::Graphic::Colour&> OnHighlightTextColourChanged;
 
 		Control() = delete;
 		Control(const Control&) = delete;
@@ -72,57 +72,57 @@ namespace NoLifeNoCry::Engine::UI
 
 		virtual void SetEnabled(bool enabledState);
 
-		virtual const NoLifeNoCry::Engine::Graphic::Colour& GetPrimaryBackgroundColour() const;
+		virtual const DirtMachine::Graphic::Colour& GetPrimaryBackgroundColour() const;
 
-		virtual void SetPrimaryBackgroundColour(const NoLifeNoCry::Engine::Graphic::Colour& colour);
+		virtual void SetPrimaryBackgroundColour(const DirtMachine::Graphic::Colour& colour);
 
 		virtual void ResetPrimaryBackgroundColour();
 
-		virtual const NoLifeNoCry::Engine::Graphic::Colour& GetSecondaryBackgroundColour() const;
+		virtual const DirtMachine::Graphic::Colour& GetSecondaryBackgroundColour() const;
 
-		virtual void SetSecondaryBackgroundColour(const NoLifeNoCry::Engine::Graphic::Colour& colour);
+		virtual void SetSecondaryBackgroundColour(const DirtMachine::Graphic::Colour& colour);
 
 		virtual void ResetSecondaryBackgroundColour();
 		 
-		virtual const NoLifeNoCry::Engine::Graphic::Colour& GetHighlightBackgroundColour() const;
+		virtual const DirtMachine::Graphic::Colour& GetHighlightBackgroundColour() const;
 
-		virtual void SetHighlightBackgroundColour(const NoLifeNoCry::Engine::Graphic::Colour& colour);
+		virtual void SetHighlightBackgroundColour(const DirtMachine::Graphic::Colour& colour);
 
 		virtual void ResetHighlightBackgroundColour();
 		 											 
-		virtual const NoLifeNoCry::Engine::Graphic::Colour& GetPrimaryForegroundColour() const;
+		virtual const DirtMachine::Graphic::Colour& GetPrimaryForegroundColour() const;
 
-		virtual void SetPrimaryForegroundColour(const NoLifeNoCry::Engine::Graphic::Colour& colour);
+		virtual void SetPrimaryForegroundColour(const DirtMachine::Graphic::Colour& colour);
 
 		virtual void ResetPrimaryForegroundColour();
 		 											 
-		virtual const NoLifeNoCry::Engine::Graphic::Colour& GetSecondaryForegroundColour() const;
+		virtual const DirtMachine::Graphic::Colour& GetSecondaryForegroundColour() const;
 
-		virtual void SetSecondaryForegroundColour(const NoLifeNoCry::Engine::Graphic::Colour& colour);
+		virtual void SetSecondaryForegroundColour(const DirtMachine::Graphic::Colour& colour);
 
 		virtual void ResetSecondaryForegroundColour();
 		 											 
-		virtual const NoLifeNoCry::Engine::Graphic::Colour& GetHighlightForegroundColour() const;
+		virtual const DirtMachine::Graphic::Colour& GetHighlightForegroundColour() const;
 
-		virtual void SetHighlightForegroundColour(const NoLifeNoCry::Engine::Graphic::Colour& colour);
+		virtual void SetHighlightForegroundColour(const DirtMachine::Graphic::Colour& colour);
 
 		virtual void ResetHighlightForegroundColour();
 		 											 
-		virtual const NoLifeNoCry::Engine::Graphic::Colour& GetPrimaryTextColour() const;
+		virtual const DirtMachine::Graphic::Colour& GetPrimaryTextColour() const;
 
-		virtual void SetPrimaryTextColour(const NoLifeNoCry::Engine::Graphic::Colour& colour);
+		virtual void SetPrimaryTextColour(const DirtMachine::Graphic::Colour& colour);
 
 		virtual void ResetPrimaryTextColour();
 		 											 
-		virtual const NoLifeNoCry::Engine::Graphic::Colour& GetSecondaryTextColour() const;
+		virtual const DirtMachine::Graphic::Colour& GetSecondaryTextColour() const;
 
-		virtual void SetSecondaryTextColour(const NoLifeNoCry::Engine::Graphic::Colour& colour);
+		virtual void SetSecondaryTextColour(const DirtMachine::Graphic::Colour& colour);
 
 		virtual void ResetSecondaryTextColour();
 		 											 
-		virtual const NoLifeNoCry::Engine::Graphic::Colour& GetHighlightTextColour() const;
+		virtual const DirtMachine::Graphic::Colour& GetHighlightTextColour() const;
 
-		virtual void SetHighlightTextColour(const NoLifeNoCry::Engine::Graphic::Colour& colour);
+		virtual void SetHighlightTextColour(const DirtMachine::Graphic::Colour& colour);
 
 		virtual void ResetHighlightTextColour();
 
@@ -172,72 +172,72 @@ namespace NoLifeNoCry::Engine::UI
 
 		virtual glm::ivec2 GetMousePosition() const;
 
-		virtual void Draw(NoLifeNoCry::Engine::Graphic::RenderTarget& renderTarget) const;
+		virtual void Draw(DirtMachine::Graphic::RenderTarget& renderTarget) const;
 		
-		virtual bool ProcessTextEntered(const NoLifeNoCry::Engine::Input::Data::TextData& textData);
+		virtual bool ProcessTextEntered(const DirtMachine::Input::Data::TextData& textData);
 
-		virtual bool ProcessKeyPressed(const NoLifeNoCry::Engine::Input::Data::KeyboardKeyData& keyboardKeyData);
+		virtual bool ProcessKeyPressed(const DirtMachine::Input::Data::KeyboardKeyData& keyboardKeyData);
 		
-		virtual bool ProcessKeyReleased(const NoLifeNoCry::Engine::Input::Data::KeyboardKeyData& keyboardKeyData);
+		virtual bool ProcessKeyReleased(const DirtMachine::Input::Data::KeyboardKeyData& keyboardKeyData);
 
-		virtual bool ProcessMouseWheelScrolled(const NoLifeNoCry::Engine::Input::Data::MouseWheelData& mouseWheelData);
+		virtual bool ProcessMouseWheelScrolled(const DirtMachine::Input::Data::MouseWheelData& mouseWheelData);
 
-		virtual bool ProcessMouseButtonPressed(const NoLifeNoCry::Engine::Input::Data::MouseButtonData& mouseButtonData);
+		virtual bool ProcessMouseButtonPressed(const DirtMachine::Input::Data::MouseButtonData& mouseButtonData);
 
-		virtual bool ProcessMouseButtonReleased(const NoLifeNoCry::Engine::Input::Data::MouseButtonData& mouseButtonData);
+		virtual bool ProcessMouseButtonReleased(const DirtMachine::Input::Data::MouseButtonData& mouseButtonData);
 
-		virtual bool ProcessMouseMoved(const NoLifeNoCry::Engine::Input::Data::MouseMovementData& mouseMovementData);
+		virtual bool ProcessMouseMoved(const DirtMachine::Input::Data::MouseMovementData& mouseMovementData);
 		
 		virtual bool ProcessWindowMouseEntered();
 
 		virtual bool ProcessWindowMouseLeft();
 
-		virtual bool ProcessJoystickButtonPressed(const NoLifeNoCry::Engine::Input::Data::JoystickButtonData& joystickButtonData);
+		virtual bool ProcessJoystickButtonPressed(const DirtMachine::Input::Data::JoystickButtonData& joystickButtonData);
 		
-		virtual bool ProcessJoystickButtonReleased(const NoLifeNoCry::Engine::Input::Data::JoystickButtonData& joystickButtonData);
+		virtual bool ProcessJoystickButtonReleased(const DirtMachine::Input::Data::JoystickButtonData& joystickButtonData);
 
-		virtual bool ProcessJoystickMoved(const NoLifeNoCry::Engine::Input::Data::JoystickMovementData& joystickMovementData);
+		virtual bool ProcessJoystickMoved(const DirtMachine::Input::Data::JoystickMovementData& joystickMovementData);
 
-		virtual bool ProcessJoystickConnected(const NoLifeNoCry::Engine::Input::Data::JoystickConnectionData& joystickConnectionData);
+		virtual bool ProcessJoystickConnected(const DirtMachine::Input::Data::JoystickConnectionData& joystickConnectionData);
 
-		virtual bool ProcessJoystickDisconnected(const NoLifeNoCry::Engine::Input::Data::JoystickConnectionData& joystickConnectionData);
+		virtual bool ProcessJoystickDisconnected(const DirtMachine::Input::Data::JoystickConnectionData& joystickConnectionData);
 
-		virtual bool ProcessTouchBegan(const NoLifeNoCry::Engine::Input::Data::TouchData& touchData);
+		virtual bool ProcessTouchBegan(const DirtMachine::Input::Data::TouchData& touchData);
 
-		virtual bool ProcessTouchMoved(const NoLifeNoCry::Engine::Input::Data::TouchData& touchData);
+		virtual bool ProcessTouchMoved(const DirtMachine::Input::Data::TouchData& touchData);
 
-		virtual bool ProcessTouchEnded(const NoLifeNoCry::Engine::Input::Data::TouchData& touchData);
+		virtual bool ProcessTouchEnded(const DirtMachine::Input::Data::TouchData& touchData);
 
-		virtual bool ProcessSensorChanged(const NoLifeNoCry::Engine::Input::Data::SensorData& sensorData);
+		virtual bool ProcessSensorChanged(const DirtMachine::Input::Data::SensorData& sensorData);
 
 		Control& operator=(const Control&) = delete;
 		Control& operator=(Control&&) = delete;
 
 	protected:
 
-		virtual void PushDrawingState(NoLifeNoCry::Engine::Graphic::RenderTarget& renderTarget);
+		virtual void PushDrawingState(DirtMachine::Graphic::RenderTarget& renderTarget);
 
-		virtual void PopDrawingState(NoLifeNoCry::Engine::Graphic::RenderTarget& renderTarget);
+		virtual void PopDrawingState(DirtMachine::Graphic::RenderTarget& renderTarget);
 
 	private:
 
-		static NoLifeNoCry::Engine::Graphic::Colour defaultPrimaryBackgroundColour;
+		static DirtMachine::Graphic::Colour defaultPrimaryBackgroundColour;
 
-		static NoLifeNoCry::Engine::Graphic::Colour defaultSecondaryBackgroundColour;
+		static DirtMachine::Graphic::Colour defaultSecondaryBackgroundColour;
 
-		static NoLifeNoCry::Engine::Graphic::Colour defaultHighlightBackgroundColour;
+		static DirtMachine::Graphic::Colour defaultHighlightBackgroundColour;
 
-		static NoLifeNoCry::Engine::Graphic::Colour defaultPrimaryForegroundColour;
+		static DirtMachine::Graphic::Colour defaultPrimaryForegroundColour;
 
-		static NoLifeNoCry::Engine::Graphic::Colour defaultSecondaryForegroundColour;
+		static DirtMachine::Graphic::Colour defaultSecondaryForegroundColour;
 
-		static NoLifeNoCry::Engine::Graphic::Colour defaultHighlightForegroundColour;
+		static DirtMachine::Graphic::Colour defaultHighlightForegroundColour;
 
-		static NoLifeNoCry::Engine::Graphic::Colour defaultPrimaryTextColour;
+		static DirtMachine::Graphic::Colour defaultPrimaryTextColour;
 
-		static NoLifeNoCry::Engine::Graphic::Colour defaultSecondaryTextColour;
+		static DirtMachine::Graphic::Colour defaultSecondaryTextColour;
 
-		static NoLifeNoCry::Engine::Graphic::Colour defaultHighlightTextColour;
+		static DirtMachine::Graphic::Colour defaultHighlightTextColour;
 
 		glm::ivec2 position;
 
@@ -249,23 +249,23 @@ namespace NoLifeNoCry::Engine::UI
 
 		bool isEnabled;
 
-		NoLifeNoCry::Engine::Graphic::Colour* primaryBackgroundColour;
+		DirtMachine::Graphic::Colour* primaryBackgroundColour;
 
-		NoLifeNoCry::Engine::Graphic::Colour* secondaryBackgroundColour;
+		DirtMachine::Graphic::Colour* secondaryBackgroundColour;
 
-		NoLifeNoCry::Engine::Graphic::Colour* highlightBackgroundColour;
+		DirtMachine::Graphic::Colour* highlightBackgroundColour;
 
-		NoLifeNoCry::Engine::Graphic::Colour* primaryForegroundColour;
+		DirtMachine::Graphic::Colour* primaryForegroundColour;
 
-		NoLifeNoCry::Engine::Graphic::Colour* secondaryForegroundColour;
+		DirtMachine::Graphic::Colour* secondaryForegroundColour;
 
-		NoLifeNoCry::Engine::Graphic::Colour* highlightForegroundColour;
+		DirtMachine::Graphic::Colour* highlightForegroundColour;
 
-		NoLifeNoCry::Engine::Graphic::Colour* primaryTextColour;
+		DirtMachine::Graphic::Colour* primaryTextColour;
 
-		NoLifeNoCry::Engine::Graphic::Colour* secondaryTextColour;
+		DirtMachine::Graphic::Colour* secondaryTextColour;
 
-		NoLifeNoCry::Engine::Graphic::Colour* highlightTextColour;
+		DirtMachine::Graphic::Colour* highlightTextColour;
 
 		Control* parent;
 

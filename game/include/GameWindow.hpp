@@ -8,11 +8,11 @@
 #include <SaveGame.hpp>
 #include <UI/Window.hpp>
 
-/// @brief No Life, No Cry game namespace
-namespace NoLifeNoCry::Game
+/// @brief No Life, No Cry namespace
+namespace NoLifeNoCry
 {
 	/// @brief Game window class
-	class GameWindow : public NoLifeNoCry::Engine::UI::Window
+	class GameWindow : public DirtMachine::UI::Window
 	{
 	public:
 
@@ -21,7 +21,7 @@ namespace NoLifeNoCry::Game
 		/// @param windowHeight Window height
 		/// @param windowName Window name
 		/// @param windowStyle Window style
-		GameWindow(std::size_t windowWidth, std::size_t windowHeight, const std::string& windowName, NoLifeNoCry::Engine::EWindowStyle windowStyle);
+		GameWindow(std::size_t windowWidth, std::size_t windowHeight, const std::string& windowName, DirtMachine::EWindowStyle windowStyle);
 
 		/// @brief Destructor
 		~GameWindow();
@@ -35,6 +35,6 @@ namespace NoLifeNoCry::Game
 	private:
 
 		/// @brief Save games
-		std::vector<std::shared_ptr<NoLifeNoCry::Game::SaveGame>> saveGames;
+		std::vector<std::shared_ptr<NoLifeNoCry::SaveGame>> saveGames;
 	};
 }

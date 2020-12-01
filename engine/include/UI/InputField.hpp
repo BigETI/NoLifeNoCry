@@ -8,35 +8,35 @@
 #include <UI/Label.hpp>
 #include <UI/Panel.hpp>
 
-namespace NoLifeNoCry::Engine::UI
+namespace DirtMachine::UI
 {
-	class InputField : public NoLifeNoCry::Engine::UI::InteractableControl
+	class InputField : public DirtMachine::UI::InteractableControl
 	{
 	public:
 
-		InputField(const glm::ivec2& position, float rotation, const glm::uvec2& size, const NoLifeNoCry::Engine::String& textString, const NoLifeNoCry::Engine::String& hintTextString, const NoLifeNoCry::Engine::Graphic::Font* textFont, unsigned int textCharacterSize, NoLifeNoCry::Engine::UI::Control* parent);
+		InputField(const glm::ivec2& position, float rotation, const glm::uvec2& size, const DirtMachine::String& textString, const DirtMachine::String& hintTextString, const DirtMachine::Graphic::Font* textFont, unsigned int textCharacterSize, DirtMachine::UI::Control* parent);
 
 		virtual ~InputField();
 
-		virtual NoLifeNoCry::Engine::String GetTextLine(std::size_t textLineIndex) const;
+		virtual DirtMachine::String GetTextLine(std::size_t textLineIndex) const;
 
-		virtual void SetTextLine(std::size_t textLineIndex, const NoLifeNoCry::Engine::String& textLine);
+		virtual void SetTextLine(std::size_t textLineIndex, const DirtMachine::String& textLine);
 
 		virtual std::size_t GetTextLineCount() const;
 
-		virtual NoLifeNoCry::Engine::String GetText() const;
+		virtual DirtMachine::String GetText() const;
 
-		virtual void SetText(const NoLifeNoCry::Engine::String& newText);
+		virtual void SetText(const DirtMachine::String& newText);
 
-		virtual NoLifeNoCry::Engine::String GetHintText() const;
+		virtual DirtMachine::String GetHintText() const;
 
-		virtual void SetHintText(const NoLifeNoCry::Engine::String& newText);
+		virtual void SetHintText(const DirtMachine::String& newText);
 
 		virtual void GetSelectionInformation(std::size_t& beginRowPosition, std::size_t& beginColumnPosition, std::size_t& endRowPosition, std::size_t& endColumnPosition) const;
 
 		virtual void ResetSelection();
 
-		virtual void InsertTextIntoSelection(const NoLifeNoCry::Engine::String& newText);
+		virtual void InsertTextIntoSelection(const DirtMachine::String& newText);
 
 		virtual void RemoveSelectedText();
 
@@ -48,25 +48,25 @@ namespace NoLifeNoCry::Engine::UI
 
 		virtual void RemoveFront();
 
-		virtual bool ProcessTextEntered(const NoLifeNoCry::Engine::Input::Data::TextData& textData) override;
+		virtual bool ProcessTextEntered(const DirtMachine::Input::Data::TextData& textData) override;
 
-		virtual bool ProcessKeyPressed(const NoLifeNoCry::Engine::Input::Data::KeyboardKeyData& keyboardKeyData) override;
+		virtual bool ProcessKeyPressed(const DirtMachine::Input::Data::KeyboardKeyData& keyboardKeyData) override;
 
 	private:
 
-		std::shared_ptr<NoLifeNoCry::Engine::UI::Panel> backgroundPanel;
+		std::shared_ptr<DirtMachine::UI::Panel> backgroundPanel;
 
-		std::vector<std::shared_ptr<NoLifeNoCry::Engine::UI::Label>> textLineLabels;
+		std::vector<std::shared_ptr<DirtMachine::UI::Label>> textLineLabels;
 
-		std::vector<std::shared_ptr<NoLifeNoCry::Engine::UI::Label>> hintTextLineLabels;
+		std::vector<std::shared_ptr<DirtMachine::UI::Label>> hintTextLineLabels;
 
-		std::vector<std::shared_ptr<NoLifeNoCry::Engine::UI::Panel>> selectionPanels;
+		std::vector<std::shared_ptr<DirtMachine::UI::Panel>> selectionPanels;
 
-		std::shared_ptr<NoLifeNoCry::Engine::UI::Label> caretLabel;
+		std::shared_ptr<DirtMachine::UI::Label> caretLabel;
 
-		std::vector<NoLifeNoCry::Engine::String> textLines;
+		std::vector<DirtMachine::String> textLines;
 
-		const NoLifeNoCry::Engine::Graphic::Font* textFont;
+		const DirtMachine::Graphic::Font* textFont;
 
 		unsigned int textCharacterSize;
 

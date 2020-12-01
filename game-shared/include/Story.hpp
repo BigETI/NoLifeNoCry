@@ -4,8 +4,8 @@
 #include <Chapter.hpp>
 #include <StoryData.hpp>
 
-/// @brief No Life, No Cry game namespace
-namespace NoLifeNoCry::Game
+/// @brief No Life, No Cry namespace
+namespace NoLifeNoCry
 {
 	/// @brief Story class
 	class Story
@@ -62,7 +62,7 @@ namespace NoLifeNoCry::Game
 		/// @brief Get story chapter
 		/// @param chapterIndex Chapter index
 		/// @return Story chapter
-		const NoLifeNoCry::Game::Chapter& GetChapter(std::size_t chapterIndex) const;
+		const NoLifeNoCry::Chapter& GetChapter(std::size_t chapterIndex) const;
 
 		/// @brief Assign operator
 		/// @param story Story
@@ -99,6 +99,6 @@ namespace NoLifeNoCry::Game
 		std::string license;
 
 		/// @brief Story chapter
-		std::vector<NoLifeNoCry::Game::Chapter> chapters;
+		std::vector<NoLifeNoCry::Chapter> chapters;
 	};
 }

@@ -2,8 +2,8 @@
 
 #include <SFML/Audio/SoundSource.hpp>
 
-/// @brief No Life, No Cry engine audio namespace
-namespace NoLifeNoCry::Engine::Audio
+/// @brief Dirt Machine game engine audio namespace
+namespace DirtMachine::Audio
 {
 	/// @brief Audio play status enumerator
 	enum class EAudioPlayStatus

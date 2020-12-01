@@ -1,7 +1,7 @@
 #pragma once
 
-/// @brief No Life, No Cry engine input data namespace
-namespace NoLifeNoCry::Engine::Input::Data
+/// @brief Dirt Machine game engine input data namespace
+namespace DirtMachine::Input::Data
 {
 	/// @brief Joystick button data structure
 	struct JoystickButtonData

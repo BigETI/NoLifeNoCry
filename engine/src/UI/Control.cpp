@@ -1,24 +1,24 @@
 #include <UI/Control.hpp>
 
-NoLifeNoCry::Engine::Graphic::Colour NoLifeNoCry::Engine::UI::Control::defaultPrimaryBackgroundColour(0x0F, 0x0F, 0x0F, 0xFF);
+DirtMachine::Graphic::Colour DirtMachine::UI::Control::defaultPrimaryBackgroundColour(0x0F, 0x0F, 0x0F, 0xFF);
 
-NoLifeNoCry::Engine::Graphic::Colour NoLifeNoCry::Engine::UI::Control::defaultSecondaryBackgroundColour(0x1F, 0x1F, 0x1F, 0xFF);
+DirtMachine::Graphic::Colour DirtMachine::UI::Control::defaultSecondaryBackgroundColour(0x1F, 0x1F, 0x1F, 0xFF);
 
-NoLifeNoCry::Engine::Graphic::Colour NoLifeNoCry::Engine::UI::Control::defaultHighlightBackgroundColour(0x7F, 0x7F, 0x7F, 0xFF);
+DirtMachine::Graphic::Colour DirtMachine::UI::Control::defaultHighlightBackgroundColour(0x7F, 0x7F, 0x7F, 0xFF);
 
-NoLifeNoCry::Engine::Graphic::Colour NoLifeNoCry::Engine::UI::Control::defaultPrimaryForegroundColour(0x3F, 0x3F, 0x3F, 0xFF);
+DirtMachine::Graphic::Colour DirtMachine::UI::Control::defaultPrimaryForegroundColour(0x3F, 0x3F, 0x3F, 0xFF);
 
-NoLifeNoCry::Engine::Graphic::Colour NoLifeNoCry::Engine::UI::Control::defaultSecondaryForegroundColour(0x5F, 0x5F, 0x5F, 0xFF);
+DirtMachine::Graphic::Colour DirtMachine::UI::Control::defaultSecondaryForegroundColour(0x5F, 0x5F, 0x5F, 0xFF);
 
-NoLifeNoCry::Engine::Graphic::Colour NoLifeNoCry::Engine::UI::Control::defaultHighlightForegroundColour(0xDF, 0xDF, 0xDF, 0xFF);
+DirtMachine::Graphic::Colour DirtMachine::UI::Control::defaultHighlightForegroundColour(0xDF, 0xDF, 0xDF, 0xFF);
 
-NoLifeNoCry::Engine::Graphic::Colour NoLifeNoCry::Engine::UI::Control::defaultPrimaryTextColour(0xFF, 0xFF, 0xFF, 0xFF);
+DirtMachine::Graphic::Colour DirtMachine::UI::Control::defaultPrimaryTextColour(0xFF, 0xFF, 0xFF, 0xFF);
 
-NoLifeNoCry::Engine::Graphic::Colour NoLifeNoCry::Engine::UI::Control::defaultSecondaryTextColour(0xFF, 0xFF, 0xFF, 0xFF);
+DirtMachine::Graphic::Colour DirtMachine::UI::Control::defaultSecondaryTextColour(0xFF, 0xFF, 0xFF, 0xFF);
 
-NoLifeNoCry::Engine::Graphic::Colour NoLifeNoCry::Engine::UI::Control::defaultHighlightTextColour(0xFF, 0xFF, 0xFF, 0xFF);
+DirtMachine::Graphic::Colour DirtMachine::UI::Control::defaultHighlightTextColour(0xFF, 0xFF, 0xFF, 0xFF);
 
-NoLifeNoCry::Engine::UI::Control::Control(const glm::ivec2& position, float rotation, const glm::uvec2& size, bool isVisible, bool isEnabled, NoLifeNoCry::Engine::UI::Control* parent) :
+DirtMachine::UI::Control::Control(const glm::ivec2& position, float rotation, const glm::uvec2& size, bool isVisible, bool isEnabled, DirtMachine::UI::Control* parent) :
 	position(position),
 	rotation(rotation),
 	size(size),
@@ -37,66 +37,66 @@ NoLifeNoCry::Engine::UI::Control::Control(const glm::ivec2& position, float rota
 {
 	OnTransformationChanged += [this]()
 	{
-		for (std::shared_ptr<NoLifeNoCry::Engine::UI::Control> child : children)
+		for (std::shared_ptr<DirtMachine::UI::Control> child : children)
 		{
 			child->OnTransformationChanged();
 		}
 	};
-	OnPrimaryBackgroundColourChanged += [this](const NoLifeNoCry::Engine::Graphic::Colour& colour)
+	OnPrimaryBackgroundColourChanged += [this](const DirtMachine::Graphic::Colour& colour)
 	{
 		if (!primaryBackgroundColour)
 		{
-			for (std::shared_ptr<NoLifeNoCry::Engine::UI::Control> child : children)
+			for (std::shared_ptr<DirtMachine::UI::Control> child : children)
 			{
 				child->OnPrimaryBackgroundColourChanged(colour);
 			}
 		}
 	};
-	OnSecondaryBackgroundColourChanged += [this](const NoLifeNoCry::Engine::Graphic::Colour& colour)
+	OnSecondaryBackgroundColourChanged += [this](const DirtMachine::Graphic::Colour& colour)
 	{
 		if (!secondaryBackgroundColour)
 		{
-			for (std::shared_ptr<NoLifeNoCry::Engine::UI::Control> child : children)
+			for (std::shared_ptr<DirtMachine::UI::Control> child : children)
 			{
 				child->OnSecondaryBackgroundColourChanged(colour);
 			}
 		}
 	};
-	OnHighlightBackgroundColourChanged += [this](const NoLifeNoCry::Engine::Graphic::Colour& colour)
+	OnHighlightBackgroundColourChanged += [this](const DirtMachine::Graphic::Colour& colour)
 	{
 		if (!highlightBackgroundColour)
 		{
-			for (std::shared_ptr<NoLifeNoCry::Engine::UI::Control> child : children)
+			for (std::shared_ptr<DirtMachine::UI::Control> child : children)
 			{
 				child->OnHighlightBackgroundColourChanged(colour);
 			}
 		}
 	};
-	OnPrimaryForegroundColourChanged += [this](const NoLifeNoCry::Engine::Graphic::Colour& colour)
+	OnPrimaryForegroundColourChanged += [this](const DirtMachine::Graphic::Colour& colour)
 	{
 		if (!primaryBackgroundColour)
 		{
-			for (std::shared_ptr<NoLifeNoCry::Engine::UI::Control> child : children)
+			for (std::shared_ptr<DirtMachine::UI::Control> child : children)
 			{
 				child->OnPrimaryForegroundColourChanged(colour);
 			}
 		}
 	};
-	OnSecondaryForegroundColourChanged += [this](const NoLifeNoCry::Engine::Graphic::Colour& colour)
+	OnSecondaryForegroundColourChanged += [this](const DirtMachine::Graphic::Colour& colour)
 	{
 		if (!secondaryBackgroundColour)
 		{
-			for (std::shared_ptr<NoLifeNoCry::Engine::UI::Control> child : children)
+			for (std::shared_ptr<DirtMachine::UI::Control> child : children)
 			{
 				child->OnSecondaryForegroundColourChanged(colour);
 			}
 		}
 	};
-	OnHighlightForegroundColourChanged += [this](const NoLifeNoCry::Engine::Graphic::Colour& colour)
+	OnHighlightForegroundColourChanged += [this](const DirtMachine::Graphic::Colour& colour)
 	{
 		if (!primaryBackgroundColour)
 		{
-			for (std::shared_ptr<NoLifeNoCry::Engine::UI::Control> child : children)
+			for (std::shared_ptr<DirtMachine::UI::Control> child : children)
 			{
 				child->OnHighlightForegroundColourChanged(colour);
 			}
@@ -104,7 +104,7 @@ NoLifeNoCry::Engine::UI::Control::Control(const glm::ivec2& position, float rota
 	};
 }
 
-NoLifeNoCry::Engine::UI::Control::~Control()
+DirtMachine::UI::Control::~Control()
 {
 	delete primaryBackgroundColour;
 	primaryBackgroundColour = nullptr;
@@ -126,12 +126,12 @@ NoLifeNoCry::Engine::UI::Control::~Control()
 	highlightTextColour = nullptr;
 }
 
-const glm::ivec2& NoLifeNoCry::Engine::UI::Control::GetLocalPosition() const
+const glm::ivec2& DirtMachine::UI::Control::GetLocalPosition() const
 {
 	return position;
 }
 
-void NoLifeNoCry::Engine::UI::Control::SetLocalPosition(const glm::ivec2& newPosition)
+void DirtMachine::UI::Control::SetLocalPosition(const glm::ivec2& newPosition)
 {
 	if (position != newPosition)
 	{
@@ -141,22 +141,22 @@ void NoLifeNoCry::Engine::UI::Control::SetLocalPosition(const glm::ivec2& newPos
 	}
 }
 
-glm::ivec2 NoLifeNoCry::Engine::UI::Control::GetGlobalPosition() const
+glm::ivec2 DirtMachine::UI::Control::GetGlobalPosition() const
 {
 	return position + (parent ? parent->GetGlobalPosition() : glm::ivec2(0, 0));
 }
 
-void NoLifeNoCry::Engine::UI::Control::SetGlobalPosition(const glm::ivec2& newPosition)
+void DirtMachine::UI::Control::SetGlobalPosition(const glm::ivec2& newPosition)
 {
 	SetLocalPosition(newPosition - GetGlobalPosition());
 }
 
-glm::uvec2 NoLifeNoCry::Engine::UI::Control::GetSize() const
+glm::uvec2 DirtMachine::UI::Control::GetSize() const
 {
 	return size;
 }
 
-void NoLifeNoCry::Engine::UI::Control::SetSize(const glm::uvec2& newSize)
+void DirtMachine::UI::Control::SetSize(const glm::uvec2& newSize)
 {
 	if (size != newSize)
 	{
@@ -166,12 +166,12 @@ void NoLifeNoCry::Engine::UI::Control::SetSize(const glm::uvec2& newSize)
 	}
 }
 
-bool NoLifeNoCry::Engine::UI::Control::IsVisible() const
+bool DirtMachine::UI::Control::IsVisible() const
 {
 	return isVisible;
 }
 
-void NoLifeNoCry::Engine::UI::Control::SetVisible(bool visibleState)
+void DirtMachine::UI::Control::SetVisible(bool visibleState)
 {
 	if (isVisible != visibleState)
 	{
@@ -183,27 +183,27 @@ void NoLifeNoCry::Engine::UI::Control::SetVisible(bool visibleState)
 	}
 }
 
-bool NoLifeNoCry::Engine::UI::Control::IsEnabled() const
+bool DirtMachine::UI::Control::IsEnabled() const
 {
 	return isEnabled;
 }
 
-void NoLifeNoCry::Engine::UI::Control::SetEnabled(bool enabledState)
+void DirtMachine::UI::Control::SetEnabled(bool enabledState)
 {
 	isEnabled = enabledState;
 }
 
-const NoLifeNoCry::Engine::Graphic::Colour& NoLifeNoCry::Engine::UI::Control::GetPrimaryBackgroundColour() const
+const DirtMachine::Graphic::Colour& DirtMachine::UI::Control::GetPrimaryBackgroundColour() const
 {
 	return primaryBackgroundColour ? *primaryBackgroundColour : (parent ? parent->GetPrimaryBackgroundColour() : defaultPrimaryBackgroundColour);
 }
 
-void NoLifeNoCry::Engine::UI::Control::SetPrimaryBackgroundColour(const NoLifeNoCry::Engine::Graphic::Colour& colour)
+void DirtMachine::UI::Control::SetPrimaryBackgroundColour(const DirtMachine::Graphic::Colour& colour)
 {
-	NoLifeNoCry::Engine::Graphic::Colour old_colour(GetPrimaryBackgroundColour());
+	DirtMachine::Graphic::Colour old_colour(GetPrimaryBackgroundColour());
 	if (!primaryBackgroundColour)
 	{
-		primaryBackgroundColour = new NoLifeNoCry::Engine::Graphic::Colour(colour);
+		primaryBackgroundColour = new DirtMachine::Graphic::Colour(colour);
 	}
 	if (*primaryBackgroundColour != colour)
 	{
@@ -215,29 +215,29 @@ void NoLifeNoCry::Engine::UI::Control::SetPrimaryBackgroundColour(const NoLifeNo
 	}
 }
 
-void NoLifeNoCry::Engine::UI::Control::ResetPrimaryBackgroundColour()
+void DirtMachine::UI::Control::ResetPrimaryBackgroundColour()
 {
-	NoLifeNoCry::Engine::Graphic::Colour old_colour(GetPrimaryBackgroundColour());
+	DirtMachine::Graphic::Colour old_colour(GetPrimaryBackgroundColour());
 	delete primaryBackgroundColour;
 	primaryBackgroundColour = nullptr;
-	NoLifeNoCry::Engine::Graphic::Colour colour(GetPrimaryBackgroundColour());
+	DirtMachine::Graphic::Colour colour(GetPrimaryBackgroundColour());
 	if (old_colour != colour)
 	{
 		OnPrimaryBackgroundColourChanged(colour);
 	}
 }
 
-const NoLifeNoCry::Engine::Graphic::Colour& NoLifeNoCry::Engine::UI::Control::GetSecondaryBackgroundColour() const
+const DirtMachine::Graphic::Colour& DirtMachine::UI::Control::GetSecondaryBackgroundColour() const
 {
 	return secondaryBackgroundColour ? *secondaryBackgroundColour : (parent ? parent->GetSecondaryBackgroundColour() : defaultSecondaryBackgroundColour);
 }
 
-void NoLifeNoCry::Engine::UI::Control::SetSecondaryBackgroundColour(const NoLifeNoCry::Engine::Graphic::Colour& colour)
+void DirtMachine::UI::Control::SetSecondaryBackgroundColour(const DirtMachine::Graphic::Colour& colour)
 {
-	NoLifeNoCry::Engine::Graphic::Colour old_colour(GetSecondaryBackgroundColour());
+	DirtMachine::Graphic::Colour old_colour(GetSecondaryBackgroundColour());
 	if (!secondaryBackgroundColour)
 	{
-		secondaryBackgroundColour = new NoLifeNoCry::Engine::Graphic::Colour(colour);
+		secondaryBackgroundColour = new DirtMachine::Graphic::Colour(colour);
 	}
 	if (*secondaryBackgroundColour != colour)
 	{
@@ -249,29 +249,29 @@ void NoLifeNoCry::Engine::UI::Control::SetSecondaryBackgroundColour(const NoLife
 	}
 }
 
-void NoLifeNoCry::Engine::UI::Control::ResetSecondaryBackgroundColour()
+void DirtMachine::UI::Control::ResetSecondaryBackgroundColour()
 {
-	NoLifeNoCry::Engine::Graphic::Colour old_colour(GetSecondaryBackgroundColour());
+	DirtMachine::Graphic::Colour old_colour(GetSecondaryBackgroundColour());
 	delete secondaryBackgroundColour;
 	secondaryBackgroundColour = nullptr;
-	NoLifeNoCry::Engine::Graphic::Colour colour(GetSecondaryBackgroundColour());
+	DirtMachine::Graphic::Colour colour(GetSecondaryBackgroundColour());
 	if (old_colour != colour)
 	{
 		OnSecondaryBackgroundColourChanged(colour);
 	}
 }
 
-const NoLifeNoCry::Engine::Graphic::Colour& NoLifeNoCry::Engine::UI::Control::GetHighlightBackgroundColour() const
+const DirtMachine::Graphic::Colour& DirtMachine::UI::Control::GetHighlightBackgroundColour() const
 {
 	return highlightBackgroundColour ? *highlightBackgroundColour : (parent ? parent->GetHighlightBackgroundColour() : defaultHighlightBackgroundColour);
 }
 
-void NoLifeNoCry::Engine::UI::Control::SetHighlightBackgroundColour(const NoLifeNoCry::Engine::Graphic::Colour& colour)
+void DirtMachine::UI::Control::SetHighlightBackgroundColour(const DirtMachine::Graphic::Colour& colour)
 {
-	NoLifeNoCry::Engine::Graphic::Colour old_colour(GetHighlightBackgroundColour());
+	DirtMachine::Graphic::Colour old_colour(GetHighlightBackgroundColour());
 	if (!highlightBackgroundColour)
 	{
-		highlightBackgroundColour = new NoLifeNoCry::Engine::Graphic::Colour(colour);
+		highlightBackgroundColour = new DirtMachine::Graphic::Colour(colour);
 	}
 	if (*highlightBackgroundColour != colour)
 	{
@@ -283,29 +283,29 @@ void NoLifeNoCry::Engine::UI::Control::SetHighlightBackgroundColour(const NoLife
 	}
 }
 
-void NoLifeNoCry::Engine::UI::Control::ResetHighlightBackgroundColour()
+void DirtMachine::UI::Control::ResetHighlightBackgroundColour()
 {
-	NoLifeNoCry::Engine::Graphic::Colour old_colour(GetHighlightBackgroundColour());
+	DirtMachine::Graphic::Colour old_colour(GetHighlightBackgroundColour());
 	delete highlightBackgroundColour;
 	highlightBackgroundColour = nullptr;
-	NoLifeNoCry::Engine::Graphic::Colour colour(GetHighlightBackgroundColour());
+	DirtMachine::Graphic::Colour colour(GetHighlightBackgroundColour());
 	if (old_colour != colour)
 	{
 		OnHighlightBackgroundColourChanged(colour);
 	}
 }
 
-const NoLifeNoCry::Engine::Graphic::Colour& NoLifeNoCry::Engine::UI::Control::GetPrimaryForegroundColour() const
+const DirtMachine::Graphic::Colour& DirtMachine::UI::Control::GetPrimaryForegroundColour() const
 {
 	return primaryForegroundColour ? *primaryForegroundColour : (parent ? parent->GetPrimaryForegroundColour() : defaultPrimaryForegroundColour);
 }
 
-void NoLifeNoCry::Engine::UI::Control::SetPrimaryForegroundColour(const NoLifeNoCry::Engine::Graphic::Colour& colour)
+void DirtMachine::UI::Control::SetPrimaryForegroundColour(const DirtMachine::Graphic::Colour& colour)
 {
-	NoLifeNoCry::Engine::Graphic::Colour old_colour(GetPrimaryForegroundColour());
+	DirtMachine::Graphic::Colour old_colour(GetPrimaryForegroundColour());
 	if (!primaryForegroundColour)
 	{
-		primaryForegroundColour = new NoLifeNoCry::Engine::Graphic::Colour(colour);
+		primaryForegroundColour = new DirtMachine::Graphic::Colour(colour);
 	}
 	if (*primaryForegroundColour != colour)
 	{
@@ -317,29 +317,29 @@ void NoLifeNoCry::Engine::UI::Control::SetPrimaryForegroundColour(const NoLifeNo
 	}
 }
 
-void NoLifeNoCry::Engine::UI::Control::ResetPrimaryForegroundColour()
+void DirtMachine::UI::Control::ResetPrimaryForegroundColour()
 {
-	NoLifeNoCry::Engine::Graphic::Colour old_colour(GetPrimaryForegroundColour());
+	DirtMachine::Graphic::Colour old_colour(GetPrimaryForegroundColour());
 	delete primaryForegroundColour;
 	primaryForegroundColour = nullptr;
-	NoLifeNoCry::Engine::Graphic::Colour colour(GetPrimaryForegroundColour());
+	DirtMachine::Graphic::Colour colour(GetPrimaryForegroundColour());
 	if (old_colour != colour)
 	{
 		OnPrimaryForegroundColourChanged(colour);
 	}
 }
 
-const NoLifeNoCry::Engine::Graphic::Colour& NoLifeNoCry::Engine::UI::Control::GetSecondaryForegroundColour() const
+const DirtMachine::Graphic::Colour& DirtMachine::UI::Control::GetSecondaryForegroundColour() const
 {
 	return secondaryForegroundColour ? *secondaryForegroundColour : (parent ? parent->GetSecondaryForegroundColour() : defaultSecondaryForegroundColour);
 }
 
-void NoLifeNoCry::Engine::UI::Control::SetSecondaryForegroundColour(const NoLifeNoCry::Engine::Graphic::Colour& colour)
+void DirtMachine::UI::Control::SetSecondaryForegroundColour(const DirtMachine::Graphic::Colour& colour)
 {
-	NoLifeNoCry::Engine::Graphic::Colour old_colour(GetSecondaryForegroundColour());
+	DirtMachine::Graphic::Colour old_colour(GetSecondaryForegroundColour());
 	if (!secondaryForegroundColour)
 	{
-		secondaryForegroundColour = new NoLifeNoCry::Engine::Graphic::Colour(colour);
+		secondaryForegroundColour = new DirtMachine::Graphic::Colour(colour);
 	}
 	if (*secondaryForegroundColour != colour)
 	{
@@ -351,29 +351,29 @@ void NoLifeNoCry::Engine::UI::Control::SetSecondaryForegroundColour(const NoLife
 	}
 }
 
-void NoLifeNoCry::Engine::UI::Control::ResetSecondaryForegroundColour()
+void DirtMachine::UI::Control::ResetSecondaryForegroundColour()
 {
-	NoLifeNoCry::Engine::Graphic::Colour old_colour(GetSecondaryForegroundColour());
+	DirtMachine::Graphic::Colour old_colour(GetSecondaryForegroundColour());
 	delete secondaryForegroundColour;
 	secondaryForegroundColour = nullptr;
-	NoLifeNoCry::Engine::Graphic::Colour colour(GetSecondaryForegroundColour());
+	DirtMachine::Graphic::Colour colour(GetSecondaryForegroundColour());
 	if (old_colour != colour)
 	{
 		OnSecondaryForegroundColourChanged(colour);
 	}
 }
 
-const NoLifeNoCry::Engine::Graphic::Colour& NoLifeNoCry::Engine::UI::Control::GetHighlightForegroundColour() const
+const DirtMachine::Graphic::Colour& DirtMachine::UI::Control::GetHighlightForegroundColour() const
 {
 	return highlightForegroundColour ? *highlightForegroundColour : (parent ? parent->GetHighlightForegroundColour() : defaultHighlightForegroundColour);
 }
 
-void NoLifeNoCry::Engine::UI::Control::SetHighlightForegroundColour(const NoLifeNoCry::Engine::Graphic::Colour& colour)
+void DirtMachine::UI::Control::SetHighlightForegroundColour(const DirtMachine::Graphic::Colour& colour)
 {
-	NoLifeNoCry::Engine::Graphic::Colour old_colour(GetHighlightForegroundColour());
+	DirtMachine::Graphic::Colour old_colour(GetHighlightForegroundColour());
 	if (!highlightForegroundColour)
 	{
-		highlightForegroundColour = new NoLifeNoCry::Engine::Graphic::Colour(colour);
+		highlightForegroundColour = new DirtMachine::Graphic::Colour(colour);
 	}
 	if (*highlightForegroundColour != colour)
 	{
@@ -385,29 +385,29 @@ void NoLifeNoCry::Engine::UI::Control::SetHighlightForegroundColour(const NoLife
 	}
 }
 
-void NoLifeNoCry::Engine::UI::Control::ResetHighlightForegroundColour()
+void DirtMachine::UI::Control::ResetHighlightForegroundColour()
 {
-	NoLifeNoCry::Engine::Graphic::Colour old_colour(GetHighlightForegroundColour());
+	DirtMachine::Graphic::Colour old_colour(GetHighlightForegroundColour());
 	delete highlightForegroundColour;
 	highlightForegroundColour = nullptr;
-	NoLifeNoCry::Engine::Graphic::Colour colour(GetHighlightForegroundColour());
+	DirtMachine::Graphic::Colour colour(GetHighlightForegroundColour());
 	if (old_colour != colour)
 	{
 		OnHighlightForegroundColourChanged(colour);
 	}
 }
 
-const NoLifeNoCry::Engine::Graphic::Colour& NoLifeNoCry::Engine::UI::Control::GetPrimaryTextColour() const
+const DirtMachine::Graphic::Colour& DirtMachine::UI::Control::GetPrimaryTextColour() const
 {
 	return primaryTextColour ? *primaryTextColour : (parent ? parent->GetPrimaryTextColour() : defaultPrimaryTextColour);
 }
 
-void NoLifeNoCry::Engine::UI::Control::SetPrimaryTextColour(const NoLifeNoCry::Engine::Graphic::Colour& colour)
+void DirtMachine::UI::Control::SetPrimaryTextColour(const DirtMachine::Graphic::Colour& colour)
 {
-	NoLifeNoCry::Engine::Graphic::Colour old_colour(GetPrimaryTextColour());
+	DirtMachine::Graphic::Colour old_colour(GetPrimaryTextColour());
 	if (!primaryTextColour)
 	{
-		primaryTextColour = new NoLifeNoCry::Engine::Graphic::Colour(colour);
+		primaryTextColour = new DirtMachine::Graphic::Colour(colour);
 	}
 	if (*primaryTextColour != colour)
 	{
@@ -419,29 +419,29 @@ void NoLifeNoCry::Engine::UI::Control::SetPrimaryTextColour(const NoLifeNoCry::E
 	}
 }
 
-void NoLifeNoCry::Engine::UI::Control::ResetPrimaryTextColour()
+void DirtMachine::UI::Control::ResetPrimaryTextColour()
 {
-	NoLifeNoCry::Engine::Graphic::Colour old_colour(GetPrimaryTextColour());
+	DirtMachine::Graphic::Colour old_colour(GetPrimaryTextColour());
 	delete primaryTextColour;
 	primaryTextColour = nullptr;
-	NoLifeNoCry::Engine::Graphic::Colour colour(GetPrimaryTextColour());
+	DirtMachine::Graphic::Colour colour(GetPrimaryTextColour());
 	if (old_colour != colour)
 	{
 		OnPrimaryTextColourChanged(colour);
 	}
 }
 
-const NoLifeNoCry::Engine::Graphic::Colour& NoLifeNoCry::Engine::UI::Control::GetSecondaryTextColour() const
+const DirtMachine::Graphic::Colour& DirtMachine::UI::Control::GetSecondaryTextColour() const
 {
 	return secondaryTextColour ? *secondaryTextColour : (parent ? parent->GetSecondaryTextColour() : defaultSecondaryTextColour);
 }
 
-void NoLifeNoCry::Engine::UI::Control::SetSecondaryTextColour(const NoLifeNoCry::Engine::Graphic::Colour& colour)
+void DirtMachine::UI::Control::SetSecondaryTextColour(const DirtMachine::Graphic::Colour& colour)
 {
-	NoLifeNoCry::Engine::Graphic::Colour old_colour(GetSecondaryTextColour());
+	DirtMachine::Graphic::Colour old_colour(GetSecondaryTextColour());
 	if (!secondaryTextColour)
 	{
-		secondaryTextColour = new NoLifeNoCry::Engine::Graphic::Colour(colour);
+		secondaryTextColour = new DirtMachine::Graphic::Colour(colour);
 	}
 	if (*secondaryTextColour != colour)
 	{
@@ -453,29 +453,29 @@ void NoLifeNoCry::Engine::UI::Control::SetSecondaryTextColour(const NoLifeNoCry:
 	}
 }
 
-void NoLifeNoCry::Engine::UI::Control::ResetSecondaryTextColour()
+void DirtMachine::UI::Control::ResetSecondaryTextColour()
 {
-	NoLifeNoCry::Engine::Graphic::Colour old_colour(GetSecondaryTextColour());
+	DirtMachine::Graphic::Colour old_colour(GetSecondaryTextColour());
 	delete secondaryTextColour;
 	secondaryTextColour = nullptr;
-	NoLifeNoCry::Engine::Graphic::Colour colour(GetSecondaryTextColour());
+	DirtMachine::Graphic::Colour colour(GetSecondaryTextColour());
 	if (old_colour != colour)
 	{
 		OnSecondaryTextColourChanged(colour);
 	}
 }
 
-const NoLifeNoCry::Engine::Graphic::Colour& NoLifeNoCry::Engine::UI::Control::GetHighlightTextColour() const
+const DirtMachine::Graphic::Colour& DirtMachine::UI::Control::GetHighlightTextColour() const
 {
 	return highlightTextColour ? *highlightTextColour : (parent ? parent->GetHighlightTextColour() : defaultHighlightTextColour);
 }
 
-void NoLifeNoCry::Engine::UI::Control::SetHighlightTextColour(const NoLifeNoCry::Engine::Graphic::Colour& colour)
+void DirtMachine::UI::Control::SetHighlightTextColour(const DirtMachine::Graphic::Colour& colour)
 {
-	NoLifeNoCry::Engine::Graphic::Colour old_colour(GetHighlightTextColour());
+	DirtMachine::Graphic::Colour old_colour(GetHighlightTextColour());
 	if (!highlightTextColour)
 	{
-		highlightTextColour = new NoLifeNoCry::Engine::Graphic::Colour(colour);
+		highlightTextColour = new DirtMachine::Graphic::Colour(colour);
 	}
 	if (*highlightTextColour != colour)
 	{
@@ -487,59 +487,59 @@ void NoLifeNoCry::Engine::UI::Control::SetHighlightTextColour(const NoLifeNoCry:
 	}
 }
 
-void NoLifeNoCry::Engine::UI::Control::ResetHighlightTextColour()
+void DirtMachine::UI::Control::ResetHighlightTextColour()
 {
-	NoLifeNoCry::Engine::Graphic::Colour old_colour(GetHighlightTextColour());
+	DirtMachine::Graphic::Colour old_colour(GetHighlightTextColour());
 	delete highlightTextColour;
 	highlightTextColour = nullptr;
-	NoLifeNoCry::Engine::Graphic::Colour colour(GetHighlightTextColour());
+	DirtMachine::Graphic::Colour colour(GetHighlightTextColour());
 	if (old_colour != colour)
 	{
 		OnHighlightTextColourChanged(colour);
 	}
 }
 
-bool NoLifeNoCry::Engine::UI::Control::HasParent() const
+bool DirtMachine::UI::Control::HasParent() const
 {
 	return parent;
 }
 
-NoLifeNoCry::Engine::UI::Control* NoLifeNoCry::Engine::UI::Control::GetParent() const
+DirtMachine::UI::Control* DirtMachine::UI::Control::GetParent() const
 {
 	return parent;
 }
 
-std::size_t NoLifeNoCry::Engine::UI::Control::GetChildCount() const
+std::size_t DirtMachine::UI::Control::GetChildCount() const
 {
 	return children.size();
 }
 
-NoLifeNoCry::Engine::UI::Control& NoLifeNoCry::Engine::UI::Control::GetChild(std::size_t index)
+DirtMachine::UI::Control& DirtMachine::UI::Control::GetChild(std::size_t index)
 {
 	return *(children[index].get());
 }
 
-const NoLifeNoCry::Engine::UI::Control& NoLifeNoCry::Engine::UI::Control::GetChild(std::size_t index) const
+const DirtMachine::UI::Control& DirtMachine::UI::Control::GetChild(std::size_t index) const
 {
 	return *(children[index].get());
 }
 
-bool NoLifeNoCry::Engine::UI::Control::IsMouseOnWindow() const
+bool DirtMachine::UI::Control::IsMouseOnWindow() const
 {
 	return parent ? parent->IsMouseOnWindow() : false;
 }
 
-bool NoLifeNoCry::Engine::UI::Control::IsWindowFocused() const
+bool DirtMachine::UI::Control::IsWindowFocused() const
 {
 	return parent ? parent->IsWindowFocused() : false;
 }
 
-glm::ivec2 NoLifeNoCry::Engine::UI::Control::GetMousePosition() const
+glm::ivec2 DirtMachine::UI::Control::GetMousePosition() const
 {
 	return parent ? parent->GetMousePosition() : glm::ivec2(0, 0);
 }
 
-void NoLifeNoCry::Engine::UI::Control::Draw(NoLifeNoCry::Engine::Graphic::RenderTarget& renderTarget) const
+void DirtMachine::UI::Control::Draw(DirtMachine::Graphic::RenderTarget& renderTarget) const
 {
 	for (const std::shared_ptr<Control>& child : children)
 	{
@@ -552,7 +552,7 @@ void NoLifeNoCry::Engine::UI::Control::Draw(NoLifeNoCry::Engine::Graphic::Render
 	}
 }
 
-bool NoLifeNoCry::Engine::UI::Control::ProcessTextEntered(const NoLifeNoCry::Engine::Input::Data::TextData& textData)
+bool DirtMachine::UI::Control::ProcessTextEntered(const DirtMachine::Input::Data::TextData& textData)
 {
 	bool ret(false);
 	for (std::vector<std::shared_ptr<Control>>::const_reverse_iterator reverse_iterator(children.crbegin()), reverse_end(children.crend()); reverse_iterator != reverse_end; reverse_iterator++)
@@ -569,7 +569,7 @@ bool NoLifeNoCry::Engine::UI::Control::ProcessTextEntered(const NoLifeNoCry::Eng
 	return ret;
 }
 
-bool NoLifeNoCry::Engine::UI::Control::ProcessKeyPressed(const NoLifeNoCry::Engine::Input::Data::KeyboardKeyData& keyboardKeyData)
+bool DirtMachine::UI::Control::ProcessKeyPressed(const DirtMachine::Input::Data::KeyboardKeyData& keyboardKeyData)
 {
 	bool ret(false);
 	for (std::vector<std::shared_ptr<Control>>::const_reverse_iterator reverse_iterator(children.crbegin()), reverse_end(children.crend()); reverse_iterator != reverse_end; reverse_iterator++)
@@ -586,7 +586,7 @@ bool NoLifeNoCry::Engine::UI::Control::ProcessKeyPressed(const NoLifeNoCry::Engi
 	return ret;
 }
 
-bool NoLifeNoCry::Engine::UI::Control::ProcessKeyReleased(const NoLifeNoCry::Engine::Input::Data::KeyboardKeyData& keyboardKeyData)
+bool DirtMachine::UI::Control::ProcessKeyReleased(const DirtMachine::Input::Data::KeyboardKeyData& keyboardKeyData)
 {
 	bool ret(false);
 	for (std::vector<std::shared_ptr<Control>>::const_reverse_iterator reverse_iterator(children.crbegin()), reverse_end(children.crend()); reverse_iterator != reverse_end; reverse_iterator++)
@@ -603,10 +603,10 @@ bool NoLifeNoCry::Engine::UI::Control::ProcessKeyReleased(const NoLifeNoCry::Eng
 	return ret;
 }
 
-bool NoLifeNoCry::Engine::UI::Control::ProcessMouseWheelScrolled(const NoLifeNoCry::Engine::Input::Data::MouseWheelData& mouseWheelData)
+bool DirtMachine::UI::Control::ProcessMouseWheelScrolled(const DirtMachine::Input::Data::MouseWheelData& mouseWheelData)
 {
 	bool ret(false);
-	NoLifeNoCry::Engine::Input::Data::MouseWheelData local_mouse_wheel_data({ mouseWheelData.wheel, mouseWheelData.delta, mouseWheelData.position - position });
+	DirtMachine::Input::Data::MouseWheelData local_mouse_wheel_data({ mouseWheelData.wheel, mouseWheelData.delta, mouseWheelData.position - position });
 	for (std::vector<std::shared_ptr<Control>>::const_reverse_iterator reverse_iterator(children.crbegin()), reverse_end(children.crend()); reverse_iterator != reverse_end; reverse_iterator++)
 	{
 		if ((*reverse_iterator)->IsVisible() && (*reverse_iterator)->IsEnabled())
@@ -621,7 +621,7 @@ bool NoLifeNoCry::Engine::UI::Control::ProcessMouseWheelScrolled(const NoLifeNoC
 	return ret;
 }
 
-bool NoLifeNoCry::Engine::UI::Control::ProcessMouseButtonPressed(const NoLifeNoCry::Engine::Input::Data::MouseButtonData& mouseButtonData)
+bool DirtMachine::UI::Control::ProcessMouseButtonPressed(const DirtMachine::Input::Data::MouseButtonData& mouseButtonData)
 {
 	bool ret(false);
 	for (std::vector<std::shared_ptr<Control>>::const_reverse_iterator reverse_iterator(children.crbegin()), reverse_end(children.crend()); reverse_iterator != reverse_end; reverse_iterator++)
@@ -638,7 +638,7 @@ bool NoLifeNoCry::Engine::UI::Control::ProcessMouseButtonPressed(const NoLifeNoC
 	return ret;
 }
 
-bool NoLifeNoCry::Engine::UI::Control::ProcessMouseButtonReleased(const NoLifeNoCry::Engine::Input::Data::MouseButtonData& mouseButtonData)
+bool DirtMachine::UI::Control::ProcessMouseButtonReleased(const DirtMachine::Input::Data::MouseButtonData& mouseButtonData)
 {
 	bool ret(false);
 	for (std::vector<std::shared_ptr<Control>>::const_reverse_iterator reverse_iterator(children.crbegin()), reverse_end(children.crend()); reverse_iterator != reverse_end; reverse_iterator++)
@@ -655,7 +655,7 @@ bool NoLifeNoCry::Engine::UI::Control::ProcessMouseButtonReleased(const NoLifeNo
 	return ret;
 }
 
-bool NoLifeNoCry::Engine::UI::Control::ProcessMouseMoved(const NoLifeNoCry::Engine::Input::Data::MouseMovementData& mouseMovementData)
+bool DirtMachine::UI::Control::ProcessMouseMoved(const DirtMachine::Input::Data::MouseMovementData& mouseMovementData)
 {
 	bool ret(false);
 	for (std::vector<std::shared_ptr<Control>>::const_reverse_iterator reverse_iterator(children.crbegin()), reverse_end(children.crend()); reverse_iterator != reverse_end; reverse_iterator++)
@@ -672,7 +672,7 @@ bool NoLifeNoCry::Engine::UI::Control::ProcessMouseMoved(const NoLifeNoCry::Engi
 	return ret;
 }
 
-bool NoLifeNoCry::Engine::UI::Control::ProcessWindowMouseEntered()
+bool DirtMachine::UI::Control::ProcessWindowMouseEntered()
 {
 	bool ret(false);
 	for (std::vector<std::shared_ptr<Control>>::const_reverse_iterator reverse_iterator(children.crbegin()), reverse_end(children.crend()); reverse_iterator != reverse_end; reverse_iterator++)
@@ -689,7 +689,7 @@ bool NoLifeNoCry::Engine::UI::Control::ProcessWindowMouseEntered()
 	return ret;
 }
 
-bool NoLifeNoCry::Engine::UI::Control::ProcessWindowMouseLeft()
+bool DirtMachine::UI::Control::ProcessWindowMouseLeft()
 {
 	bool ret(false);
 	for (std::vector<std::shared_ptr<Control>>::const_reverse_iterator reverse_iterator(children.crbegin()), reverse_end(children.crend()); reverse_iterator != reverse_end; reverse_iterator++)
@@ -706,7 +706,7 @@ bool NoLifeNoCry::Engine::UI::Control::ProcessWindowMouseLeft()
 	return ret;
 }
 
-bool NoLifeNoCry::Engine::UI::Control::ProcessJoystickButtonPressed(const NoLifeNoCry::Engine::Input::Data::JoystickButtonData& joystickButtonData)
+bool DirtMachine::UI::Control::ProcessJoystickButtonPressed(const DirtMachine::Input::Data::JoystickButtonData& joystickButtonData)
 {
 	bool ret(false);
 	for (std::vector<std::shared_ptr<Control>>::const_reverse_iterator reverse_iterator(children.crbegin()), reverse_end(children.crend()); reverse_iterator != reverse_end; reverse_iterator++)
@@ -723,7 +723,7 @@ bool NoLifeNoCry::Engine::UI::Control::ProcessJoystickButtonPressed(const NoLife
 	return ret;
 }
 
-bool NoLifeNoCry::Engine::UI::Control::ProcessJoystickButtonReleased(const NoLifeNoCry::Engine::Input::Data::JoystickButtonData& joystickButtonData)
+bool DirtMachine::UI::Control::ProcessJoystickButtonReleased(const DirtMachine::Input::Data::JoystickButtonData& joystickButtonData)
 {
 	bool ret(false);
 	for (std::vector<std::shared_ptr<Control>>::const_reverse_iterator reverse_iterator(children.crbegin()), reverse_end(children.crend()); reverse_iterator != reverse_end; reverse_iterator++)
@@ -740,7 +740,7 @@ bool NoLifeNoCry::Engine::UI::Control::ProcessJoystickButtonReleased(const NoLif
 	return ret;
 }
 
-bool NoLifeNoCry::Engine::UI::Control::ProcessJoystickMoved(const NoLifeNoCry::Engine::Input::Data::JoystickMovementData& joystickMovementData)
+bool DirtMachine::UI::Control::ProcessJoystickMoved(const DirtMachine::Input::Data::JoystickMovementData& joystickMovementData)
 {
 	bool ret(false);
 	for (std::vector<std::shared_ptr<Control>>::const_reverse_iterator reverse_iterator(children.crbegin()), reverse_end(children.crend()); reverse_iterator != reverse_end; reverse_iterator++)
@@ -757,7 +757,7 @@ bool NoLifeNoCry::Engine::UI::Control::ProcessJoystickMoved(const NoLifeNoCry::E
 	return ret;
 }
 
-bool NoLifeNoCry::Engine::UI::Control::ProcessJoystickConnected(const NoLifeNoCry::Engine::Input::Data::JoystickConnectionData& joystickConnectionData)
+bool DirtMachine::UI::Control::ProcessJoystickConnected(const DirtMachine::Input::Data::JoystickConnectionData& joystickConnectionData)
 {
 	bool ret(false);
 	for (std::vector<std::shared_ptr<Control>>::const_reverse_iterator reverse_iterator(children.crbegin()), reverse_end(children.crend()); reverse_iterator != reverse_end; reverse_iterator++)
@@ -774,7 +774,7 @@ bool NoLifeNoCry::Engine::UI::Control::ProcessJoystickConnected(const NoLifeNoCr
 	return ret;
 }
 
-bool NoLifeNoCry::Engine::UI::Control::ProcessJoystickDisconnected(const NoLifeNoCry::Engine::Input::Data::JoystickConnectionData& joystickConnectionData)
+bool DirtMachine::UI::Control::ProcessJoystickDisconnected(const DirtMachine::Input::Data::JoystickConnectionData& joystickConnectionData)
 {
 	bool ret(false);
 	for (std::vector<std::shared_ptr<Control>>::const_reverse_iterator reverse_iterator(children.crbegin()), reverse_end(children.crend()); reverse_iterator != reverse_end; reverse_iterator++)
@@ -791,7 +791,7 @@ bool NoLifeNoCry::Engine::UI::Control::ProcessJoystickDisconnected(const NoLifeN
 	return ret;
 }
 
-bool NoLifeNoCry::Engine::UI::Control::ProcessTouchBegan(const NoLifeNoCry::Engine::Input::Data::TouchData& touchData)
+bool DirtMachine::UI::Control::ProcessTouchBegan(const DirtMachine::Input::Data::TouchData& touchData)
 {
 	bool ret(false);
 	glm::ivec2 local_position = touchData.position - GetGlobalPosition();
@@ -812,7 +812,7 @@ bool NoLifeNoCry::Engine::UI::Control::ProcessTouchBegan(const NoLifeNoCry::Engi
 	return ret;
 }
 
-bool NoLifeNoCry::Engine::UI::Control::ProcessTouchMoved(const NoLifeNoCry::Engine::Input::Data::TouchData& touchData)
+bool DirtMachine::UI::Control::ProcessTouchMoved(const DirtMachine::Input::Data::TouchData& touchData)
 {
 	bool ret(false);
 	glm::ivec2 local_position = touchData.position - GetGlobalPosition();
@@ -833,7 +833,7 @@ bool NoLifeNoCry::Engine::UI::Control::ProcessTouchMoved(const NoLifeNoCry::Engi
 	return ret;
 }
 
-bool NoLifeNoCry::Engine::UI::Control::ProcessTouchEnded(const NoLifeNoCry::Engine::Input::Data::TouchData& touchData)
+bool DirtMachine::UI::Control::ProcessTouchEnded(const DirtMachine::Input::Data::TouchData& touchData)
 {
 	bool ret(false);
 	glm::ivec2 local_position = touchData.position - GetGlobalPosition();
@@ -854,7 +854,7 @@ bool NoLifeNoCry::Engine::UI::Control::ProcessTouchEnded(const NoLifeNoCry::Engi
 	return ret;
 }
 
-bool NoLifeNoCry::Engine::UI::Control::ProcessSensorChanged(const NoLifeNoCry::Engine::Input::Data::SensorData& sensorData)
+bool DirtMachine::UI::Control::ProcessSensorChanged(const DirtMachine::Input::Data::SensorData& sensorData)
 {
 	bool ret(false);
 	for (std::vector<std::shared_ptr<Control>>::const_reverse_iterator reverse_iterator(children.crbegin()), reverse_end(children.crend()); reverse_iterator != reverse_end; reverse_iterator++)
@@ -871,7 +871,7 @@ bool NoLifeNoCry::Engine::UI::Control::ProcessSensorChanged(const NoLifeNoCry::E
 	return ret;
 }
 
-void NoLifeNoCry::Engine::UI::Control::PushDrawingState(NoLifeNoCry::Engine::Graphic::RenderTarget& renderTarget)
+void DirtMachine::UI::Control::PushDrawingState(DirtMachine::Graphic::RenderTarget& renderTarget)
 {
 	originalView = renderTarget.getView();
 	sf::View view(originalView);
@@ -881,7 +881,7 @@ void NoLifeNoCry::Engine::UI::Control::PushDrawingState(NoLifeNoCry::Engine::Gra
 	renderTarget.setView(view);
 }
 
-void NoLifeNoCry::Engine::UI::Control::PopDrawingState(NoLifeNoCry::Engine::Graphic::RenderTarget& renderTarget)
+void DirtMachine::UI::Control::PopDrawingState(DirtMachine::Graphic::RenderTarget& renderTarget)
 {
 	renderTarget.setView(originalView);
 }

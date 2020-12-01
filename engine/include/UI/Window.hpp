@@ -21,95 +21,95 @@
 #include <UI/Control.hpp>
 #include <WindowHandle.hpp>
 
-/// @brief No Life, No Cry engine UI namespace
-namespace NoLifeNoCry::Engine::UI
+/// @brief Dirt Machine game engine UI namespace
+namespace DirtMachine::UI
 {
 	/// @brief Window class
-	class Window : sf::RenderWindow, NoLifeNoCry::Engine::UI::Control
+	class Window : sf::RenderWindow, DirtMachine::UI::Control
 	{
 	public:
 
 		/// @brief On window started
-		NoLifeNoCry::Engine::Event<> OnWindowStarted;
+		DirtMachine::Event<> OnWindowStarted;
 
 		/// @brief On window stopped
-		NoLifeNoCry::Engine::Event<> OnWindowStopped;
+		DirtMachine::Event<> OnWindowStopped;
 
 		/// @brief On window messages processed
-		NoLifeNoCry::Engine::Event<double> OnWindowMessagesProcessed;
+		DirtMachine::Event<double> OnWindowMessagesProcessed;
 
 		/// @brief On window closed
-		NoLifeNoCry::Engine::Event<> OnWindowClosed;
+		DirtMachine::Event<> OnWindowClosed;
 
 		/// @brief On window resized
-		NoLifeNoCry::Engine::Event<std::size_t, std::size_t> OnWindowResized;
+		DirtMachine::Event<std::size_t, std::size_t> OnWindowResized;
 
 		/// @brief On focus lost
-		NoLifeNoCry::Engine::Event<> OnFocusLost;
+		DirtMachine::Event<> OnFocusLost;
 
 		/// @brief On focus gained
-		NoLifeNoCry::Engine::Event<> OnFocusGained;
+		DirtMachine::Event<> OnFocusGained;
 
 		/// @brief On text entered
-		NoLifeNoCry::Engine::Event<NoLifeNoCry::Engine::Input::Data::TextData> OnTextEntered;
+		DirtMachine::Event<DirtMachine::Input::Data::TextData> OnTextEntered;
 
 		/// @brief On keyboard key pressed
-		NoLifeNoCry::Engine::Event<NoLifeNoCry::Engine::Input::Data::KeyboardKeyData> OnKeyboardKeyPressed;
+		DirtMachine::Event<DirtMachine::Input::Data::KeyboardKeyData> OnKeyboardKeyPressed;
 
 		/// @brief On keyboard key released
-		NoLifeNoCry::Engine::Event<NoLifeNoCry::Engine::Input::Data::KeyboardKeyData> OnKeyboardKeyReleased;
+		DirtMachine::Event<DirtMachine::Input::Data::KeyboardKeyData> OnKeyboardKeyReleased;
 
 		/// @brief On mouse wheel scrolled
-		NoLifeNoCry::Engine::Event<NoLifeNoCry::Engine::Input::Data::MouseWheelData> OnMouseWheelScrolled;
+		DirtMachine::Event<DirtMachine::Input::Data::MouseWheelData> OnMouseWheelScrolled;
 
 		/// @brief On mouse button pressed
-		NoLifeNoCry::Engine::Event<NoLifeNoCry::Engine::Input::Data::MouseButtonData> OnMouseButtonPressed;
+		DirtMachine::Event<DirtMachine::Input::Data::MouseButtonData> OnMouseButtonPressed;
 
 		/// @brief On mouse button released
-		NoLifeNoCry::Engine::Event<NoLifeNoCry::Engine::Input::Data::MouseButtonData> OnMouseButtonReleased;
+		DirtMachine::Event<DirtMachine::Input::Data::MouseButtonData> OnMouseButtonReleased;
 
 		/// @brief On mouse moved
-		NoLifeNoCry::Engine::Event<NoLifeNoCry::Engine::Input::Data::MouseMovementData> OnMouseMoved;
+		DirtMachine::Event<DirtMachine::Input::Data::MouseMovementData> OnMouseMoved;
 
 		/// @brief On mouse entered
-		NoLifeNoCry::Engine::Event<> OnMouseEntered;
+		DirtMachine::Event<> OnMouseEntered;
 
 		/// @brief On mouse left
-		NoLifeNoCry::Engine::Event<> OnMouseLeft;
+		DirtMachine::Event<> OnMouseLeft;
 
 		/// @brief On joystick button pressed
-		NoLifeNoCry::Engine::Event<NoLifeNoCry::Engine::Input::Data::JoystickButtonData> OnJoystickButtonPressed;
+		DirtMachine::Event<DirtMachine::Input::Data::JoystickButtonData> OnJoystickButtonPressed;
 
 		/// @brief On joystick button released
-		NoLifeNoCry::Engine::Event<NoLifeNoCry::Engine::Input::Data::JoystickButtonData> OnJoystickButtonReleased;
+		DirtMachine::Event<DirtMachine::Input::Data::JoystickButtonData> OnJoystickButtonReleased;
 
 		/// @brief On joystick moved
-		NoLifeNoCry::Engine::Event<NoLifeNoCry::Engine::Input::Data::JoystickMovementData> OnJoystickMoved;
+		DirtMachine::Event<DirtMachine::Input::Data::JoystickMovementData> OnJoystickMoved;
 
 		/// @brief On joystick connected
-		NoLifeNoCry::Engine::Event<NoLifeNoCry::Engine::Input::Data::JoystickConnectionData> OnJoystickConnected;
+		DirtMachine::Event<DirtMachine::Input::Data::JoystickConnectionData> OnJoystickConnected;
 
 		/// @brief On joystick disconnected
-		NoLifeNoCry::Engine::Event<NoLifeNoCry::Engine::Input::Data::JoystickConnectionData> OnJoystickDisconnected;
+		DirtMachine::Event<DirtMachine::Input::Data::JoystickConnectionData> OnJoystickDisconnected;
 
 		/// @brief On touch began
-		NoLifeNoCry::Engine::Event<NoLifeNoCry::Engine::Input::Data::TouchData> OnTouchBegan;
+		DirtMachine::Event<DirtMachine::Input::Data::TouchData> OnTouchBegan;
 
 		/// @brief On touch moved
-		NoLifeNoCry::Engine::Event<NoLifeNoCry::Engine::Input::Data::TouchData> OnTouchMoved;
+		DirtMachine::Event<DirtMachine::Input::Data::TouchData> OnTouchMoved;
 
 		/// @brief On touch ended
-		NoLifeNoCry::Engine::Event<NoLifeNoCry::Engine::Input::Data::TouchData> OnTouchEnded;
+		DirtMachine::Event<DirtMachine::Input::Data::TouchData> OnTouchEnded;
 
 		/// @brief On sensor changed
-		NoLifeNoCry::Engine::Event<NoLifeNoCry::Engine::Input::Data::SensorData> OnSensorChanged;
+		DirtMachine::Event<DirtMachine::Input::Data::SensorData> OnSensorChanged;
 
 		/// @brief Constructor
 		/// @param windowWidth Window width
 		/// @param windowHeight Window height
 		/// @param windowName Window name
 		/// @param windowStyle Window style
-		Window(std::size_t width, std::size_t height, const std::string& title, NoLifeNoCry::Engine::EWindowStyle style);
+		Window(std::size_t width, std::size_t height, const std::string& title, DirtMachine::EWindowStyle style);
 
 		/// @brief Destructor
 		virtual ~Window();
@@ -126,7 +126,7 @@ namespace NoLifeNoCry::Engine::UI
 
 		/// @brief Get window handle
 		/// @return Window handle
-		NoLifeNoCry::Engine::WindowHandle GetWindowHandle() const;
+		DirtMachine::WindowHandle GetWindowHandle() const;
 
 		/// @brief Get window size
 		/// @return Window size
@@ -138,7 +138,7 @@ namespace NoLifeNoCry::Engine::UI
 
 		/// @brief Get user interface
 		/// @return User interface
-		NoLifeNoCry::Engine::UI::Control& GetUI();
+		DirtMachine::UI::Control& GetUI();
 
 		/// @brief Process messages
 		/// @return "true" if messages have been successfully processed, otherwise "false"
@@ -149,11 +149,11 @@ namespace NoLifeNoCry::Engine::UI
 
 		/// @brief Start window process
 		/// @return Exit code
-		NoLifeNoCry::Engine::EExitCode Start();
+		DirtMachine::EExitCode Start();
 
 		/// @brief Get default font
 		/// @return 
-		virtual const NoLifeNoCry::Engine::Graphic::Font* GetDefaultFont() const;
+		virtual const DirtMachine::Graphic::Font* GetDefaultFont() const;
 
 		/// @brief Is mouse on window
 		/// @return "true" is mouse is on window, otherwise "false"
@@ -184,10 +184,10 @@ namespace NoLifeNoCry::Engine::UI
 		std::string title;
 
 		/// @brief Window style
-		NoLifeNoCry::Engine::EWindowStyle style;
+		DirtMachine::EWindowStyle style;
 
 		/// @brief Default font
-		NoLifeNoCry::Engine::Graphic::Font defaultFont;
+		DirtMachine::Graphic::Font defaultFont;
 
 		/// @brief Last messages processed time point
 		std::chrono::high_resolution_clock::time_point lastMessagesProcessedTimePoint;

@@ -4,8 +4,8 @@
 #include <Input/Clipboard.hpp>
 #include <UI/InputField.hpp>
 
-NoLifeNoCry::Engine::UI::InputField::InputField(const glm::ivec2& position, float rotation, const glm::uvec2& size, const NoLifeNoCry::Engine::String& textString, const NoLifeNoCry::Engine::String& hintTextString, const NoLifeNoCry::Engine::Graphic::Font* textFont, unsigned int textCharacterSize, NoLifeNoCry::Engine::UI::Control* parent) :
-	NoLifeNoCry::Engine::UI::InteractableControl(position, rotation, size, true, true, true, false, parent),
+DirtMachine::UI::InputField::InputField(const glm::ivec2& position, float rotation, const glm::uvec2& size, const DirtMachine::String& textString, const DirtMachine::String& hintTextString, const DirtMachine::Graphic::Font* textFont, unsigned int textCharacterSize, DirtMachine::UI::Control* parent) :
+	DirtMachine::UI::InteractableControl(position, rotation, size, true, true, true, false, parent),
 	backgroundPanel(nullptr),
 	caretLabel(nullptr),
 	textFont(textFont),
@@ -15,32 +15,32 @@ NoLifeNoCry::Engine::UI::InputField::InputField(const glm::ivec2& position, floa
 	selectionRowPosition(static_cast<std::size_t>(0)),
 	selectionColumnPosition(static_cast<std::size_t>(0))
 {
-	backgroundPanel = CreateChild<NoLifeNoCry::Engine::UI::Panel>(glm::ivec2(0, 0), 0.0f, size);
-	caretLabel = CreateChild<NoLifeNoCry::Engine::UI::Label>("|", textFont, textCharacterSize, NoLifeNoCry::Engine::UI::ETextAlignment::TopLeft, glm::ivec2(0, 0), 0.0f, size);
+	backgroundPanel = CreateChild<DirtMachine::UI::Panel>(glm::ivec2(0, 0), 0.0f, size);
+	caretLabel = CreateChild<DirtMachine::UI::Label>("|", textFont, textCharacterSize, DirtMachine::UI::ETextAlignment::TopLeft, glm::ivec2(0, 0), 0.0f, size);
 	textLines.push_back(std::string());
 	SetText(textString);
 	OnTransformationChanged += [this]()
 	{
 		glm::uvec2 size(GetSize());
 		backgroundPanel->SetSize(size);
-		for (const std::shared_ptr<NoLifeNoCry::Engine::UI::Label>& text_line_label : textLineLabels)
+		for (const std::shared_ptr<DirtMachine::UI::Label>& text_line_label : textLineLabels)
 		{
 			text_line_label->SetSize(size);
 		}
 	};
 }
 
-NoLifeNoCry::Engine::UI::InputField::~InputField()
+DirtMachine::UI::InputField::~InputField()
 {
 	// ...
 }
 
-NoLifeNoCry::Engine::String NoLifeNoCry::Engine::UI::InputField::GetTextLine(std::size_t textLineIndex) const
+DirtMachine::String DirtMachine::UI::InputField::GetTextLine(std::size_t textLineIndex) const
 {
-	return (textLineIndex < textLines.size()) ? textLines[textLineIndex] : NoLifeNoCry::Engine::String();
+	return (textLineIndex < textLines.size()) ? textLines[textLineIndex] : DirtMachine::String();
 }
 
-void NoLifeNoCry::Engine::UI::InputField::SetTextLine(std::size_t textLineIndex, const NoLifeNoCry::Engine::String& textLine)
+void DirtMachine::UI::InputField::SetTextLine(std::size_t textLineIndex, const DirtMachine::String& textLine)
 {
 	if (textLineIndex < textLines.size())
 	{
@@ -50,23 +50,23 @@ void NoLifeNoCry::Engine::UI::InputField::SetTextLine(std::size_t textLineIndex,
 	{
 		while (textLineIndex >= textLines.size())
 		{
-			textLines.push_back((textLineIndex == textLines.size()) ? textLine : NoLifeNoCry::Engine::String());
+			textLines.push_back((textLineIndex == textLines.size()) ? textLine : DirtMachine::String());
 			UpdateTextLineLabel(textLineIndex);
 		}
 	}
 	ResetSelection();
 }
 
-std::size_t NoLifeNoCry::Engine::UI::InputField::GetTextLineCount() const
+std::size_t DirtMachine::UI::InputField::GetTextLineCount() const
 {
 	return textLines.size();
 }
 
-NoLifeNoCry::Engine::String NoLifeNoCry::Engine::UI::InputField::GetText() const
+DirtMachine::String DirtMachine::UI::InputField::GetText() const
 {
-	NoLifeNoCry::Engine::String ret;
+	DirtMachine::String ret;
 	bool is_first(true);
-	for (const NoLifeNoCry::Engine::String& text_line : textLines)
+	for (const DirtMachine::String& text_line : textLines)
 	{
 		if (is_first)
 		{
@@ -81,16 +81,16 @@ NoLifeNoCry::Engine::String NoLifeNoCry::Engine::UI::InputField::GetText() const
 	return ret;
 }
 
-void NoLifeNoCry::Engine::UI::InputField::SetText(const NoLifeNoCry::Engine::String& newText)
+void DirtMachine::UI::InputField::SetText(const DirtMachine::String& newText)
 {
-	NoLifeNoCry::Engine::String text_line;
+	DirtMachine::String text_line;
 	textLines.clear();
-	textLines.push_back(NoLifeNoCry::Engine::String());
+	textLines.push_back(DirtMachine::String());
 	for (const sf::Uint32& new_text_character : newText)
 	{
 		if (new_text_character == '\n')
 		{
-			textLines.push_back(NoLifeNoCry::Engine::String());
+			textLines.push_back(DirtMachine::String());
 		}
 		else
 		{
@@ -101,25 +101,25 @@ void NoLifeNoCry::Engine::UI::InputField::SetText(const NoLifeNoCry::Engine::Str
 	ResetSelection();
 }
 
-NoLifeNoCry::Engine::String NoLifeNoCry::Engine::UI::InputField::GetHintText() const
+DirtMachine::String DirtMachine::UI::InputField::GetHintText() const
 {
 	// TODO
-	return NoLifeNoCry::Engine::String();
+	return DirtMachine::String();
 }
 
-void NoLifeNoCry::Engine::UI::InputField::SetHintText(const NoLifeNoCry::Engine::String& newText)
+void DirtMachine::UI::InputField::SetHintText(const DirtMachine::String& newText)
 {
 	// TODO
 }
 
-void NoLifeNoCry::Engine::UI::InputField::ResetSelection()
+void DirtMachine::UI::InputField::ResetSelection()
 {
 	selectionRowPosition = caretRowPosition;
 	selectionColumnPosition = caretColumnPosition;
 	UpdateSelection();
 }
 
-void NoLifeNoCry::Engine::UI::InputField::GetSelectionInformation(std::size_t& beginRowPosition, std::size_t& beginColumnPosition, std::size_t& endRowPosition, std::size_t& endColumnPosition) const
+void DirtMachine::UI::InputField::GetSelectionInformation(std::size_t& beginRowPosition, std::size_t& beginColumnPosition, std::size_t& endRowPosition, std::size_t& endColumnPosition) const
 {
 	if (caretRowPosition < selectionRowPosition)
 	{
@@ -144,27 +144,27 @@ void NoLifeNoCry::Engine::UI::InputField::GetSelectionInformation(std::size_t& b
 	}
 }
 
-void NoLifeNoCry::Engine::UI::InputField::InsertTextIntoSelection(const NoLifeNoCry::Engine::String& newText)
+void DirtMachine::UI::InputField::InsertTextIntoSelection(const DirtMachine::String& newText)
 {
 	std::size_t begin_row_position;
 	std::size_t begin_column_position;
 	std::size_t end_row_position;
 	std::size_t end_column_position;
 	GetSelectionInformation(begin_row_position, begin_column_position, end_row_position, end_column_position);
-	NoLifeNoCry::Engine::String end_string(textLines[end_row_position].substring(end_column_position));
+	DirtMachine::String end_string(textLines[end_row_position].substring(end_column_position));
 	for (std::size_t row(end_row_position + static_cast<std::size_t>(1)); row != textLines.size(); row++)
 	{
 		end_string += "\n";
 		end_string += textLines[row];
 	}
-	NoLifeNoCry::Engine::String begin_text_line(textLines[begin_row_position].substring(static_cast<std::size_t>(0), begin_column_position));
+	DirtMachine::String begin_text_line(textLines[begin_row_position].substring(static_cast<std::size_t>(0), begin_column_position));
 	while (begin_row_position < textLines.size())
 	{
 		textLines.pop_back();
 	}
-	NoLifeNoCry::Engine::String append_string;
-	NoLifeNoCry::Engine::String append_text_line;
-	NoLifeNoCry::Engine::String new_text;
+	DirtMachine::String append_string;
+	DirtMachine::String append_text_line;
+	DirtMachine::String new_text;
 	for (const sf::Uint32& new_text_character : newText)
 	{
 		if ((!std::iscntrl(new_text_character)) || (new_text_character == '\n'))
@@ -174,12 +174,12 @@ void NoLifeNoCry::Engine::UI::InputField::InsertTextIntoSelection(const NoLifeNo
 	}
 	append_string += begin_text_line;
 	append_string += new_text;
-	textLines.push_back(NoLifeNoCry::Engine::String());
+	textLines.push_back(DirtMachine::String());
 	for (const sf::Uint32& append_string_character : append_string)
 	{
 		if (append_string_character == '\n')
 		{
-			textLines.push_back(NoLifeNoCry::Engine::String());
+			textLines.push_back(DirtMachine::String());
 		}
 		else
 		{
@@ -196,7 +196,7 @@ void NoLifeNoCry::Engine::UI::InputField::InsertTextIntoSelection(const NoLifeNo
 	{
 		if (end_string_character == '\n')
 		{
-			textLines.push_back(NoLifeNoCry::Engine::String());
+			textLines.push_back(DirtMachine::String());
 		}
 		else
 		{
@@ -207,12 +207,12 @@ void NoLifeNoCry::Engine::UI::InputField::InsertTextIntoSelection(const NoLifeNo
 	ResetSelection();
 }
 
-void NoLifeNoCry::Engine::UI::InputField::RemoveSelectedText()
+void DirtMachine::UI::InputField::RemoveSelectedText()
 {
-	InsertTextIntoSelection(NoLifeNoCry::Engine::String());
+	InsertTextIntoSelection(DirtMachine::String());
 }
 
-bool NoLifeNoCry::Engine::UI::InputField::CopySelectedText() const
+bool DirtMachine::UI::InputField::CopySelectedText() const
 {
 	bool ret(false);
 	std::size_t begin_row_position;
@@ -223,7 +223,7 @@ bool NoLifeNoCry::Engine::UI::InputField::CopySelectedText() const
 	if ((begin_row_position != end_row_position) || (begin_column_position != end_column_position))
 	{
 		bool is_first(true);
-		NoLifeNoCry::Engine::String copy_string;
+		DirtMachine::String copy_string;
 		for (std::size_t row(begin_row_position), end(end_row_position + static_cast<std::size_t>(1)); row != end; row++)
 		{
 			const std::string& text_line(textLines[row]);
@@ -252,13 +252,13 @@ bool NoLifeNoCry::Engine::UI::InputField::CopySelectedText() const
 				copy_string += text_line;
 			}
 		}
-		NoLifeNoCry::Engine::Input::Clipboard::SetString(copy_string);
+		DirtMachine::Input::Clipboard::SetString(copy_string);
 		ret = true;
 	}
 	return ret;
 }
 
-void NoLifeNoCry::Engine::UI::InputField::SelectAllText()
+void DirtMachine::UI::InputField::SelectAllText()
 {
 	caretRowPosition = textLines.size() - static_cast<std::size_t>(1);
 	caretColumnPosition = textLines[caretRowPosition].getSize();
@@ -267,7 +267,7 @@ void NoLifeNoCry::Engine::UI::InputField::SelectAllText()
 	UpdateSelection();
 }
 
-void NoLifeNoCry::Engine::UI::InputField::RemoveBack()
+void DirtMachine::UI::InputField::RemoveBack()
 {
 	if ((caretRowPosition == selectionRowPosition) && (caretColumnPosition == selectionColumnPosition))
 	{
@@ -289,11 +289,11 @@ void NoLifeNoCry::Engine::UI::InputField::RemoveBack()
 	}
 }
 
-void NoLifeNoCry::Engine::UI::InputField::RemoveFront()
+void DirtMachine::UI::InputField::RemoveFront()
 {
 	if ((caretRowPosition == selectionRowPosition) && (caretColumnPosition == selectionColumnPosition))
 	{
-		const NoLifeNoCry::Engine::String& text_line(textLines[caretRowPosition]);
+		const DirtMachine::String& text_line(textLines[caretRowPosition]);
 		if ((caretColumnPosition + static_cast<std::size_t>(1)) < text_line.getSize())
 		{
 			++caretColumnPosition;
@@ -312,50 +312,50 @@ void NoLifeNoCry::Engine::UI::InputField::RemoveFront()
 	}
 }
 
-bool NoLifeNoCry::Engine::UI::InputField::ProcessTextEntered(const NoLifeNoCry::Engine::Input::Data::TextData& textData)
+bool DirtMachine::UI::InputField::ProcessTextEntered(const DirtMachine::Input::Data::TextData& textData)
 {
-	if (!NoLifeNoCry::Engine::UI::InteractableControl::ProcessTextEntered(textData))
+	if (!DirtMachine::UI::InteractableControl::ProcessTextEntered(textData))
 	{
 		if (!std::iscntrl(textData.unicode))
 		{
-			InsertTextIntoSelection(NoLifeNoCry::Engine::String(textData.unicode));
+			InsertTextIntoSelection(DirtMachine::String(textData.unicode));
 		}
 	}
 	return true;
 }
 
-bool NoLifeNoCry::Engine::UI::InputField::ProcessKeyPressed(const NoLifeNoCry::Engine::Input::Data::KeyboardKeyData& keyboardKeyData)
+bool DirtMachine::UI::InputField::ProcessKeyPressed(const DirtMachine::Input::Data::KeyboardKeyData& keyboardKeyData)
 {
-	if (!NoLifeNoCry::Engine::UI::InteractableControl::ProcessKeyPressed(keyboardKeyData))
+	if (!DirtMachine::UI::InteractableControl::ProcessKeyPressed(keyboardKeyData))
 	{
 		switch (keyboardKeyData.keyCode)
 		{
-		case NoLifeNoCry::Engine::Input::EKeyboardKey::A:
+		case DirtMachine::Input::EKeyboardKey::A:
 			if (keyboardKeyData.isControlKeyUsed)
 			{
 				SelectAllText();
 			}
 			break;
-		case NoLifeNoCry::Engine::Input::EKeyboardKey::C:
+		case DirtMachine::Input::EKeyboardKey::C:
 			if (keyboardKeyData.isControlKeyUsed)
 			{
 				CopySelectedText();
 			}
 			break;
-		case NoLifeNoCry::Engine::Input::EKeyboardKey::V:
+		case DirtMachine::Input::EKeyboardKey::V:
 			if (keyboardKeyData.isControlKeyUsed)
 			{
-				InsertTextIntoSelection(NoLifeNoCry::Engine::Input::Clipboard::GetString());
+				InsertTextIntoSelection(DirtMachine::Input::Clipboard::GetString());
 			}
 			break;
-		case NoLifeNoCry::Engine::Input::EKeyboardKey::X:
+		case DirtMachine::Input::EKeyboardKey::X:
 			if (keyboardKeyData.isControlKeyUsed)
 			{
 				CopySelectedText();
 				RemoveSelectedText();
 			}
 			break;
-		case NoLifeNoCry::Engine::Input::EKeyboardKey::Up:
+		case DirtMachine::Input::EKeyboardKey::Up:
 			if (caretRowPosition > static_cast<std::size_t>(0))
 			{
 				--caretRowPosition;
@@ -366,7 +366,7 @@ bool NoLifeNoCry::Engine::UI::InputField::ProcessKeyPressed(const NoLifeNoCry::E
 				UpdateSelection();
 			}
 			break;
-		case NoLifeNoCry::Engine::Input::EKeyboardKey::Down:
+		case DirtMachine::Input::EKeyboardKey::Down:
 			if ((caretRowPosition + static_cast<std::size_t>(1)) < textLines.size())
 			{
 				++caretRowPosition;
@@ -377,7 +377,7 @@ bool NoLifeNoCry::Engine::UI::InputField::ProcessKeyPressed(const NoLifeNoCry::E
 				UpdateSelection();
 			}
 			break;
-		case NoLifeNoCry::Engine::Input::EKeyboardKey::Left:
+		case DirtMachine::Input::EKeyboardKey::Left:
 			if (caretColumnPosition > static_cast<std::size_t>(0))
 			{
 				--caretColumnPosition;
@@ -398,9 +398,9 @@ bool NoLifeNoCry::Engine::UI::InputField::ProcessKeyPressed(const NoLifeNoCry::E
 				UpdateSelection();
 			}
 			break;
-		case NoLifeNoCry::Engine::Input::EKeyboardKey::Right:
+		case DirtMachine::Input::EKeyboardKey::Right:
 		{
-			const NoLifeNoCry::Engine::String& text_line(textLines[caretRowPosition]);
+			const DirtMachine::String& text_line(textLines[caretRowPosition]);
 			if (caretColumnPosition < text_line.getSize())
 			{
 				++caretColumnPosition;
@@ -422,13 +422,13 @@ bool NoLifeNoCry::Engine::UI::InputField::ProcessKeyPressed(const NoLifeNoCry::E
 			}
 		}
 		break;
-		case NoLifeNoCry::Engine::Input::EKeyboardKey::Backspace:
+		case DirtMachine::Input::EKeyboardKey::Backspace:
 			RemoveBack();
 			break;
-		case NoLifeNoCry::Engine::Input::EKeyboardKey::Delete:
+		case DirtMachine::Input::EKeyboardKey::Delete:
 			RemoveFront();
 			break;
-		case NoLifeNoCry::Engine::Input::EKeyboardKey::Enter:
+		case DirtMachine::Input::EKeyboardKey::Enter:
 			InsertTextIntoSelection("\r\n");
 			break;
 		}
@@ -436,7 +436,7 @@ bool NoLifeNoCry::Engine::UI::InputField::ProcessKeyPressed(const NoLifeNoCry::E
 	return true;
 }
 
-void NoLifeNoCry::Engine::UI::InputField::UpdateTextLineLabel(std::size_t textLineIndex)
+void DirtMachine::UI::InputField::UpdateTextLineLabel(std::size_t textLineIndex)
 {
 	if (textLineIndex < textLineLabels.size())
 	{
@@ -446,17 +446,17 @@ void NoLifeNoCry::Engine::UI::InputField::UpdateTextLineLabel(std::size_t textLi
 	{
 		while (textLineIndex >= textLineLabels.size())
 		{
-			std::shared_ptr<NoLifeNoCry::Engine::UI::Label> text_line_label(backgroundPanel->CreateChild<NoLifeNoCry::Engine::UI::Label>(textLines[textLineLabels.size()], textFont, textCharacterSize, NoLifeNoCry::Engine::UI::ETextAlignment::TopLeft, glm::ivec2(0, static_cast<int>(textFont->getLineSpacing(textCharacterSize) * static_cast<float>(textLineLabels.size()))), 0.0f, GetSize()));
+			std::shared_ptr<DirtMachine::UI::Label> text_line_label(backgroundPanel->CreateChild<DirtMachine::UI::Label>(textLines[textLineLabels.size()], textFont, textCharacterSize, DirtMachine::UI::ETextAlignment::TopLeft, glm::ivec2(0, static_cast<int>(textFont->getLineSpacing(textCharacterSize) * static_cast<float>(textLineLabels.size()))), 0.0f, GetSize()));
 			textLineLabels.push_back(text_line_label);
-			std::shared_ptr<NoLifeNoCry::Engine::UI::Panel> selection_panel(text_line_label->CreateChild<NoLifeNoCry::Engine::UI::Panel>(glm::ivec2(0, 0), 0.0f, glm::uvec2(0U, 0U)));
+			std::shared_ptr<DirtMachine::UI::Panel> selection_panel(text_line_label->CreateChild<DirtMachine::UI::Panel>(glm::ivec2(0, 0), 0.0f, glm::uvec2(0U, 0U)));
 			selection_panel->SetVisible(false);
-			selection_panel->SetPrimaryBackgroundColour(NoLifeNoCry::Engine::Graphic::Colour(0xFF, 0x00, 0x00, 0x1F));
+			selection_panel->SetPrimaryBackgroundColour(DirtMachine::Graphic::Colour(0xFF, 0x00, 0x00, 0x1F));
 			selectionPanels.push_back(selection_panel);
 		}
 	}
 }
 
-void NoLifeNoCry::Engine::UI::InputField::UpdateTextLineLabels()
+void DirtMachine::UI::InputField::UpdateTextLineLabels()
 {
 	for (std::size_t index(static_cast<std::size_t>(0)); (index != textLineLabels.size()) && (index != textLines.size()); index++)
 	{
@@ -464,11 +464,11 @@ void NoLifeNoCry::Engine::UI::InputField::UpdateTextLineLabels()
 	}
 	while (textLineLabels.size() < textLines.size())
 	{
-		std::shared_ptr<NoLifeNoCry::Engine::UI::Label> text_line_label(backgroundPanel->CreateChild<NoLifeNoCry::Engine::UI::Label>(textLines[textLineLabels.size()], textFont, textCharacterSize, NoLifeNoCry::Engine::UI::ETextAlignment::TopLeft, glm::ivec2(0, static_cast<int>(textFont->getLineSpacing(textCharacterSize) * static_cast<float>(textLineLabels.size()))), 0.0f, GetSize()));
+		std::shared_ptr<DirtMachine::UI::Label> text_line_label(backgroundPanel->CreateChild<DirtMachine::UI::Label>(textLines[textLineLabels.size()], textFont, textCharacterSize, DirtMachine::UI::ETextAlignment::TopLeft, glm::ivec2(0, static_cast<int>(textFont->getLineSpacing(textCharacterSize) * static_cast<float>(textLineLabels.size()))), 0.0f, GetSize()));
 		textLineLabels.push_back(text_line_label);
-		std::shared_ptr<NoLifeNoCry::Engine::UI::Panel> selection_panel(text_line_label->CreateChild<NoLifeNoCry::Engine::UI::Panel>(glm::ivec2(0, 0), 0.0f, glm::uvec2(0U, 0U)));
+		std::shared_ptr<DirtMachine::UI::Panel> selection_panel(text_line_label->CreateChild<DirtMachine::UI::Panel>(glm::ivec2(0, 0), 0.0f, glm::uvec2(0U, 0U)));
 		selection_panel->SetVisible(false);
-		selection_panel->SetPrimaryBackgroundColour(NoLifeNoCry::Engine::Graphic::Colour(0xFF, 0x00, 0x00, 0x1F));
+		selection_panel->SetPrimaryBackgroundColour(DirtMachine::Graphic::Colour(0xFF, 0x00, 0x00, 0x1F));
 		selectionPanels.push_back(selection_panel);
 	}
 	while (textLineLabels.size() > textLines.size())
@@ -479,7 +479,7 @@ void NoLifeNoCry::Engine::UI::InputField::UpdateTextLineLabels()
 	}
 }
 
-void NoLifeNoCry::Engine::UI::InputField::UpdateSelection()
+void DirtMachine::UI::InputField::UpdateSelection()
 {
 	if (caretRowPosition >= textLines.size())
 	{
@@ -489,7 +489,7 @@ void NoLifeNoCry::Engine::UI::InputField::UpdateSelection()
 	{
 		selectionRowPosition = textLines.size() - static_cast<std::size_t>(1);
 	}
-	const NoLifeNoCry::Engine::String& text_line(textLines[caretRowPosition]);
+	const DirtMachine::String& text_line(textLines[caretRowPosition]);
 	if (caretColumnPosition > text_line.getSize())
 	{
 		caretColumnPosition = text_line.getSize();
@@ -505,8 +505,8 @@ void NoLifeNoCry::Engine::UI::InputField::UpdateSelection()
 	GetSelectionInformation(begin_row_position, begin_column_position, end_row_position, end_column_position);
 	for (std::size_t row(static_cast<std::size_t>(0)); row != textLines.size(); row++)
 	{
-		const std::shared_ptr<NoLifeNoCry::Engine::UI::Label>& text_line_label(textLineLabels[row]);
-		const std::shared_ptr<NoLifeNoCry::Engine::UI::Panel>& selection_panel(selectionPanels[row]);
+		const std::shared_ptr<DirtMachine::UI::Label>& text_line_label(textLineLabels[row]);
+		const std::shared_ptr<DirtMachine::UI::Panel>& selection_panel(selectionPanels[row]);
 		if ((row < begin_row_position) || (row > end_row_position))
 		{
 			selection_panel->SetVisible(false);
@@ -524,6 +524,6 @@ void NoLifeNoCry::Engine::UI::InputField::UpdateSelection()
 			selection_panel->SetSize(end_text_character_position - begin_text_character_position);
 		}
 	}
-	const std::shared_ptr<NoLifeNoCry::Engine::UI::Label>& caret_text_line_label(textLineLabels[caretRowPosition]);
+	const std::shared_ptr<DirtMachine::UI::Label>& caret_text_line_label(textLineLabels[caretRowPosition]);
 	caretLabel->SetLocalPosition(glm::ivec2(caret_text_line_label->FindTextCharacterPosition(caretColumnPosition).x - caret_text_line_label->GetTextLetterSpacing(), caret_text_line_label->GetLocalPosition().y));
 }

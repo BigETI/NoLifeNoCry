@@ -2,8 +2,8 @@
 
 #include <SFML/Graphics/Texture.hpp>
 
-/// @brief No Life, No Cry engine graphic namespace
-namespace NoLifeNoCry::Engine::Graphic
+/// @brief Dirt Machine game engine graphic namespace
+namespace DirtMachine::Graphic
 {
 	/// @brief Coordinate space enumerator
 	enum class ECoordinateSpace

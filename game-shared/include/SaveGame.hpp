@@ -9,8 +9,8 @@
 #include <Chapter.hpp>
 #include <Page.hpp>
 
-/// @brief No Life, No Cry game namespace
-namespace NoLifeNoCry::Game
+/// @brief No Life, No Cry namespace
+namespace NoLifeNoCry
 {
 	/// @brief Save game class
 	class SaveGame
@@ -84,15 +84,15 @@ namespace NoLifeNoCry::Game
 		std::filesystem::path saveGameFilePath;
 
 		/// @brief Save game data
-		NoLifeNoCry::Game::SaveGameData saveGameData;
+		NoLifeNoCry::SaveGameData saveGameData;
 
 		/// @brief Story
-		NoLifeNoCry::Game::Story story;
+		NoLifeNoCry::Story story;
 
 		/// @brief Chapter
-		const NoLifeNoCry::Game::Chapter* chapter;
+		const NoLifeNoCry::Chapter* chapter;
 
 		/// @brief page
-		const NoLifeNoCry::Game::Page* page;
+		const NoLifeNoCry::Page* page;
 	};
 }

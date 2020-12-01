@@ -5,9 +5,9 @@
 #include <UI/InputField.hpp>
 #include <UI/Window.hpp>
 
-namespace NoLifeNoCry::Editor
+namespace DirtyFinger
 {
-	class EditorWindow : public NoLifeNoCry::Engine::UI::Window
+	class EditorWindow : public DirtMachine::UI::Window
 	{
 	public:
 		/// @brief Constructor
@@ -15,7 +15,7 @@ namespace NoLifeNoCry::Editor
 		/// @param windowHeight Window height
 		/// @param windowName Window name
 		/// @param windowStyle Window style
-		EditorWindow(std::size_t windowWidth, std::size_t windowHeight, const std::string& windowName, NoLifeNoCry::Engine::EWindowStyle windowStyle);
+		EditorWindow(std::size_t windowWidth, std::size_t windowHeight, const std::string& windowName, DirtMachine::EWindowStyle windowStyle);
 
 		/// @brief Destructor
 		~EditorWindow();
@@ -28,9 +28,9 @@ namespace NoLifeNoCry::Editor
 
 	private:
 
-		std::shared_ptr<NoLifeNoCry::Engine::UI::Button> testButton;
+		std::shared_ptr<DirtMachine::UI::Button> testButton;
 
-		std::shared_ptr<NoLifeNoCry::Engine::UI::InputField> testInputField;
+		std::shared_ptr<DirtMachine::UI::InputField> testInputField;
 
 		double time;
 	};

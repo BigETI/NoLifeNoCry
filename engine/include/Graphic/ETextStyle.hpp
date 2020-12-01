@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics/Text.hpp>
 
-namespace NoLifeNoCry::Engine::Graphic
+namespace DirtMachine::Graphic
 {
     enum class TextStyle
     {

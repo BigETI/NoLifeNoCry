@@ -3,8 +3,8 @@
 #include <forward_list>
 #include <functional>
 
-/// @brief No Life, No Cry engine namespace
-namespace NoLifeNoCry::Engine
+/// @brief Dirt Machine game engine namespace
+namespace DirtMachine
 {
 	/// @brief Event class
 	/// @tparam ...Ts Listener argument types

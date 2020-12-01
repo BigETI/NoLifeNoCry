@@ -2,8 +2,8 @@
 
 #include <SFML/Window/WindowStyle.hpp>
 
-/// @brief No Life, No Cry engine namespace
-namespace NoLifeNoCry::Engine
+/// @brief Dirt Machine game engine namespace
+namespace DirtMachine
 {
 	/// @brief Game window style enumerator
 	enum class EWindowStyle

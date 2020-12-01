@@ -2,8 +2,8 @@
 
 #include <SFML/Window/Keyboard.hpp>
 
-/// @brief No Life, No Cry engine input namespace
-namespace NoLifeNoCry::Engine::Input
+/// @brief Dirt Machine game engine input namespace
+namespace DirtMachine::Input
 {
 	/// @brief Keyboard key enumerator
 	enum class EKeyboardKey

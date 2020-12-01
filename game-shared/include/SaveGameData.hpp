@@ -3,8 +3,8 @@
 #include <map>
 #include <string>
 
-/// @brief No Life, No Cry game namespace
-namespace NoLifeNoCry::Game
+/// @brief No Life, No Cry namespace
+namespace NoLifeNoCry
 {
 	/// @brief Save game data structure
 	struct SaveGameData

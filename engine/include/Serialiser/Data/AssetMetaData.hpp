@@ -3,8 +3,8 @@
 #include <string>
 #include <rttr/registration.h>
 
-/// @brief No Life, No Cry engine serialiser data namespace
-namespace NoLifeNoCry::Engine::Serialiser::Data
+/// @brief Dirt Machine game engine serialiser data namespace
+namespace DirtMachine::Serialiser::Data
 {
 	/// @brief Asset meta data structure
 	struct AssetMetaData
@@ -18,9 +18,9 @@ namespace NoLifeNoCry::Engine::Serialiser::Data
 
 	RTTR_REGISTRATION
 	{
-		rttr::registration::class_<NoLifeNoCry::Engine::Serialiser::Data::AssetMetaData>("Meta")
+		rttr::registration::class_<DirtMachine::Serialiser::Data::AssetMetaData>("Meta")
 			.constructor<>()
-			.property("Author", &NoLifeNoCry::Engine::Serialiser::Data::AssetMetaData::author)
-			.property("License", &NoLifeNoCry::Engine::Serialiser::Data::AssetMetaData::license);
+			.property("Author", &DirtMachine::Serialiser::Data::AssetMetaData::author)
+			.property("License", &DirtMachine::Serialiser::Data::AssetMetaData::license);
 	}
 }

@@ -10,8 +10,8 @@
 #include <Serialiser/Data/AssetMetaData.hpp>
 #include <Serialiser/XMLSerialiser.hpp>
 
-/// @brief No Life, No Cry engine serialiser namespace
-namespace NoLifeNoCry::Engine::Serialiser
+/// @brief Dirt Machine game engine serialiser namespace
+namespace DirtMachine::Serialiser
 {
 	/// @brief Asset class
 	template <typename T>
@@ -20,7 +20,7 @@ namespace NoLifeNoCry::Engine::Serialiser
 	public:
 
 		/// @brief Meta
-		NoLifeNoCry::Engine::Serialiser::Data::AssetMetaData metaData;
+		DirtMachine::Serialiser::Data::AssetMetaData metaData;
 
 		/// @brief Asset properties
 		T properties;
@@ -46,7 +46,7 @@ namespace NoLifeNoCry::Engine::Serialiser
 		/// @param fileTypeVersion File type version
 		/// @param metaData Meta data
 		/// @param properties Properties
-		Asset(const std::filesystem::path& path, std::string&& className, std::string&& fileTypeVersion, NoLifeNoCry::Engine::Serialiser::Data::AssetMetaData&& metaData, T&& properties) : path(path), className(className), fileTypeVersion(fileTypeVersion), metaData(metaData), properties(properties)
+		Asset(const std::filesystem::path& path, std::string&& className, std::string&& fileTypeVersion, DirtMachine::Serialiser::Data::AssetMetaData&& metaData, T&& properties) : path(path), className(className), fileTypeVersion(fileTypeVersion), metaData(metaData), properties(properties)
 		{
 			// ...
 		}
@@ -83,11 +83,11 @@ namespace NoLifeNoCry::Engine::Serialiser
 							{
 								rapidxml::xml_node<>* meta_data_xml_node(asset_xml_node->first_node("Meta"));
 								rapidxml::xml_node<>* properties_xml_node(asset_xml_node->first_node("Properties"));
-								NoLifeNoCry::Engine::Serialiser::Data::AssetMetaData meta_data;
+								DirtMachine::Serialiser::Data::AssetMetaData meta_data;
 								T properties;
 								if (meta_data_xml_node)
 								{
-									std::shared_ptr<NoLifeNoCry::Engine::Serialiser::Data::AssetMetaData> meta_data_result(NoLifeNoCry::Engine::Serialiser::XMLSerialiser<NoLifeNoCry::Engine::Serialiser::Data::AssetMetaData>().DeserialiseObject(meta_data_xml_node));
+									std::shared_ptr<DirtMachine::Serialiser::Data::AssetMetaData> meta_data_result(DirtMachine::Serialiser::XMLSerialiser<DirtMachine::Serialiser::Data::AssetMetaData>().DeserialiseObject(meta_data_xml_node));
 									if (meta_data_result)
 									{
 										meta_data = *meta_data_result;
@@ -95,7 +95,7 @@ namespace NoLifeNoCry::Engine::Serialiser
 								}
 								if (properties_xml_node)
 								{
-									std::shared_ptr<T> properties_result(NoLifeNoCry::Engine::Serialiser::XMLSerialiser<T>().DeserialiseObject(properties_xml_node));
+									std::shared_ptr<T> properties_result(DirtMachine::Serialiser::XMLSerialiser<T>().DeserialiseObject(properties_xml_node));
 									if (properties_result)
 									{
 										properties = *properties_result;
@@ -172,7 +172,7 @@ namespace NoLifeNoCry::Engine::Serialiser
 				std::string property_value(rttr::type::get<T>().get_name().to_string());
 				asset_xml_node->append_attribute(xml_document.allocate_attribute("class", xml_document.allocate_string(property_value.c_str())));
 				asset_xml_node->append_attribute(xml_document.allocate_attribute("version", xml_document.allocate_string("1.0")));
-				std::shared_ptr<rapidxml::xml_document<>> serialised_meta_data_xml_document(XMLSerialiser<NoLifeNoCry::Engine::Serialiser::Data::AssetMetaData>().SerialiseObject(metaData));
+				std::shared_ptr<rapidxml::xml_document<>> serialised_meta_data_xml_document(XMLSerialiser<DirtMachine::Serialiser::Data::AssetMetaData>().SerialiseObject(metaData));
 				std::shared_ptr<rapidxml::xml_document<>> serialised_properties_xml_document(XMLSerialiser<T>().SerialiseObject(properties));
 				rapidxml::xml_node<>* serialised_meta_data_xml_node(serialised_meta_data_xml_document->first_node());
 				rapidxml::xml_node<>* serialised_properties_xml_node(serialised_properties_xml_document->first_node());

@@ -4,8 +4,8 @@
 #include <vector>
 #include <Page.hpp>
 
-/// @brief No Life, No Cry game namespace
-namespace NoLifeNoCry::Game
+/// @brief No Life, No Cry namespace
+namespace NoLifeNoCry
 {
 	/// @brief Chapter class
 	class Chapter
@@ -23,7 +23,7 @@ namespace NoLifeNoCry::Game
 		/// @brief Get chapter page
 		/// @param chapterIndex Chapter index
 		/// @return Chapter page
-		const NoLifeNoCry::Game::Page& GetPage(std::size_t chapterIndex) const;
+		const NoLifeNoCry::Page& GetPage(std::size_t chapterIndex) const;
 
 	private:
 
@@ -31,6 +31,6 @@ namespace NoLifeNoCry::Game
 		std::string name;
 
 		/// @brief Chapter pages
-		std::vector<NoLifeNoCry::Game::Page> pages;
+		std::vector<NoLifeNoCry::Page> pages;
 	};
 }

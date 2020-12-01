@@ -8,18 +8,18 @@
 #include <Graphic/Font.hpp>
 #include <Graphic/Rectangle.hpp>
 
-namespace NoLifeNoCry::Engine::Graphic
+namespace DirtMachine::Graphic
 {
 	class Text : sf::Text
 	{
     public:
         Text();
 
-        Text(const std::string& string, const NoLifeNoCry::Engine::Graphic::Font& font, unsigned int characterSize = 30);
+        Text(const std::string& string, const DirtMachine::Graphic::Font& font, unsigned int characterSize = 30);
 
         void SetString(const std::string& string);
 
-        void SetFont(const NoLifeNoCry::Engine::Graphic::Font& font);
+        void SetFont(const DirtMachine::Graphic::Font& font);
 
         void SetCharacterSize(unsigned int size);
 
@@ -29,15 +29,15 @@ namespace NoLifeNoCry::Engine::Graphic
 
         void SetStyle(uint32_t style);
 
-        void SetFillColour(const NoLifeNoCry::Engine::Graphic::Colour& colour);
+        void SetFillColour(const DirtMachine::Graphic::Colour& colour);
 
-        void SetOutlineColour(const NoLifeNoCry::Engine::Graphic::Colour& colour);
+        void SetOutlineColour(const DirtMachine::Graphic::Colour& colour);
 
         void SetOutlineThickness(float thickness);
 
         std::string GetString() const;
 
-        const NoLifeNoCry::Engine::Graphic::Font* GetFont() const;
+        const DirtMachine::Graphic::Font* GetFont() const;
 
         unsigned int GetCharacterSize() const;
 
@@ -47,16 +47,16 @@ namespace NoLifeNoCry::Engine::Graphic
 
         std::uint32_t GetStyle() const;
 
-        const NoLifeNoCry::Engine::Graphic::Colour& GetFillColour() const;
+        const DirtMachine::Graphic::Colour& GetFillColour() const;
 
-        const NoLifeNoCry::Engine::Graphic::Colour& GetOutlineColour() const;
+        const DirtMachine::Graphic::Colour& GetOutlineColour() const;
 
         float GetOutlineThickness() const;
 
         glm::vec2 FindCharacterPosition(std::size_t index) const;
 
-        NoLifeNoCry::Engine::Graphic::Rectangle<float> GetLocalBounds() const;
+        DirtMachine::Graphic::Rectangle<float> GetLocalBounds() const;
 
-        NoLifeNoCry::Engine::Graphic::Rectangle<float> GetGlobalBounds() const;
+        DirtMachine::Graphic::Rectangle<float> GetGlobalBounds() const;
 	};
 }

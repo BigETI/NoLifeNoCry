@@ -1,7 +1,7 @@
 #include <UI/InteractableControl.hpp>
 
-NoLifeNoCry::Engine::UI::InteractableControl::InteractableControl(const glm::ivec2& position, float rotation, const glm::uvec2& size, bool isVisible, bool isEnabled, bool isSelectable, bool isDraggable, NoLifeNoCry::Engine::UI::Control* parent) :
-	NoLifeNoCry::Engine::UI::Control(position, rotation, size, isVisible, isEnabled, parent),
+DirtMachine::UI::InteractableControl::InteractableControl(const glm::ivec2& position, float rotation, const glm::uvec2& size, bool isVisible, bool isEnabled, bool isSelectable, bool isDraggable, DirtMachine::UI::Control* parent) :
+	DirtMachine::UI::Control(position, rotation, size, isVisible, isEnabled, parent),
 	isSelectable(isSelectable),
 	isDraggable(isDraggable),
 	isMouseOnControl(false)
@@ -9,37 +9,37 @@ NoLifeNoCry::Engine::UI::InteractableControl::InteractableControl(const glm::ive
 	// ...
 }
 
-NoLifeNoCry::Engine::UI::InteractableControl::~InteractableControl()
+DirtMachine::UI::InteractableControl::~InteractableControl()
 {
 	// ...
 }
 
-bool NoLifeNoCry::Engine::UI::InteractableControl::IsSelectable() const
+bool DirtMachine::UI::InteractableControl::IsSelectable() const
 {
 	return isSelectable;
 }
 
-void NoLifeNoCry::Engine::UI::InteractableControl::SetSelectable(bool selectableState)
+void DirtMachine::UI::InteractableControl::SetSelectable(bool selectableState)
 {
 	isSelectable = selectableState;
 }
 
-bool NoLifeNoCry::Engine::UI::InteractableControl::IsDraggable() const
+bool DirtMachine::UI::InteractableControl::IsDraggable() const
 {
 	return isDraggable;
 }
 
-void NoLifeNoCry::Engine::UI::InteractableControl::SetDraggable(bool draggableState)
+void DirtMachine::UI::InteractableControl::SetDraggable(bool draggableState)
 {
 	isDraggable = draggableState;
 }
 
-bool NoLifeNoCry::Engine::UI::InteractableControl::IsMouseOnControl() const
+bool DirtMachine::UI::InteractableControl::IsMouseOnControl() const
 {
 	return isMouseOnControl;
 }
 
-bool NoLifeNoCry::Engine::UI::InteractableControl::ProcessMouseWheelScrolled(const NoLifeNoCry::Engine::Input::Data::MouseWheelData& mouseWheelData)
+bool DirtMachine::UI::InteractableControl::ProcessMouseWheelScrolled(const DirtMachine::Input::Data::MouseWheelData& mouseWheelData)
 {
 	bool ret(false);
 	if (IsMouseOnWindow())
@@ -65,7 +65,7 @@ bool NoLifeNoCry::Engine::UI::InteractableControl::ProcessMouseWheelScrolled(con
 	return ret;
 }
 
-bool NoLifeNoCry::Engine::UI::InteractableControl::ProcessMouseButtonPressed(const NoLifeNoCry::Engine::Input::Data::MouseButtonData& mouseButtonData)
+bool DirtMachine::UI::InteractableControl::ProcessMouseButtonPressed(const DirtMachine::Input::Data::MouseButtonData& mouseButtonData)
 {
 	bool ret(false);
 	if (IsMouseOnWindow())
@@ -95,7 +95,7 @@ bool NoLifeNoCry::Engine::UI::InteractableControl::ProcessMouseButtonPressed(con
 	return ret;
 }
 
-bool NoLifeNoCry::Engine::UI::InteractableControl::ProcessMouseButtonReleased(const NoLifeNoCry::Engine::Input::Data::MouseButtonData& mouseButtonData)
+bool DirtMachine::UI::InteractableControl::ProcessMouseButtonReleased(const DirtMachine::Input::Data::MouseButtonData& mouseButtonData)
 {
 	bool ret(false);
 	if (IsMouseOnWindow())
@@ -125,7 +125,7 @@ bool NoLifeNoCry::Engine::UI::InteractableControl::ProcessMouseButtonReleased(co
 	return ret;
 }
 
-bool NoLifeNoCry::Engine::UI::InteractableControl::ProcessMouseMoved(const NoLifeNoCry::Engine::Input::Data::MouseMovementData& mouseMovementData)
+bool DirtMachine::UI::InteractableControl::ProcessMouseMoved(const DirtMachine::Input::Data::MouseMovementData& mouseMovementData)
 {
 	bool ret(false);
 	if (IsMouseOnWindow())

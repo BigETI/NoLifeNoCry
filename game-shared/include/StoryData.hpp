@@ -3,8 +3,8 @@
 #include <string>
 #include <ChapterData.hpp>
 
-/// @brief No Life, No Cry game namespace
-namespace NoLifeNoCry::Game
+/// @brief No Life, No Cry namespace
+namespace NoLifeNoCry
 {
 	/// @brief Story data structure
 	struct StoryData
@@ -22,6 +22,6 @@ namespace NoLifeNoCry::Game
 		std::string license;
 
 		/// @brief Story chapters
-		std::vector<NoLifeNoCry::Game::ChapterData> chapters;
+		std::vector<NoLifeNoCry::ChapterData> chapters;
 	};
 }
