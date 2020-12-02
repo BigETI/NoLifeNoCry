@@ -15,9 +15,9 @@ void DirtMachine::Graphic::Text::SetString(const std::string& string)
 	setString(string);
 }
 
-void DirtMachine::Graphic::Text::SetFont(const DirtMachine::Graphic::Font& font)
+void DirtMachine::Graphic::Text::SetFont(const DirtMachine::Graphic::Font* font)
 {
-	setFont(font);
+	setFont(*font);
 }
 
 void DirtMachine::Graphic::Text::SetCharacterSize(unsigned int size)

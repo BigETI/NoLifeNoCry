@@ -19,7 +19,7 @@ bool DirtMachine::UI::InteractableControl::IsSelectable() const
 	return isSelectable;
 }
 
-void DirtMachine::UI::InteractableControl::SetSelectable(bool selectableState)
+void DirtMachine::UI::InteractableControl::SetSelectableState(bool selectableState)
 {
 	isSelectable = selectableState;
 }
@@ -29,7 +29,7 @@ bool DirtMachine::UI::InteractableControl::IsDraggable() const
 	return isDraggable;
 }
 
-void DirtMachine::UI::InteractableControl::SetDraggable(bool draggableState)
+void DirtMachine::UI::InteractableControl::SetDraggableState(bool draggableState)
 {
 	isDraggable = draggableState;
 }

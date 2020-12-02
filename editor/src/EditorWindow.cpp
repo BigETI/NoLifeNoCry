@@ -19,7 +19,7 @@ DirtyFinger::EditorWindow::EditorWindow(std::size_t windowWidth, std::size_t win
 	{
 		std::cout << "Window has started." << std::endl;
 		testButton = GetUI().CreateChild<DirtMachine::UI::Button>(glm::ivec2(0, 0), 0.0f, glm::uvec2(200U, 100U), "Hi", GetDefaultFont(), 24U);
-		testInputField = GetUI().CreateChild<DirtMachine::UI::InputField>(glm::ivec2(100, 100), 0.0f, glm::uvec2(200, 120), "Delete me!", "Hint...", GetDefaultFont(), 16U);
+		testInputField = GetUI().CreateChild<DirtMachine::UI::InputField>(glm::ivec2(100, 100), 0.0f, glm::uvec2(200, 120), "Delete me!", "Hint...", GetDefaultFont(), 16U, false);
 		//testButton->GetLabel().SetTextString("Hi!");
 		testButton->OnMouseEntered += []()
 		{
@@ -146,3 +146,5 @@ DirtyFinger::EditorWindow::~EditorWindow()
 {
 	// ...
 }
+
+const std::filesystem::path DirtyFinger::EditorWindow::configurationFilePath("./editorconfig.xml");

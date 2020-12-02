@@ -1,10 +1,6 @@
-#include <filesystem>
 #include <iostream>
 #include <string>
 #include <EditorWindow.hpp>
-
-/// @brief Configuration path
-static const std::filesystem::path configurationPath("./editorconfig.xml");
 
 /// @brief Main entry point
 /// @param argc Command line argument count

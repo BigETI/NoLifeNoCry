@@ -14,7 +14,7 @@ namespace DirtMachine::UI
 	{
 	public:
 
-		InputField(const glm::ivec2& position, float rotation, const glm::uvec2& size, const DirtMachine::String& textString, const DirtMachine::String& hintTextString, const DirtMachine::Graphic::Font* textFont, unsigned int textCharacterSize, DirtMachine::UI::Control* parent);
+		InputField(const glm::ivec2& position, float rotation, const glm::uvec2& size, const DirtMachine::String& textString, const DirtMachine::String& hintTextString, const DirtMachine::Graphic::Font* textFont, unsigned int textCharacterSize, bool isMultiLine, DirtMachine::UI::Control* parent);
 
 		virtual ~InputField();
 
@@ -31,6 +31,18 @@ namespace DirtMachine::UI
 		virtual DirtMachine::String GetHintText() const;
 
 		virtual void SetHintText(const DirtMachine::String& newText);
+
+		virtual const DirtMachine::Graphic::Font* GetTextFont() const;
+
+		virtual void SetTextFont(const DirtMachine::Graphic::Font* newTextFont);
+
+		virtual unsigned int GetTextCharacterSize() const;
+
+		virtual void SetTextCharacterSize(unsigned int newTextCharacterSize);
+
+		virtual bool IsMultiLine() const;
+
+		virtual void SetMultiLineState(bool multiLineState);
 
 		virtual void GetSelectionInformation(std::size_t& beginRowPosition, std::size_t& beginColumnPosition, std::size_t& endRowPosition, std::size_t& endColumnPosition) const;
 
@@ -54,6 +66,14 @@ namespace DirtMachine::UI
 
 	private:
 
+		std::vector<DirtMachine::String> textLines;
+
+		const DirtMachine::Graphic::Font* textFont;
+
+		unsigned int textCharacterSize;
+
+		bool isMultiLine;
+
 		std::shared_ptr<DirtMachine::UI::Panel> backgroundPanel;
 
 		std::vector<std::shared_ptr<DirtMachine::UI::Label>> textLineLabels;
@@ -63,12 +83,6 @@ namespace DirtMachine::UI
 		std::vector<std::shared_ptr<DirtMachine::UI::Panel>> selectionPanels;
 
 		std::shared_ptr<DirtMachine::UI::Label> caretLabel;
-
-		std::vector<DirtMachine::String> textLines;
-
-		const DirtMachine::Graphic::Font* textFont;
-
-		unsigned int textCharacterSize;
 
 		std::size_t caretRowPosition;
 

@@ -311,7 +311,7 @@ foreach(CMAKE_CONFIGURATION_TYPE ${CMAKE_CONFIGURATION_TYPES})
 endforeach()
 
 # Output name
-set_property(TARGET editor PROPERTY OUTPUT_NAME NoLifeNoCryEditor)
+set_property(TARGET editor PROPERTY OUTPUT_NAME DirtyFinger)
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT editor)
 
 unset(PROJECT)

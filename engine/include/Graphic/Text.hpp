@@ -19,7 +19,7 @@ namespace DirtMachine::Graphic
 
         void SetString(const std::string& string);
 
-        void SetFont(const DirtMachine::Graphic::Font& font);
+        void SetFont(const DirtMachine::Graphic::Font* font);
 
         void SetCharacterSize(unsigned int size);
 

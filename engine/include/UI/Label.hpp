@@ -26,7 +26,7 @@ namespace DirtMachine::UI
 
 		virtual DirtMachine::UI::ETextAlignment GetTextAlignment() const;
 
-		virtual void SetTextFont(const DirtMachine::Graphic::Font& newTextFont);
+		virtual void SetTextFont(const DirtMachine::Graphic::Font* newTextFont);
 
 		virtual const DirtMachine::Graphic::Font* GetTextFont() const;
 

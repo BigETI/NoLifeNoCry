@@ -43,7 +43,7 @@ DirtMachine::UI::ETextAlignment DirtMachine::UI::Label::GetTextAlignment() const
 	return textAlignment;
 }
 
-void DirtMachine::UI::Label::SetTextFont(const DirtMachine::Graphic::Font& newTextFont)
+void DirtMachine::UI::Label::SetTextFont(const DirtMachine::Graphic::Font* newTextFont)
 {
 	text.SetFont(newTextFont);
 }

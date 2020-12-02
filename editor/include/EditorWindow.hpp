@@ -1,5 +1,6 @@
 #pragma once
 
+#include <filesystem>
 #include <EExitCode.hpp>
 #include <UI/Button.hpp>
 #include <UI/InputField.hpp>
@@ -27,6 +28,8 @@ namespace DirtyFinger
 		EditorWindow& operator=(EditorWindow&&) = delete;
 
 	private:
+
+		static const std::filesystem::path configurationFilePath;
 
 		std::shared_ptr<DirtMachine::UI::Button> testButton;
 

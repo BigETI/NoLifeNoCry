@@ -29,11 +29,11 @@ namespace DirtMachine::UI
 
 		virtual bool IsSelectable() const;
 
-		virtual void SetSelectable(bool selectableState);
+		virtual void SetSelectableState(bool selectableState);
 
 		virtual bool IsDraggable() const;
 
-		virtual void SetDraggable(bool draggableState);
+		virtual void SetDraggableState(bool draggableState);
 
 		virtual bool IsMouseOnControl() const;
 		

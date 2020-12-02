@@ -66,11 +66,11 @@ namespace DirtMachine::UI
 
 		virtual bool IsVisible() const;
 
-		virtual void SetVisible(bool visibleState);
+		virtual void SetVisibleState(bool visibleState);
 
 		virtual bool IsEnabled() const;
 
-		virtual void SetEnabled(bool enabledState);
+		virtual void SetEnabledState(bool enabledState);
 
 		virtual const DirtMachine::Graphic::Colour& GetPrimaryBackgroundColour() const;
 

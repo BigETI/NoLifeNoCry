@@ -4,12 +4,13 @@
 #include <Input/Clipboard.hpp>
 #include <UI/InputField.hpp>
 
-DirtMachine::UI::InputField::InputField(const glm::ivec2& position, float rotation, const glm::uvec2& size, const DirtMachine::String& textString, const DirtMachine::String& hintTextString, const DirtMachine::Graphic::Font* textFont, unsigned int textCharacterSize, DirtMachine::UI::Control* parent) :
+DirtMachine::UI::InputField::InputField(const glm::ivec2& position, float rotation, const glm::uvec2& size, const DirtMachine::String& textString, const DirtMachine::String& hintTextString, const DirtMachine::Graphic::Font* textFont, unsigned int textCharacterSize, bool isMultiLine, DirtMachine::UI::Control* parent) :
 	DirtMachine::UI::InteractableControl(position, rotation, size, true, true, true, false, parent),
 	backgroundPanel(nullptr),
 	caretLabel(nullptr),
 	textFont(textFont),
 	textCharacterSize(textCharacterSize),
+	isMultiLine(isMultiLine),
 	caretRowPosition(static_cast<std::size_t>(0)),
 	caretColumnPosition(static_cast<std::size_t>(0)),
 	selectionRowPosition(static_cast<std::size_t>(0)),
@@ -112,6 +113,64 @@ void DirtMachine::UI::InputField::SetHintText(const DirtMachine::String& newText
 	// TODO
 }
 
+const DirtMachine::Graphic::Font* DirtMachine::UI::InputField::GetTextFont() const
+{
+	return textFont;
+}
+
+void DirtMachine::UI::InputField::SetTextFont(const DirtMachine::Graphic::Font* newTextFont)
+{
+	if (textFont != newTextFont)
+	{
+		textFont = newTextFont;
+		for (const std::shared_ptr<DirtMachine::UI::Label>& text_line_label : textLineLabels)
+		{
+			text_line_label->SetTextFont(textFont);
+		}
+		UpdateTextLineLabels();
+		UpdateSelection();
+	}
+}
+
+unsigned int DirtMachine::UI::InputField::GetTextCharacterSize() const
+{
+	return textCharacterSize;
+}
+
+void DirtMachine::UI::InputField::SetTextCharacterSize(unsigned int newTextCharacterSize)
+{
+	if (textCharacterSize != newTextCharacterSize)
+	{
+		textCharacterSize = newTextCharacterSize;
+		UpdateTextLineLabels();
+		UpdateSelection();
+	}
+}
+
+bool DirtMachine::UI::InputField::IsMultiLine() const
+{
+	return isMultiLine;
+}
+
+void DirtMachine::UI::InputField::SetMultiLineState(bool multiLineState)
+{
+	if (isMultiLine != multiLineState)
+	{
+		isMultiLine = multiLineState;
+		if ((!isMultiLine) && (textLines.size() > static_cast<std::size_t>(0)))
+		{
+			while (textLines.size() > static_cast<std::size_t>(0))
+			{
+				textLines.pop_back();
+			}
+			caretRowPosition = static_cast<std::size_t>(0);
+			caretColumnPosition = static_cast<std::size_t>(0);
+			UpdateTextLineLabels();
+			UpdateSelection();
+		}
+	}
+}
+
 void DirtMachine::UI::InputField::ResetSelection()
 {
 	selectionRowPosition = caretRowPosition;
@@ -151,59 +210,82 @@ void DirtMachine::UI::InputField::InsertTextIntoSelection(const DirtMachine::Str
 	std::size_t end_row_position;
 	std::size_t end_column_position;
 	GetSelectionInformation(begin_row_position, begin_column_position, end_row_position, end_column_position);
-	DirtMachine::String end_string(textLines[end_row_position].substring(end_column_position));
-	for (std::size_t row(end_row_position + static_cast<std::size_t>(1)); row != textLines.size(); row++)
+	if (isMultiLine)
 	{
-		end_string += "\n";
-		end_string += textLines[row];
-	}
-	DirtMachine::String begin_text_line(textLines[begin_row_position].substring(static_cast<std::size_t>(0), begin_column_position));
-	while (begin_row_position < textLines.size())
-	{
-		textLines.pop_back();
-	}
-	DirtMachine::String append_string;
-	DirtMachine::String append_text_line;
-	DirtMachine::String new_text;
-	for (const sf::Uint32& new_text_character : newText)
-	{
-		if ((!std::iscntrl(new_text_character)) || (new_text_character == '\n'))
+		DirtMachine::String end_string(textLines[end_row_position].substring(end_column_position));
+		for (std::size_t row(end_row_position + static_cast<std::size_t>(1)); row != textLines.size(); row++)
 		{
-			new_text += new_text_character;
+			end_string += "\n";
+			end_string += textLines[row];
 		}
+		DirtMachine::String begin_text_line(textLines[begin_row_position].substring(static_cast<std::size_t>(0), begin_column_position));
+		while (begin_row_position < textLines.size())
+		{
+			textLines.pop_back();
+		}
+		DirtMachine::String append_string;
+		DirtMachine::String append_text_line;
+		DirtMachine::String new_text;
+		for (const sf::Uint32& new_text_character : newText)
+		{
+			if ((!std::iscntrl(new_text_character)) || (new_text_character == '\n'))
+			{
+				new_text += new_text_character;
+			}
+		}
+		append_string += begin_text_line;
+		append_string += new_text;
+		textLines.push_back(DirtMachine::String());
+		for (const sf::Uint32& append_string_character : append_string)
+		{
+			if (append_string_character == '\n')
+			{
+				textLines.push_back(DirtMachine::String());
+			}
+			else
+			{
+				textLines.back() += append_string_character;
+			}
+		}
+		if (textLines.size() <= static_cast<std::size_t>(0))
+		{
+			textLines.push_back(std::string());
+		}
+		caretRowPosition = textLines.size() - static_cast<std::size_t>(1);
+		caretColumnPosition = textLines[caretRowPosition].getSize();
+		for (const sf::Uint32& end_string_character : end_string)
+		{
+			if (end_string_character == '\n')
+			{
+				textLines.push_back(DirtMachine::String());
+			}
+			else
+			{
+				textLines.back() += end_string_character;
+			}
+		}
+		UpdateTextLineLabels();
 	}
-	append_string += begin_text_line;
-	append_string += new_text;
-	textLines.push_back(DirtMachine::String());
-	for (const sf::Uint32& append_string_character : append_string)
+	else
 	{
-		if (append_string_character == '\n')
+		DirtMachine::String& text_line(textLines.front());
+		DirtMachine::String new_text;
+		for (const sf::Uint32& new_text_character : newText)
 		{
-			textLines.push_back(DirtMachine::String());
+			if (new_text_character == '\n')
+			{
+				break;
+			}
+			else if (!std::iscntrl(new_text_character))
+			{
+				new_text += new_text_character;
+			}
 		}
-		else
-		{
-			textLines.back() += append_string_character;
-		}
+		text_line = text_line.substring(static_cast<std::size_t>(0), begin_column_position) + new_text + ((end_column_position < text_line.getSize()) ? text_line.substring(end_column_position) : DirtMachine::String());
+		caretColumnPosition = begin_column_position + new_text.getSize();
+		ResetSelection();
+		UpdateTextLineLabel(static_cast<std::size_t>(0));
 	}
-	if (textLines.size() <= static_cast<std::size_t>(0))
-	{
-		textLines.push_back(std::string());
-	}
-	caretRowPosition = textLines.size() - static_cast<std::size_t>(1);
-	caretColumnPosition = textLines[caretRowPosition].getSize();
-	for (const sf::Uint32& end_string_character : end_string)
-	{
-		if (end_string_character == '\n')
-		{
-			textLines.push_back(DirtMachine::String());
-		}
-		else
-		{
-			textLines.back() += end_string_character;
-		}
-	}
-	UpdateTextLineLabels();
 	ResetSelection();
 }
 
@@ -294,12 +376,12 @@ void DirtMachine::UI::InputField::RemoveFront()
 	if ((caretRowPosition == selectionRowPosition) && (caretColumnPosition == selectionColumnPosition))
 	{
 		const DirtMachine::String& text_line(textLines[caretRowPosition]);
-		if ((caretColumnPosition + static_cast<std::size_t>(1)) < text_line.getSize())
+		if (caretColumnPosition < text_line.getSize())
 		{
 			++caretColumnPosition;
 			RemoveSelectedText();
 		}
-		else if ((caretRowPosition + static_cast<std::size_t>(1)) > static_cast<std::size_t>(0))
+		else if ((caretRowPosition + static_cast<std::size_t>(1)) < textLines.size())
 		{
 			++caretRowPosition;
 			caretColumnPosition = static_cast<std::size_t>(0);
@@ -429,7 +511,10 @@ bool DirtMachine::UI::InputField::ProcessKeyPressed(const DirtMachine::Input::Da
 			RemoveFront();
 			break;
 		case DirtMachine::Input::EKeyboardKey::Enter:
-			InsertTextIntoSelection("\r\n");
+			if (isMultiLine)
+			{
+				InsertTextIntoSelection("\n");
+			}
 			break;
 		}
 	}
@@ -449,7 +534,7 @@ void DirtMachine::UI::InputField::UpdateTextLineLabel(std::size_t textLineIndex)
 			std::shared_ptr<DirtMachine::UI::Label> text_line_label(backgroundPanel->CreateChild<DirtMachine::UI::Label>(textLines[textLineLabels.size()], textFont, textCharacterSize, DirtMachine::UI::ETextAlignment::TopLeft, glm::ivec2(0, static_cast<int>(textFont->getLineSpacing(textCharacterSize) * static_cast<float>(textLineLabels.size()))), 0.0f, GetSize()));
 			textLineLabels.push_back(text_line_label);
 			std::shared_ptr<DirtMachine::UI::Panel> selection_panel(text_line_label->CreateChild<DirtMachine::UI::Panel>(glm::ivec2(0, 0), 0.0f, glm::uvec2(0U, 0U)));
-			selection_panel->SetVisible(false);
+			selection_panel->SetVisibleState(false);
 			selection_panel->SetPrimaryBackgroundColour(DirtMachine::Graphic::Colour(0xFF, 0x00, 0x00, 0x1F));
 			selectionPanels.push_back(selection_panel);
 		}
@@ -467,7 +552,7 @@ void DirtMachine::UI::InputField::UpdateTextLineLabels()
 		std::shared_ptr<DirtMachine::UI::Label> text_line_label(backgroundPanel->CreateChild<DirtMachine::UI::Label>(textLines[textLineLabels.size()], textFont, textCharacterSize, DirtMachine::UI::ETextAlignment::TopLeft, glm::ivec2(0, static_cast<int>(textFont->getLineSpacing(textCharacterSize) * static_cast<float>(textLineLabels.size()))), 0.0f, GetSize()));
 		textLineLabels.push_back(text_line_label);
 		std::shared_ptr<DirtMachine::UI::Panel> selection_panel(text_line_label->CreateChild<DirtMachine::UI::Panel>(glm::ivec2(0, 0), 0.0f, glm::uvec2(0U, 0U)));
-		selection_panel->SetVisible(false);
+		selection_panel->SetVisibleState(false);
 		selection_panel->SetPrimaryBackgroundColour(DirtMachine::Graphic::Colour(0xFF, 0x00, 0x00, 0x1F));
 		selectionPanels.push_back(selection_panel);
 	}
@@ -484,10 +569,12 @@ void DirtMachine::UI::InputField::UpdateSelection()
 	if (caretRowPosition >= textLines.size())
 	{
 		caretRowPosition = textLines.size() - static_cast<std::size_t>(1);
+		caretColumnPosition = textLines[caretRowPosition].getSize();
 	}
 	if (selectionRowPosition >= textLines.size())
 	{
 		selectionRowPosition = textLines.size() - static_cast<std::size_t>(1);
+		selectionColumnPosition = textLines[selectionRowPosition].getSize();
 	}
 	const DirtMachine::String& text_line(textLines[caretRowPosition]);
 	if (caretColumnPosition > text_line.getSize())
@@ -509,13 +596,13 @@ void DirtMachine::UI::InputField::UpdateSelection()
 		const std::shared_ptr<DirtMachine::UI::Panel>& selection_panel(selectionPanels[row]);
 		if ((row < begin_row_position) || (row > end_row_position))
 		{
-			selection_panel->SetVisible(false);
+			selection_panel->SetVisibleState(false);
 		}
 		else
 		{
 			glm::vec2 begin_text_character_position;
 			glm::vec2 end_text_character_position;
-			selection_panel->SetVisible(true);
+			selection_panel->SetVisibleState(true);
 			begin_text_character_position = text_line_label->FindTextCharacterPosition((begin_row_position == row) ? begin_column_position : static_cast<std::size_t>(0));
 			end_text_character_position = ((end_row_position == row) && (end_column_position < textLines[row].getSize())) ?
 				glm::vec2(static_cast<float>(text_line_label->FindTextCharacterPosition(end_column_position).x), static_cast<float>(text_line_label->GetTextCharacterSize())) :

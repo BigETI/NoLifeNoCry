@@ -171,7 +171,7 @@ bool DirtMachine::UI::Control::IsVisible() const
 	return isVisible;
 }
 
-void DirtMachine::UI::Control::SetVisible(bool visibleState)
+void DirtMachine::UI::Control::SetVisibleState(bool visibleState)
 {
 	if (isVisible != visibleState)
 	{
@@ -188,7 +188,7 @@ bool DirtMachine::UI::Control::IsEnabled() const
 	return isEnabled;
 }
 
-void DirtMachine::UI::Control::SetEnabled(bool enabledState)
+void DirtMachine::UI::Control::SetEnabledState(bool enabledState)
 {
 	isEnabled = enabledState;
 }
