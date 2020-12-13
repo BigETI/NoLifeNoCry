@@ -4,5 +4,7 @@
 
 namespace DirtMachine::Graphic
 {
+	// TODO: Make better API!
+
 	using RenderTarget = sf::RenderTarget;
 }

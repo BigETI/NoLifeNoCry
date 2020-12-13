@@ -1,10 +1,8 @@
 #pragma once
 
-#include <cstdint>
-#include <string>
 #include <glm/vec2.hpp>
-#include <Graphic/Sprite.hpp>
-#include <Graphic/Text.hpp>
+#include <String.hpp>
+#include <Graphic/Font.hpp>
 #include <UI/InteractableControl.hpp>
 #include <UI/Label.hpp>
 #include <UI/Panel.hpp>
@@ -15,7 +13,7 @@ namespace DirtMachine::UI
 	{
 	public:
 
-		Button(glm::ivec2 position, float rotation, glm::uvec2 size, const std::string& labelTextString, const DirtMachine::Graphic::Font* labelTextFont, unsigned int labelTextCharacterSize, DirtMachine::UI::Control* parent);
+		Button(const glm::ivec2& position, float rotation, const glm::uvec2& size, const DirtMachine::String& labelTextString, const DirtMachine::Graphic::Font* labelTextFont, unsigned int labelTextCharacterSize, DirtMachine::UI::Control* parent);
 
 		virtual ~Button();
 

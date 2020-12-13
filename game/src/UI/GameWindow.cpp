@@ -1,59 +1,28 @@
-#define _USE_MATH_DEFINES
 #include <iostream>
-#include <EditorWindow.hpp>
-#include <glm/trigonometric.hpp>
-#include <cmath>
+#include <rttr/registration.h>
+#include <Serialiser/Asset.hpp>
+#include <Story.hpp>
+#include <StoryData.hpp>
+#include <UI/GameWindow.hpp>
 
 /// @brief Constructor
 /// @param windowWidth Window width
 /// @param windowHeight Window height
 /// @param windowName Window name
 /// @param windowStyle Window style
-DirtyFinger::EditorWindow::EditorWindow(std::size_t windowWidth, std::size_t windowHeight, const std::string& windowName, DirtMachine::EWindowStyle windowStyle) :
-	DirtMachine::UI::Window(windowWidth, windowHeight, windowName, windowStyle),
-	time(0.0),
-	testButton(nullptr),
-	testInputField(nullptr)
+NoLifeNoCry::GameWindow::GameWindow(std::size_t windowWidth, std::size_t windowHeight, const std::string& windowName, DirtMachine::EWindowStyle windowStyle) : DirtMachine::UI::Window(windowWidth, windowHeight, windowName, windowStyle)
 {
-	OnWindowStarted += [this]()
+	OnWindowStarted += []()
 	{
 		std::cout << "Window has started." << std::endl;
-		testButton = GetUI().CreateChild<DirtMachine::UI::Button>(glm::ivec2(0, 0), 0.0f, glm::uvec2(200U, 100U), "Hi", GetDefaultFont(), 24U);
-		testInputField = GetUI().CreateChild<DirtMachine::UI::InputField>(glm::ivec2(100, 100), 0.0f, glm::uvec2(200, 120), "Delete me!", "Hint...", GetDefaultFont(), 16U, false);
-		//testButton->GetLabel().SetTextString("Hi!");
-		testButton->OnMouseEntered += []()
-		{
-			std::cout << "Mouse has entered button." << std::endl;
-		};
-		testButton->OnMouseHovered += []()
-		{
-			//std::cout << "Mouse has hovered over button." << std::endl;
-		};
-		testButton->OnMouseLeft += []()
-		{
-			std::cout << "Mouse has left button." << std::endl;
-		};
-		testButton->OnMouseButtonPressed += [](DirtMachine::Input::Data::MouseButtonData mouseButton)
-		{
-			std::cout << "Mouse button pressed: " << static_cast<int>(mouseButton.button) << " at (" << mouseButton.position.x << ", " << mouseButton.position.y << ")" << std::endl;
-		};
-		testButton->OnMouseButtonReleased += [](DirtMachine::Input::Data::MouseButtonData mouseButton)
-		{
-			std::cout << "Mouse button released: " << static_cast<int>(mouseButton.button) << " at (" << mouseButton.position.x << ", " << mouseButton.position.y << ")" << std::endl;
-		};
 	};
 	OnWindowStopped += []()
 	{
 		std::cout << "Window has stopped." << std::endl;
 	};
-	OnWindowMessagesProcessed += [this](double deltaTime)
+	OnWindowMessagesProcessed += [](double deltaTime)
 	{
-		time += deltaTime;
-		glm::vec2 normalized_position((glm::sin(time * M_PI) + 1.0) * 0.5, (glm::cos(time * M_PI) + 1.0) * 0.5);
-		if (testButton)
-		{
-			testButton->SetLocalPosition({ static_cast<int>(normalized_position.x * (GetSize().x - testButton->GetSize().x)), static_cast<int>(normalized_position.y * (GetSize().y - testButton->GetSize().y)) });
-		}
+		std::cout << "Window has processed messaged. Delta time: " << deltaTime << std::endl;
 	};
 	OnWindowResized += [](std::size_t width, std::size_t height)
 	{
@@ -71,7 +40,7 @@ DirtyFinger::EditorWindow::EditorWindow(std::size_t windowWidth, std::size_t win
 	{
 		std::cout << "Text entered: " << text.unicode << std::endl;
 	};
-	OnKeyboardKeyPressed += [this](DirtMachine::Input::Data::KeyboardKeyData keyboardKey)
+	OnKeyboardKeyPressed += [](DirtMachine::Input::Data::KeyboardKeyData keyboardKey)
 	{
 		std::cout << "Key pressed: " << (keyboardKey.isSystemKeyUsed ? "Sys+" : "") << (keyboardKey.isControlKeyUsed ? "Ctrl+" : "") << (keyboardKey.isAltKeyUsed ? "Alt+" : "") << static_cast<int>(keyboardKey.keyCode) << std::endl;
 	};
@@ -85,15 +54,15 @@ DirtyFinger::EditorWindow::EditorWindow(std::size_t windowWidth, std::size_t win
 	};
 	OnMouseButtonPressed += [](DirtMachine::Input::Data::MouseButtonData mouseButton)
 	{
-		//std::cout << "Mouse button pressed: " << static_cast<int>(mouseButton.button) << " at (" << mouseButton.position.x << ", " << mouseButton.position.y << ")" << std::endl;
+		std::cout << "Mouse button pressed: " << static_cast<int>(mouseButton.button) << " at (" << mouseButton.position.x << ", " << mouseButton.position.y << ")" << std::endl;
 	};
 	OnMouseButtonReleased += [](DirtMachine::Input::Data::MouseButtonData mouseButton)
 	{
-		//std::cout << "Mouse button released: " << static_cast<int>(mouseButton.button) << " at (" << mouseButton.position.x << ", " << mouseButton.position.y << ")" << std::endl;
+		std::cout << "Mouse button released: " << static_cast<int>(mouseButton.button) << " at (" << mouseButton.position.x << ", " << mouseButton.position.y << ")" << std::endl;
 	};
 	OnMouseMoved += [](DirtMachine::Input::Data::MouseMovementData mouseMovement)
 	{
-		//std::cout << "Mouse moved: (" << mouseMovement.position.x << ", " << mouseMovement.position.y << ")" << std::endl;
+		std::cout << "Mouse moved: (" << mouseMovement.position.x << ", " << mouseMovement.position.y << ")" << std::endl;
 	};
 	OnMouseEntered += []()
 	{
@@ -139,12 +108,12 @@ DirtyFinger::EditorWindow::EditorWindow(std::size_t windowWidth, std::size_t win
 	{
 		std::cout << "Sensor changed: Type " << static_cast<int>(sensor.type) << " at (" << sensor.value.x << ", " << sensor.value.y << ", " << sensor.value.z << ")" << std::endl;
 	};
+
+	SaveGame::LoadAll("./saves/", saveGames);
 }
 
 /// @brief Destructor
-DirtyFinger::EditorWindow::~EditorWindow()
+NoLifeNoCry::GameWindow::~GameWindow()
 {
 	// ...
 }
-
-const std::filesystem::path DirtyFinger::EditorWindow::configurationFilePath("./editorconfig.xml");

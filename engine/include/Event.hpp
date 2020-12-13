@@ -33,6 +33,13 @@ namespace DirtMachine
 			*this = e;
 		}
 
+		/// @brief Checks if event has any registered callbacks
+		/// @return "true" if empty, otherwise "false"
+		bool IsEmpty() const
+		{
+			return listeners.empty();
+		}
+
 		/// @brief Invoke event
 		/// @tparam arguments Listener arguments
 		void operator()(Ts... arguments)

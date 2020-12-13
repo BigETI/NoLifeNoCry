@@ -44,21 +44,26 @@ bool DirtMachine::UI::InteractableControl::ProcessMouseWheelScrolled(const DirtM
 	bool ret(false);
 	if (IsMouseOnWindow())
 	{
-		glm::ivec2 local_position = mouseWheelData.position - GetGlobalPosition();
-		glm::uvec2 current_size(GetSize());
-		if ((local_position.x >= 0) && (local_position.x <= static_cast<int>(current_size.x)) && (local_position.y >= 0) && (local_position.y <= static_cast<int>(current_size.y)))
+		for (int index(static_cast<int>(GetChildCount()) - 1); index >= 0; index--)
 		{
-			for (int index(static_cast<int>(GetChildCount()) - 1); index >= 0; index--)
+			Control& child(GetChild(static_cast<std::size_t>(index)));
+			if (child.IsVisible() && child.IsEnabled())
 			{
-				Control& child(GetChild(static_cast<std::size_t>(index)));
-				if (child.IsVisible() && child.IsEnabled())
+				ret = child.ProcessMouseWheelScrolled(mouseWheelData);
+				if (ret)
 				{
-					ret = child.ProcessMouseWheelScrolled(mouseWheelData);
-					if (ret)
-					{
-						break;
-					}
+					break;
 				}
+			}
+		}
+		if (!ret)
+		{
+			glm::ivec2 local_position = mouseWheelData.position - GetGlobalPosition();
+			glm::uvec2 current_size(GetSize());
+			ret = (local_position.x >= 0) && (local_position.x <= static_cast<int>(current_size.x)) && (local_position.y >= 0) && (local_position.y <= static_cast<int>(current_size.y));
+			if (ret)
+			{
+				OnMouseWheelScrolled(mouseWheelData);
 			}
 		}
 	}
@@ -70,23 +75,24 @@ bool DirtMachine::UI::InteractableControl::ProcessMouseButtonPressed(const DirtM
 	bool ret(false);
 	if (IsMouseOnWindow())
 	{
-		glm::ivec2 local_position = mouseButtonData.position - GetGlobalPosition();
-		glm::uvec2 current_size(GetSize());
-		if ((local_position.x >= 0) && (local_position.x <= static_cast<int>(current_size.x)) && (local_position.y >= 0) && (local_position.y <= static_cast<int>(current_size.y)))
+		for (int index(static_cast<int>(GetChildCount()) - 1); index >= 0; index--)
 		{
-			for (int index(static_cast<int>(GetChildCount()) - 1); index >= 0; index--)
+			Control& child(GetChild(static_cast<std::size_t>(index)));
+			if (child.IsVisible() && child.IsEnabled())
 			{
-				Control& child(GetChild(static_cast<std::size_t>(index)));
-				if (child.IsVisible() && child.IsEnabled())
+				ret = child.ProcessMouseButtonPressed(mouseButtonData);
+				if (ret)
 				{
-					ret = child.ProcessMouseButtonPressed(mouseButtonData);
-					if (ret)
-					{
-						break;
-					}
+					break;
 				}
 			}
-			if (!ret)
+		}
+		if (!ret)
+		{
+			glm::ivec2 local_position = mouseButtonData.position - GetGlobalPosition();
+			glm::uvec2 current_size(GetSize());
+			ret = (local_position.x >= 0) && (local_position.x <= static_cast<int>(current_size.x)) && (local_position.y >= 0) && (local_position.y <= static_cast<int>(current_size.y));
+			if (ret)
 			{
 				OnMouseButtonPressed(mouseButtonData);
 			}
@@ -100,23 +106,25 @@ bool DirtMachine::UI::InteractableControl::ProcessMouseButtonReleased(const Dirt
 	bool ret(false);
 	if (IsMouseOnWindow())
 	{
-		glm::ivec2 local_position = mouseButtonData.position - GetGlobalPosition();
-		glm::uvec2 current_size(GetSize());
-		if ((local_position.x >= 0) && (local_position.x <= static_cast<int>(current_size.x)) && (local_position.y >= 0) && (local_position.y <= static_cast<int>(current_size.y)))
+		for (int index(static_cast<int>(GetChildCount()) - 1); index >= 0; index--)
 		{
-			for (int index(static_cast<int>(GetChildCount()) - 1); index >= 0; index--)
+			Control& child(GetChild(static_cast<std::size_t>(index)));
+			if (child.IsVisible() && child.IsEnabled())
 			{
-				Control& child(GetChild(static_cast<std::size_t>(index)));
-				if (child.IsVisible() && child.IsEnabled())
+				ret = child.ProcessMouseButtonReleased(mouseButtonData);
+				if (ret)
 				{
-					ret = child.ProcessMouseButtonReleased(mouseButtonData);
-					if (ret)
-					{
-						break;
-					}
+					break;
 				}
 			}
-			if (!ret)
+		}
+		if (!ret)
+		{
+			glm::ivec2 global_position(GetGlobalPosition());
+			glm::ivec2 local_position = mouseButtonData.position - global_position;
+			glm::uvec2 current_size(GetSize());
+			ret = (local_position.x >= 0) && (local_position.x <= static_cast<int>(current_size.x)) && (local_position.y >= 0) && (local_position.y <= static_cast<int>(current_size.y));
+			if (ret)
 			{
 				OnMouseButtonReleased(mouseButtonData);
 			}
@@ -130,37 +138,27 @@ bool DirtMachine::UI::InteractableControl::ProcessMouseMoved(const DirtMachine::
 	bool ret(false);
 	if (IsMouseOnWindow())
 	{
-		glm::ivec2 local_position = mouseMovementData.position - GetGlobalPosition();
-		glm::uvec2 current_size(GetSize());
-		bool has_entered((local_position.x >= 0) && (local_position.x <= static_cast<int>(current_size.x)) && (local_position.y >= 0) && (local_position.y <= static_cast<int>(current_size.y)));
-		if (has_entered)
+		for (int index(static_cast<int>(GetChildCount()) - 1); index >= 0; index--)
 		{
-			for (int index(static_cast<int>(GetChildCount()) - 1); index >= 0; index--)
+			Control& child(GetChild(static_cast<std::size_t>(index)));
+			if (child.IsVisible() && child.IsEnabled())
 			{
-				Control& child(GetChild(static_cast<std::size_t>(index)));
-				if (child.IsVisible() && child.IsEnabled())
+				ret = child.ProcessMouseMoved(mouseMovementData);
+				if (ret)
 				{
-					ret = child.ProcessMouseMoved(mouseMovementData);
-					if (ret)
-					{
-						break;
-					}
+					break;
 				}
 			}
 		}
 		if (!ret)
 		{
-			if (isMouseOnControl == has_entered)
+			glm::ivec2 local_position = mouseMovementData.position - GetGlobalPosition();
+			glm::uvec2 current_size(GetSize());
+			ret = (local_position.x >= 0) && (local_position.x <= static_cast<int>(current_size.x)) && (local_position.y >= 0) && (local_position.y <= static_cast<int>(current_size.y));
+			if (isMouseOnControl != ret)
 			{
-				if (has_entered)
-				{
-					OnMouseHovered();
-				}
-			}
-			else
-			{
-				isMouseOnControl = has_entered;
-				if (has_entered)
+				isMouseOnControl = ret;
+				if (isMouseOnControl)
 				{
 					OnMouseEntered();
 				}
@@ -169,7 +167,10 @@ bool DirtMachine::UI::InteractableControl::ProcessMouseMoved(const DirtMachine::
 					OnMouseLeft();
 				}
 			}
-			ret = has_entered;
+			else if (isMouseOnControl)
+			{
+				OnMouseHovered();
+			}
 		}
 	}
 	return ret;

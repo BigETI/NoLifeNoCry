@@ -1,6 +1,6 @@
 #include <UI/Label.hpp>
 
-DirtMachine::UI::Label::Label(const DirtMachine::String& textString, const DirtMachine::Graphic::Font* textFont, unsigned int textCharacterSize, DirtMachine::UI::ETextAlignment textAlignment, const glm::ivec2& position, float rotation, const glm::uvec2& size, DirtMachine::UI::Control* parent) :
+DirtMachine::UI::Label::Label(const glm::ivec2& position, float rotation, const glm::uvec2& size, const DirtMachine::String& textString, const DirtMachine::Graphic::Font* textFont, unsigned int textCharacterSize, DirtMachine::UI::ETextAlignment textAlignment, DirtMachine::UI::Control* parent) :
 	DirtMachine::UI::Control(position, rotation, size, true, true, parent),
 	text(textString, *textFont, textCharacterSize),
 	textAlignment(textAlignment)

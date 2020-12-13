@@ -19,9 +19,11 @@ namespace DirtMachine::UI
 
 		DirtMachine::Event<> OnMouseHovered;
 
-		DirtMachine::Event<DirtMachine::Input::Data::MouseButtonData> OnMouseButtonPressed;
+		DirtMachine::Event<const DirtMachine::Input::Data::MouseWheelData&> OnMouseWheelScrolled;
 
-		DirtMachine::Event<DirtMachine::Input::Data::MouseButtonData> OnMouseButtonReleased;
+		DirtMachine::Event<const DirtMachine::Input::Data::MouseButtonData&> OnMouseButtonPressed;
+
+		DirtMachine::Event<const DirtMachine::Input::Data::MouseButtonData&> OnMouseButtonReleased;
 
 		InteractableControl(const glm::ivec2& position, float rotation, const glm::uvec2& size, bool isVisible, bool isEnabled, bool isSelectable, bool isDraggable, DirtMachine::UI::Control* parent);
 

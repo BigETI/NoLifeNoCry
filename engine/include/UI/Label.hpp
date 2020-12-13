@@ -14,7 +14,7 @@ namespace DirtMachine::UI
 	{
 	public:
 
-		Label(const DirtMachine::String& textString, const DirtMachine::Graphic::Font* textFont, unsigned int textCharacterSize, DirtMachine::UI::ETextAlignment textAlignment, const glm::ivec2& position, float rotation, const glm::uvec2& size, DirtMachine::UI::Control* parent = nullptr);
+		Label(const glm::ivec2& position, float rotation, const glm::uvec2& size, const DirtMachine::String& textString, const DirtMachine::Graphic::Font* textFont, unsigned int textCharacterSize, DirtMachine::UI::ETextAlignment textAlignment, DirtMachine::UI::Control* parent = nullptr);
 
 		virtual ~Label();
 

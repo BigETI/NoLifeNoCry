@@ -1,13 +1,17 @@
 #pragma once
 
 #include <chrono>
-#include <string>
+#include <cstdint>
+#include <list>
+#include <map>
+#include <memory>
 #include <glm/vec2.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <EExitCode.hpp>
 #include <EWindowStyle.hpp>
 #include <Event.hpp>
 #include <Graphic/Font.hpp>
+#include <Graphic/Renderer.hpp>
 #include <Input/Data/JoystickButtonData.hpp>
 #include <Input/Data/JoystickConnectionData.hpp>
 #include <Input/Data/JoystickMovementData.hpp>
@@ -18,6 +22,8 @@
 #include <Input/Data/SensorData.hpp>
 #include <Input/Data/TextData.hpp>
 #include <Input/Data/TouchData.hpp>
+#include <Scripting/Scene.hpp>
+#include <String.hpp>
 #include <UI/Control.hpp>
 #include <WindowHandle.hpp>
 
@@ -109,7 +115,7 @@ namespace DirtMachine::UI
 		/// @param windowHeight Window height
 		/// @param windowName Window name
 		/// @param windowStyle Window style
-		Window(std::size_t width, std::size_t height, const std::string& title, DirtMachine::EWindowStyle style);
+		Window(std::size_t width, std::size_t height, const DirtMachine::String& title, DirtMachine::EWindowStyle style);
 
 		/// @brief Destructor
 		virtual ~Window();
@@ -123,6 +129,9 @@ namespace DirtMachine::UI
 		/// @brief Is window open
 		/// @return "true" if window is open (not to be confused with is window showing), otherwise "false"
 		bool IsOpen() const;
+
+		/// @brief Close window
+		void Close();
 
 		/// @brief Get window handle
 		/// @return Window handle
@@ -140,6 +149,10 @@ namespace DirtMachine::UI
 		/// @return User interface
 		DirtMachine::UI::Control& GetUI();
 
+		/// @brief Refresh window
+		/// @return "true" if messages have been successfully processed, otherwise "false"
+		bool Refresh();
+
 		/// @brief Process messages
 		/// @return "true" if messages have been successfully processed, otherwise "false"
 		bool ProcessMessages();
@@ -154,6 +167,44 @@ namespace DirtMachine::UI
 		/// @brief Get default font
 		/// @return 
 		virtual const DirtMachine::Graphic::Font* GetDefaultFont() const;
+		
+		/// @brief Add scene
+		/// @param sceneID Scene ID
+		/// @return Scene if successfull, otherwise "null"
+		virtual std::shared_ptr<DirtMachine::Scripting::Scene> AddScene(const DirtMachine::String& sceneID);
+
+		/// @brief Gets scene by scene ID
+		/// @param sceneID Scene ID
+		/// @return Scene if successful, otherwise "null"
+		virtual std::shared_ptr<DirtMachine::Scripting::Scene> GetScene(const DirtMachine::String& sceneID) const;
+
+		/// @brief Require scene
+		/// @param sceneID Scene ID
+		/// @return Scene
+		/// @summary Creates scene if it does not exist
+		virtual std::shared_ptr<DirtMachine::Scripting::Scene> RequireScene(const DirtMachine::String& sceneID);
+
+		/// @brief Removes scene by scene ID
+		/// @param sceneID Scene ID
+		/// @return "true" if successful, otherwise "false"
+		bool RemoveScene(const DirtMachine::String& sceneID);
+
+		/// @brief Gets the current renderer
+		/// @return Current renderer
+		virtual DirtMachine::Graphic::Renderer& GetRenderer();
+
+		/// @brief Gets the current renderer
+		/// @return Renderer
+		virtual const DirtMachine::Graphic::Renderer& GetRenderer() const;
+
+		template <typename T>
+		std::shared_ptr<T> CreateWindow(std::size_t width, std::size_t height, const DirtMachine::String& title, DirtMachine::EWindowStyle style)
+		{
+			static_assert(std::is_convertible<T*, DirtMachine::UI::Window*>::value, "Children type must inherit from \"Control\".");
+			std::shared_ptr<T> ret(std::make_shared<T>(width, height, title, style));
+			startingWindows.push_back(ret);
+			return ret;
+		}
 
 		/// @brief Is mouse on window
 		/// @return "true" is mouse is on window, otherwise "false"
@@ -181,7 +232,7 @@ namespace DirtMachine::UI
 	private:
 
 		/// @brief Window title
-		std::string title;
+		DirtMachine::String title;
 
 		/// @brief Window style
 		DirtMachine::EWindowStyle style;
@@ -197,5 +248,17 @@ namespace DirtMachine::UI
 
 		/// @brief Last mouse position
 		glm::ivec2 lastMousePosition;
+
+		/// @brief Scenes
+		std::map<DirtMachine::String, std::shared_ptr<DirtMachine::Scripting::Scene>> scenes;
+
+		/// @brief Renderer
+		DirtMachine::Graphic::Renderer renderer;
+
+		/// @brief Starting windows
+		std::list<std::shared_ptr<DirtMachine::UI::Window>> startingWindows;
+
+		/// @brief Windows
+		std::list<std::shared_ptr<DirtMachine::UI::Window>> windows;
 	};
 }

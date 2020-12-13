@@ -17,7 +17,7 @@ DirtMachine::UI::InputField::InputField(const glm::ivec2& position, float rotati
 	selectionColumnPosition(static_cast<std::size_t>(0))
 {
 	backgroundPanel = CreateChild<DirtMachine::UI::Panel>(glm::ivec2(0, 0), 0.0f, size);
-	caretLabel = CreateChild<DirtMachine::UI::Label>("|", textFont, textCharacterSize, DirtMachine::UI::ETextAlignment::TopLeft, glm::ivec2(0, 0), 0.0f, size);
+	caretLabel = CreateChild<DirtMachine::UI::Label>(glm::ivec2(0, 0), 0.0f, size, "|", textFont, textCharacterSize, DirtMachine::UI::ETextAlignment::TopLeft);
 	textLines.push_back(std::string());
 	SetText(textString);
 	OnTransformationChanged += [this]()
@@ -45,7 +45,12 @@ void DirtMachine::UI::InputField::SetTextLine(std::size_t textLineIndex, const D
 {
 	if (textLineIndex < textLines.size())
 	{
-		UpdateTextLineLabel(textLineIndex);
+		if (textLines[textLineIndex] != textLine)
+		{
+			textLines[textLineIndex] = textLine;
+			UpdateTextLineLabel(textLineIndex);
+			OnTextStringChanged(GetText());
+		}
 	}
 	else
 	{
@@ -54,6 +59,7 @@ void DirtMachine::UI::InputField::SetTextLine(std::size_t textLineIndex, const D
 			textLines.push_back((textLineIndex == textLines.size()) ? textLine : DirtMachine::String());
 			UpdateTextLineLabel(textLineIndex);
 		}
+		OnTextStringChanged(GetText());
 	}
 	ResetSelection();
 }
@@ -85,6 +91,12 @@ DirtMachine::String DirtMachine::UI::InputField::GetText() const
 void DirtMachine::UI::InputField::SetText(const DirtMachine::String& newText)
 {
 	DirtMachine::String text_line;
+	bool is_event_not_empty(!(OnTextStringChanged.IsEmpty()));
+	DirtMachine::String old_text;
+	if (is_event_not_empty)
+	{
+		old_text = GetText();
+	}
 	textLines.clear();
 	textLines.push_back(DirtMachine::String());
 	for (const sf::Uint32& new_text_character : newText)
@@ -100,6 +112,14 @@ void DirtMachine::UI::InputField::SetText(const DirtMachine::String& newText)
 	}
 	UpdateTextLineLabels();
 	ResetSelection();
+	if (is_event_not_empty)
+	{
+		const DirtMachine::String& new_text(GetText());
+		if (old_text != new_text)
+		{
+			OnTextStringChanged(new_text);
+		}
+	}
 }
 
 DirtMachine::String DirtMachine::UI::InputField::GetHintText() const
@@ -205,10 +225,16 @@ void DirtMachine::UI::InputField::GetSelectionInformation(std::size_t& beginRowP
 
 void DirtMachine::UI::InputField::InsertTextIntoSelection(const DirtMachine::String& newText)
 {
+	bool is_event_not_empty(!(OnTextStringChanged.IsEmpty()));
+	DirtMachine::String old_text;
 	std::size_t begin_row_position;
 	std::size_t begin_column_position;
 	std::size_t end_row_position;
 	std::size_t end_column_position;
+	if (is_event_not_empty)
+	{
+		old_text = GetText();
+	}
 	GetSelectionInformation(begin_row_position, begin_column_position, end_row_position, end_column_position);
 	if (isMultiLine)
 	{
@@ -287,6 +313,14 @@ void DirtMachine::UI::InputField::InsertTextIntoSelection(const DirtMachine::Str
 		UpdateTextLineLabel(static_cast<std::size_t>(0));
 	}
 	ResetSelection();
+	if (is_event_not_empty)
+	{
+		const DirtMachine::String& new_text(GetText());
+		if (old_text != new_text)
+		{
+			OnTextStringChanged(new_text);
+		}
+	}
 }
 
 void DirtMachine::UI::InputField::RemoveSelectedText()
@@ -531,7 +565,7 @@ void DirtMachine::UI::InputField::UpdateTextLineLabel(std::size_t textLineIndex)
 	{
 		while (textLineIndex >= textLineLabels.size())
 		{
-			std::shared_ptr<DirtMachine::UI::Label> text_line_label(backgroundPanel->CreateChild<DirtMachine::UI::Label>(textLines[textLineLabels.size()], textFont, textCharacterSize, DirtMachine::UI::ETextAlignment::TopLeft, glm::ivec2(0, static_cast<int>(textFont->getLineSpacing(textCharacterSize) * static_cast<float>(textLineLabels.size()))), 0.0f, GetSize()));
+			std::shared_ptr<DirtMachine::UI::Label> text_line_label(backgroundPanel->CreateChild<DirtMachine::UI::Label>(glm::ivec2(0, static_cast<int>(textFont->getLineSpacing(textCharacterSize) * static_cast<float>(textLineLabels.size()))), 0.0f, GetSize(), textLines[textLineLabels.size()], textFont, textCharacterSize, DirtMachine::UI::ETextAlignment::TopLeft));
 			textLineLabels.push_back(text_line_label);
 			std::shared_ptr<DirtMachine::UI::Panel> selection_panel(text_line_label->CreateChild<DirtMachine::UI::Panel>(glm::ivec2(0, 0), 0.0f, glm::uvec2(0U, 0U)));
 			selection_panel->SetVisibleState(false);
@@ -549,7 +583,7 @@ void DirtMachine::UI::InputField::UpdateTextLineLabels()
 	}
 	while (textLineLabels.size() < textLines.size())
 	{
-		std::shared_ptr<DirtMachine::UI::Label> text_line_label(backgroundPanel->CreateChild<DirtMachine::UI::Label>(textLines[textLineLabels.size()], textFont, textCharacterSize, DirtMachine::UI::ETextAlignment::TopLeft, glm::ivec2(0, static_cast<int>(textFont->getLineSpacing(textCharacterSize) * static_cast<float>(textLineLabels.size()))), 0.0f, GetSize()));
+		std::shared_ptr<DirtMachine::UI::Label> text_line_label(backgroundPanel->CreateChild<DirtMachine::UI::Label>(glm::ivec2(0, static_cast<int>(textFont->getLineSpacing(textCharacterSize) * static_cast<float>(textLineLabels.size()))), 0.0f, GetSize(), textLines[textLineLabels.size()], textFont, textCharacterSize, DirtMachine::UI::ETextAlignment::TopLeft));
 		textLineLabels.push_back(text_line_label);
 		std::shared_ptr<DirtMachine::UI::Panel> selection_panel(text_line_label->CreateChild<DirtMachine::UI::Panel>(glm::ivec2(0, 0), 0.0f, glm::uvec2(0U, 0U)));
 		selection_panel->SetVisibleState(false);

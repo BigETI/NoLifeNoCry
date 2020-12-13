@@ -2,8 +2,10 @@
 
 #include <string>
 #include <vector>
+#include <Event.hpp>
 #include <Graphic/Font.hpp>
 #include <Graphic/RenderTarget.hpp>
+#include <String.hpp>
 #include <UI/InteractableControl.hpp>
 #include <UI/Label.hpp>
 #include <UI/Panel.hpp>
@@ -13,6 +15,8 @@ namespace DirtMachine::UI
 	class InputField : public DirtMachine::UI::InteractableControl
 	{
 	public:
+
+		DirtMachine::Event<const DirtMachine::String&> OnTextStringChanged;
 
 		InputField(const glm::ivec2& position, float rotation, const glm::uvec2& size, const DirtMachine::String& textString, const DirtMachine::String& hintTextString, const DirtMachine::Graphic::Font* textFont, unsigned int textCharacterSize, bool isMultiLine, DirtMachine::UI::Control* parent);
 

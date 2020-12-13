@@ -1,7 +1,8 @@
 #include <Graphic/Image.hpp>
 
 /// @brief Default constructor
-DirtMachine::Graphic::Image::Image() : sf::Image()
+DirtMachine::Graphic::Image::Image() :
+	sf::Image()
 {
 	// TODO
 }

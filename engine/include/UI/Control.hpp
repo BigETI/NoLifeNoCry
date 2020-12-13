@@ -139,15 +139,16 @@ namespace DirtMachine::UI
 		template <typename T, typename... TArguments>
 		std::shared_ptr<T> CreateChild(TArguments... arguments)
 		{
-			static_assert(std::is_convertible<T*, Control*>::value, "Children type must inherit from \"Control\".");
+			static_assert(std::is_convertible<T*, DirtMachine::UI::Control*>::value, "Children type must inherit from \"Control\".");
 			std::shared_ptr<T> ret(std::make_shared<T>(std::forward<TArguments>(arguments)..., this));
 			children.push_back(ret);
 			return ret;
 		}
 
 		template <typename T>
-		bool RemoveChild(std::shared_ptr<T> child)
+		bool RemoveChild(const std::shared_ptr<T> child)
 		{
+			static_assert(std::is_convertible<T*, Control*>::value, "Children type must inherit from \"Control\".");
 			bool ret(false);
 			for (std::size_t index(static_cast<std::size_t>(0)), move_index; index != children.size(); index++)
 			{

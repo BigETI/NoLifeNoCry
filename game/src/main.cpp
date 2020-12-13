@@ -1,7 +1,7 @@
 #include <filesystem>
 #include <iostream>
 #include <string>
-#include <GameWindow.hpp>
+#include <UI/GameWindow.hpp>
 
 /// @brief Configuration path
 static const std::filesystem::path configurationPath("./config.xml");

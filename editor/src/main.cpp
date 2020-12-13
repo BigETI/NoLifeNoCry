@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <EditorWindow.hpp>
+#include <UI/EditorWindow.hpp>
 
 /// @brief Main entry point
 /// @param argc Command line argument count
@@ -11,7 +11,7 @@ int main(int argc, char* argv[])
 	DirtMachine::EExitCode ret(DirtMachine::EExitCode::UnknownError);
 	try
 	{
-		DirtyFinger::EditorWindow editor_window(static_cast<std::size_t>(800), static_cast<std::size_t>(600), "Dirty Finger - Dirt Machine Editor", DirtMachine::EWindowStyle::Default);
+		DirtyFinger::UI::EditorWindow editor_window(static_cast<std::size_t>(800), static_cast<std::size_t>(600), "Dirty Finger - Dirt Machine Editor", DirtMachine::EWindowStyle::Default);
 		ret = editor_window.Start();
 	}
 	catch (const std::exception& e)

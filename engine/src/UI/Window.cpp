@@ -8,7 +8,7 @@
 /// @param windowHeight Window height
 /// @param windowName Window name
 /// @param windowStyle Window style
-DirtMachine::UI::Window::Window(std::size_t width, std::size_t height, const std::string& title, DirtMachine::EWindowStyle style) :
+DirtMachine::UI::Window::Window(std::size_t width, std::size_t height, const DirtMachine::String& title, DirtMachine::EWindowStyle style) :
 	sf::RenderWindow(sf::VideoMode(static_cast<unsigned int>(width), static_cast<unsigned int>(height)), title, static_cast<sf::Uint32>(style)), DirtMachine::UI::Control({ 0, 0 }, 0.0f, GetSize(), true, true),
 	title(title),
 	style(style),
@@ -21,6 +21,10 @@ DirtMachine::UI::Window::Window(std::size_t width, std::size_t height, const std
 	{
 		throw std::filesystem::filesystem_error("Failed to open font file.", "./defaults/Roboto/Roboto-Regular.ttf", "", std::error_code());
 	}
+	OnWindowStarted += [this]()
+	{
+		OnTransformationChanged();
+	};
 }
 
 /// @brief Destructor
@@ -41,6 +45,12 @@ void DirtMachine::UI::Window::Create()
 bool DirtMachine::UI::Window::IsOpen() const
 {
 	return isOpen();
+}
+
+/// @brief Close window
+void DirtMachine::UI::Window::Close()
+{
+	close();
 }
 
 /// @brief Get window handle
@@ -70,6 +80,50 @@ void DirtMachine::UI::Window::SetSize(const glm::uvec2& newSize)
 DirtMachine::UI::Control& DirtMachine::UI::Window::GetUI()
 {
 	return *this;
+}
+
+/// @brief Refresh window
+/// @return "true" if messages have been successfully processed, otherwise "false"
+bool DirtMachine::UI::Window::Refresh()
+{
+	bool ret(ProcessMessages());
+	if (ret)
+	{
+		for (const std::pair<DirtMachine::String, std::shared_ptr<DirtMachine::Scripting::Scene>>& scene : scenes)
+		{
+			scene.second->Render(glm::mat4x4(), renderer);
+		}
+		Draw();
+		std::vector<std::shared_ptr<DirtMachine::UI::Window>> remove_windows;
+		for (std::shared_ptr<DirtMachine::UI::Window> starting_window : startingWindows)
+		{
+			if (starting_window->IsOpen())
+			{
+				remove_windows.push_back(starting_window);
+				windows.push_back(starting_window);
+				starting_window->OnWindowStarted();
+			}
+		}
+		for (std::shared_ptr<DirtMachine::UI::Window> remove_window : remove_windows)
+		{
+			startingWindows.remove(remove_window);
+		}
+		remove_windows.clear();
+		for (std::shared_ptr<DirtMachine::UI::Window> window : windows)
+		{
+			if (!window->Refresh())
+			{
+				remove_windows.push_back(window);
+			}
+		}
+		for (std::shared_ptr<DirtMachine::UI::Window> remove_window : remove_windows)
+		{
+			remove_window->OnWindowStopped();
+			windows.remove(remove_window);
+		}
+		remove_windows.clear();
+	}
+	return ret;
 }
 
 /// @brief Process messages
@@ -215,6 +269,7 @@ void DirtMachine::UI::Window::Draw()
 	clear(sf::Color(10, 10, 10));
 	//clear();
 	PushDrawingState(*this);
+	sf::RenderWindow::draw(renderer);
 	DirtMachine::UI::Control::Draw(*this);
 	PopDrawingState(*this);
 	display();
@@ -227,13 +282,9 @@ DirtMachine::EExitCode DirtMachine::UI::Window::Start()
 	DirtMachine::EExitCode ret(DirtMachine::EExitCode::FailedCreatingWindow);
 	if (IsOpen())
 	{
-
 		ret = DirtMachine::EExitCode::Success;
 		OnWindowStarted();
-		while (ProcessMessages())
-		{
-			Draw();
-		}
+		while (Refresh());
 		OnWindowStopped();
 	}
 	return ret;
@@ -244,6 +295,70 @@ DirtMachine::EExitCode DirtMachine::UI::Window::Start()
 const DirtMachine::Graphic::Font* DirtMachine::UI::Window::GetDefaultFont() const
 {
 	return &defaultFont;
+}
+
+/// @brief Add scene
+/// @param sceneID Scene ID
+/// @return Scene if successfull, otherwise "null"
+std::shared_ptr<DirtMachine::Scripting::Scene> DirtMachine::UI::Window::AddScene(const DirtMachine::String& sceneID)
+{
+	std::shared_ptr<DirtMachine::Scripting::Scene> ret(nullptr);
+	if (scenes.find(sceneID) == scenes.end())
+	{
+		ret = std::make_shared<DirtMachine::Scripting::Scene>();
+		scenes.insert_or_assign(sceneID, ret);
+	}
+	return ret;
+}
+
+/// @brief Gets scene by scene ID
+/// @param sceneID Scene ID
+/// @return Scene if successful, otherwise "null"
+std::shared_ptr<DirtMachine::Scripting::Scene> DirtMachine::UI::Window::GetScene(const DirtMachine::String& sceneID) const
+{
+	std::shared_ptr<DirtMachine::Scripting::Scene> ret(nullptr);
+	std::map<DirtMachine::String, std::shared_ptr<DirtMachine::Scripting::Scene>>::const_iterator iterator(scenes.find(sceneID));
+	if (iterator != scenes.end())
+	{
+		ret = iterator->second;
+	}
+	return ret;
+}
+
+/// @brief Require scene
+/// @param sceneID Scene ID
+/// @return Scene
+/// @summary Creates scene if it does not exist
+std::shared_ptr<DirtMachine::Scripting::Scene> DirtMachine::UI::Window::RequireScene(const DirtMachine::String& sceneID)
+{
+	std::shared_ptr<DirtMachine::Scripting::Scene> ret(GetScene(sceneID));
+	if (!ret)
+	{
+		ret = AddScene(sceneID);
+	}
+	return ret;
+}
+
+/// @brief Removes scene by scene ID
+/// @param sceneID Scene ID
+/// @return "true" if successful, otherwise "false"
+bool DirtMachine::UI::Window::RemoveScene(const DirtMachine::String& sceneID)
+{
+	return scenes.erase(sceneID) > static_cast<std::size_t>(0);
+}
+
+/// @brief Gets the current renderer
+/// @return Current renderer
+DirtMachine::Graphic::Renderer& DirtMachine::UI::Window::GetRenderer()
+{
+	return renderer;
+}
+
+/// @brief Gets the current renderer
+/// @return Current renderer
+const DirtMachine::Graphic::Renderer& DirtMachine::UI::Window::GetRenderer() const
+{
+	return renderer;
 }
 
 /// @brief Is mouse on window

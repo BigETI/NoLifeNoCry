@@ -4,5 +4,7 @@
 
 namespace DirtMachine
 {
+	// TODO: Make better API!
+
 	using String = sf::String;
 }
